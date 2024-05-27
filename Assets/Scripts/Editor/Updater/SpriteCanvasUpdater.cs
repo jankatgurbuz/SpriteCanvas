@@ -17,7 +17,7 @@ namespace Editor.Updater
             if (Application.isPlaying)
                 return;
 
-            var objects = Object.FindObjectsOfType<SpriteCanvasTest>();
+            var objects = Object.FindObjectsOfType<SpriteCanvas>();
 
             foreach (var item in objects)
             {

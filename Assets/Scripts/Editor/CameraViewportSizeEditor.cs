@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Editor
 {
-    [CustomEditor(typeof(SpriteCanvasTest))]
+    [CustomEditor(typeof(SpriteCanvas))]
     public class CameraViewportSizeEditor : UnityEditor.Editor
     {
         private readonly BindingFlags _bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance;
@@ -49,7 +49,7 @@ namespace Editor
 
         private void GetPrivateFields()
         {
-            var cvs = (SpriteCanvasTest)target;
+            var cvs = (SpriteCanvas)target;
 
             var planeDistanceField = cvs.GetType().GetField("_planeDistance", _bindingFlags);
             var cameraField = cvs.GetType().GetField("_camera", _bindingFlags);
@@ -62,7 +62,7 @@ namespace Editor
 
         private bool CalculateViewportSize()
         {
-            var cvs = (SpriteCanvasTest)target;
+            var cvs = (SpriteCanvas)target;
             var calculateViewportSizeMethod = cvs.GetType().GetMethod("CalculateCameraProp", _bindingFlags);
 
             if (calculateViewportSizeMethod == null)

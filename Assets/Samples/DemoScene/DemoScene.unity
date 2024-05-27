@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 404344877}
   - component: {fileID: 404344878}
   m_Layer: 0
-  m_Name: SpriteCanvasT
+  m_Name: SpriteCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -454,7 +454,7 @@ GameObject:
   - component: {fileID: 1645110079}
   - component: {fileID: 1645110081}
   m_Layer: 0
-  m_Name: 9-Sliced
+  m_Name: SpriteTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Core.UI
 {
-    public class SpriteCanvasTest : MonoBehaviour
+    public class SpriteCanvas : MonoBehaviour
     {
         [SerializeField] private string _canvasKey; 
 
