@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reflection;
 using Core.ResponsiveOperations;
 using Core.UI;
-using Editor.Edit;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,15 +11,15 @@ namespace Editor
 {
     [CanEditMultipleObjects]
     [CustomEditor(typeof(UIElement), true)]
-    public class AutoFieldInitializerEditor : UnityEditor.Editor
+    public class UIElementEditor : UnityEditor.Editor
     {
         private readonly BindingFlags _bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance;
         private const string _responsiveOperationFieldName = "_responsiveOperation";
         private const string _itemPositionFieldName = "_itemPosition";
         private const string _spriteRendererFieldName = "_spriteRenderer";
+
         private Transform _itemPosition;
 
-        private List<Type> _types;
         private List<IResponsiveOperation> implementingTypes;
         private string[] typeNames;
         private bool _initFlag;
@@ -28,9 +27,8 @@ namespace Editor
         private void OnEnable()
         {
             _initFlag = false;
-            _types = EditorHelpers.GetAssemblies();
-            implementingTypes = EditorHelpers.GenerateTypeInstances<IResponsiveOperation>(_types);
-            typeNames = EditorHelpers.ConvertTypeListToArray(implementingTypes);
+            implementingTypes = GenerateTypeInstances<IResponsiveOperation>();
+            typeNames = ConvertTypeListToArray(implementingTypes);
         }
 
         public override void OnInspectorGUI()
@@ -45,7 +43,7 @@ namespace Editor
             var script = (UIElement)target;
             var data = GetValue<ResponsiveOperation>(script, _responsiveOperationFieldName, out _);
 
-            var currentIndex = EditorHelpers.FindTypeIndexInArray(implementingTypes, data);
+            var currentIndex = FindTypeIndexInArray(implementingTypes, data);
 
             EditorGUI.BeginChangeCheck();
             var selectedIndex = EditorGUILayout.Popup("Responsive", currentIndex, typeNames);
@@ -131,8 +129,47 @@ namespace Editor
         {
             var script = (UIElement)target;
             var so = new SerializedObject(script);
-            EditorHelpers.DrawPropertiesAutomatically(so);
+            DrawPropertiesAutomatically(so);
             so.ApplyModifiedProperties();
+        }
+        
+        // helpers
+
+        private static IEnumerable<Type> GetAssemblies()
+        {
+            return AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(assembly => assembly.GetTypes()).ToList();
+        }
+
+        private static List<T> GenerateTypeInstances<T>()
+        {
+            var typeList = GetAssemblies();
+            return typeList.Where(type => typeof(T).IsAssignableFrom(type) && type.IsClass && !type.IsAbstract)
+                .Select(type => (T)Activator.CreateInstance(type))
+                .ToList();
+        }
+
+        private static string[] ConvertTypeListToArray<T>(List<T> list)
+        {
+            return list.Select(type => type.GetType().ToString().Split('.').Last()).ToArray();
+        }
+
+        private static int FindTypeIndexInArray<T>(List<T> array, T field)
+        {
+            if (field == null)
+                return 0;
+
+            return array.FindIndex(type => type.GetType() == field.GetType());
+        }
+
+        private static void DrawPropertiesAutomatically(SerializedObject so)
+        {
+            var serializedProperty = so.GetIterator();
+            serializedProperty.NextVisible(true);
+            while (serializedProperty.NextVisible(false))
+            {
+                EditorGUILayout.PropertyField(serializedProperty, true);
+            }
         }
     }
 }

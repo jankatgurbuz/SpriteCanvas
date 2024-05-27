@@ -540,7 +540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _responsiveOperation:
-    rid: 7831881323755077675
+    rid: 7831881323755077678
   _canvasKey: Main
   _itemPosition: {fileID: 1645110080}
   _orderInLayer: 22
@@ -549,7 +549,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 7831881323755077675
+    - rid: 7831881323755077678
       type: {class: TopCenter, ns: Core.ResponsiveOperations, asm: Assembly-CSharp}
       data:
         LocalScale: {x: 1, y: 1, z: 1}
