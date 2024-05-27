@@ -1,7 +1,6 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using Core;
 using Core.UI;
 
 namespace Manager
@@ -9,16 +8,16 @@ namespace Manager
     public class SpriteCanvasManager : MonoBehaviour
     {
         public static SpriteCanvasManager Instance;
-        private Dictionary<string, SpriteCanvasTest> _spriteCanvasMap;
+        private Dictionary<string, SpriteCanvas> _spriteCanvasMap;
 
         private void Awake()
         {
             Instance = this;
         }
 
-        public void Register(string str,SpriteCanvasTest spriteCanvas)
+        public void Register(string str,SpriteCanvas spriteCanvas)
         {
-            _spriteCanvasMap ??= new Dictionary<string,SpriteCanvasTest>();
+            _spriteCanvasMap ??= new Dictionary<string,SpriteCanvas>();
 
             if (!_spriteCanvasMap.TryAdd(str, spriteCanvas))
             {
@@ -26,7 +25,7 @@ namespace Manager
             }
         }
 
-        public SpriteCanvasTest Get(string key)
+        public SpriteCanvas Get(string key)
         {
             if (_spriteCanvasMap.TryGetValue(key, out var spriteCanvas))
             {

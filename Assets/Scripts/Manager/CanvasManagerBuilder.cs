@@ -1,7 +1,7 @@
 using Manager;
 using UnityEngine;
 
-namespace SpriteCanvas.Scripts.Manager
+namespace Scripts.Manager
 {
     public static class CanvasManagerBuilder 
     {

@@ -35,7 +35,7 @@ namespace Editor.Drawer
 
         private bool IsValidCanvasKey(string key)
         {
-            var sc = Resources.FindObjectsOfTypeAll<SpriteCanvasTest>();
+            var sc = Resources.FindObjectsOfTypeAll<SpriteCanvas>();
 
             foreach (var spriteCanvas in sc)
             {
