@@ -5,6 +5,7 @@ namespace Core.UI
     public class UISprite : UIElement
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private Vector3 _spriteSize;
 
         public override void ArrangeLayers(string sortingLayer, int sortingOrder)
         {
@@ -16,6 +17,8 @@ namespace Core.UI
             Vector3 viewportCenterPosition, float balance)
         {
             var spriteSize = _spriteRenderer.sprite.bounds.size;
+            _spriteRenderer.size = _spriteSize;
+            
             if (_referenceSprite == null)
             {
                 _responsiveOperation.AdjustUI(screenHeight, screenWidth, spriteSize, _itemPosition,
@@ -23,14 +26,23 @@ namespace Core.UI
             }
             else
             {
-                var size = _referenceSprite.sprite.bounds.size;
+                var referenceSpriteSize = _referenceSprite.sprite.bounds.size;
+                var referenceTransform = _referenceSprite.transform;
+                var globalReferenceSize = GetGlobalSize(referenceSpriteSize, referenceTransform);
 
                 _responsiveOperation.AdjustUI(
-                    size.y * _referenceSprite.transform.localScale.y,
-                    size.x * _referenceSprite.transform.localScale.x,
-                    spriteSize, _itemPosition,
+                    globalReferenceSize.y,
+                    globalReferenceSize.x,
+                    spriteSize,
+                    _itemPosition,
                     _referenceSprite.transform.position, balance);
             }
+        }
+
+        private Vector3 GetGlobalSize(Vector3 localSize, Transform myTransform)
+        {
+            var globalScale = myTransform.lossyScale;
+            return new Vector3(localSize.x * globalScale.x, localSize.y * globalScale.y, localSize.z * globalScale.z);
         }
     }
 }
