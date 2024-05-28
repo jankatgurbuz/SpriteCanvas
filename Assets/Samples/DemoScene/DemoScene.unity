@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 16508834}
   - component: {fileID: 16508837}
-  - component: {fileID: 16508836}
   - component: {fileID: 16508835}
   m_Layer: 0
   m_Name: PurpleBead
@@ -172,6 +171,7 @@ MonoBehaviour:
   _responsiveOperation:
     rid: 7831881342642552855
   _canvasKey: TopCanvas
+  _targetKey: Purple
   _itemPosition: {fileID: 16508834}
   _orderInLayer: 22
   _referenceSprite: {fileID: 1211146598}
@@ -186,20 +186,6 @@ MonoBehaviour:
         LocalScale: {x: 0.5, y: 0.5, z: 1}
         _topOffset: 0.05
         _horizontalOffset: 0
---- !u!114 &16508836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 16508833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfab89cd739854cc197ea00ba3475b42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parent: {fileID: 1645110077}
-  cut: 1
 --- !u!212 &16508837
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -262,7 +248,6 @@ GameObject:
   m_Component:
   - component: {fileID: 94823675}
   - component: {fileID: 94823678}
-  - component: {fileID: 94823677}
   - component: {fileID: 94823676}
   m_Layer: 0
   m_Name: YellowBead
@@ -301,6 +286,7 @@ MonoBehaviour:
   _responsiveOperation:
     rid: 7831881342642552857
   _canvasKey: TopCanvas
+  _targetKey: Yellow
   _itemPosition: {fileID: 94823675}
   _orderInLayer: 22
   _referenceSprite: {fileID: 1211146598}
@@ -315,20 +301,6 @@ MonoBehaviour:
         LocalScale: {x: 0.5, y: 0.5, z: 1}
         _topOffset: 0.05
         _horizontalOffset: 0.2
---- !u!114 &94823677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 94823674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfab89cd739854cc197ea00ba3475b42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parent: {fileID: 1645110077}
-  cut: 1
 --- !u!212 &94823678
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -475,7 +447,6 @@ GameObject:
   m_Component:
   - component: {fileID: 349766884}
   - component: {fileID: 349766887}
-  - component: {fileID: 349766886}
   - component: {fileID: 349766885}
   m_Layer: 0
   m_Name: OrangeBead
@@ -514,6 +485,7 @@ MonoBehaviour:
   _responsiveOperation:
     rid: 7831881342642552854
   _canvasKey: TopCanvas
+  _targetKey: Orange
   _itemPosition: {fileID: 349766884}
   _orderInLayer: 22
   _referenceSprite: {fileID: 1211146598}
@@ -528,20 +500,6 @@ MonoBehaviour:
         LocalScale: {x: 0.5, y: 0.5, z: 0.5}
         _topOffset: 0.05
         _horizontalOffset: 0
---- !u!114 &349766886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 349766883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfab89cd739854cc197ea00ba3475b42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parent: {fileID: 1645110077}
-  cut: 1
 --- !u!212 &349766887
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -681,7 +639,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.99607843, g: 0.92156863, b: 0.76862746, a: 0}
+  m_BackGroundColor: {r: 0.103773594, g: 0.103773594, b: 0.103773594, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -748,6 +706,7 @@ GameObject:
   - component: {fileID: 566408708}
   - component: {fileID: 566408706}
   - component: {fileID: 566408707}
+  - component: {fileID: 566408709}
   - component: {fileID: 566408705}
   m_Layer: 0
   m_Name: DemoGameManager
@@ -807,6 +766,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rowLength: 11
   _columnLength: 10
+  _hand: {fileID: 685365847}
 --- !u!4 &566408708
 Transform:
   m_ObjectHideFlags: 0
@@ -821,8 +781,105 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 144838285}
+  - {fileID: 685365848}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &566408709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566408704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d7a051aa730740089d82f178c153fd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &685365847
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 685365848}
+  - component: {fileID: 685365849}
+  m_Layer: 0
+  m_Name: Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &685365848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685365847}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 566408708}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &685365849
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685365847}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 100
+  m_Sprite: {fileID: 21300000, guid: 754f544b869bb4290bbcdc3224aab018, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &788897654
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,6 +928,7 @@ MonoBehaviour:
   _responsiveOperation:
     rid: 7831881342642552838
   _canvasKey: TopCanvas
+  _targetKey: 
   _itemPosition: {fileID: 788897655}
   _orderInLayer: 0
   _referenceSprite: {fileID: 0}
@@ -949,7 +1007,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1129966640}
   - component: {fileID: 1129966643}
-  - component: {fileID: 1129966642}
   - component: {fileID: 1129966641}
   m_Layer: 0
   m_Name: RedBead
@@ -988,6 +1045,7 @@ MonoBehaviour:
   _responsiveOperation:
     rid: 7831881342642552856
   _canvasKey: TopCanvas
+  _targetKey: Red
   _itemPosition: {fileID: 1129966640}
   _orderInLayer: 22
   _referenceSprite: {fileID: 1211146598}
@@ -1002,20 +1060,6 @@ MonoBehaviour:
         LocalScale: {x: 0.5, y: 0.5, z: 1}
         _topOffset: 0.05
         _horizontalOffset: 0.2
---- !u!114 &1129966642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129966639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfab89cd739854cc197ea00ba3475b42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parent: {fileID: 1645110077}
-  cut: 1
 --- !u!212 &1129966643
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1153,7 +1197,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1211146595}
   - component: {fileID: 1211146598}
-  - component: {fileID: 1211146597}
   - component: {fileID: 1211146596}
   m_Layer: 0
   m_Name: RightArea
@@ -1198,6 +1241,7 @@ MonoBehaviour:
   _responsiveOperation:
     rid: 7831881342642552850
   _canvasKey: TopCanvas
+  _targetKey: 
   _itemPosition: {fileID: 1211146595}
   _orderInLayer: 1
   _referenceSprite: {fileID: 1645110079}
@@ -1212,20 +1256,6 @@ MonoBehaviour:
         LocalScale: {x: 1, y: 1, z: 1}
         _topOffset: 0.2
         _horizontalOffset: 0
---- !u!114 &1211146597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1211146594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfab89cd739854cc197ea00ba3475b42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parent: {fileID: 1645110077}
-  cut: 1
 --- !u!212 &1211146598
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1288,7 +1318,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1321324815}
   - component: {fileID: 1321324817}
-  - component: {fileID: 1321324819}
   - component: {fileID: 1321324818}
   m_Layer: 0
   m_Name: LeftArea
@@ -1379,6 +1408,7 @@ MonoBehaviour:
   _responsiveOperation:
     rid: 7831881342642552849
   _canvasKey: TopCanvas
+  _targetKey: 
   _itemPosition: {fileID: 1321324815}
   _orderInLayer: 1
   _referenceSprite: {fileID: 1645110079}
@@ -1393,20 +1423,6 @@ MonoBehaviour:
         LocalScale: {x: 1, y: 1, z: 1}
         _topOffset: 0.2
         _horizontalOffset: -0.48
---- !u!114 &1321324819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1321324814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfab89cd739854cc197ea00ba3475b42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parent: {fileID: 1645110077}
-  cut: 1
 --- !u!1 &1351810434
 GameObject:
   m_ObjectHideFlags: 0
@@ -1596,7 +1612,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1569241408}
   - component: {fileID: 1569241411}
-  - component: {fileID: 1569241410}
   - component: {fileID: 1569241409}
   m_Layer: 0
   m_Name: BlueBead
@@ -1635,6 +1650,7 @@ MonoBehaviour:
   _responsiveOperation:
     rid: 7831881342642552851
   _canvasKey: TopCanvas
+  _targetKey: Blue
   _itemPosition: {fileID: 1569241408}
   _orderInLayer: 22
   _referenceSprite: {fileID: 1211146598}
@@ -1649,20 +1665,6 @@ MonoBehaviour:
         LocalScale: {x: 0.5, y: 0.5, z: 1}
         _topOffset: 0.05
         _horizontalOffset: 0.2
---- !u!114 &1569241410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1569241407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfab89cd739854cc197ea00ba3475b42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parent: {fileID: 1645110077}
-  cut: 1
 --- !u!212 &1569241411
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1818,6 +1820,7 @@ MonoBehaviour:
   _responsiveOperation:
     rid: 7831881342642552838
   _canvasKey: TopCanvas
+  _targetKey: 
   _itemPosition: {fileID: 1645110080}
   _orderInLayer: 0
   _referenceSprite: {fileID: 0}
@@ -1919,7 +1922,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2016244202}
   - component: {fileID: 2016244205}
-  - component: {fileID: 2016244204}
   - component: {fileID: 2016244203}
   m_Layer: 0
   m_Name: GreenBead
@@ -1958,6 +1960,7 @@ MonoBehaviour:
   _responsiveOperation:
     rid: 7831881342642552853
   _canvasKey: TopCanvas
+  _targetKey: Green
   _itemPosition: {fileID: 2016244202}
   _orderInLayer: 22
   _referenceSprite: {fileID: 1211146598}
@@ -1972,20 +1975,6 @@ MonoBehaviour:
         LocalScale: {x: 0.5, y: 0.5, z: 1}
         _topOffset: 0.05
         _horizontalOffset: 0.2
---- !u!114 &2016244204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2016244201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfab89cd739854cc197ea00ba3475b42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parent: {fileID: 1645110077}
-  cut: 1
 --- !u!212 &2016244205
 SpriteRenderer:
   m_ObjectHideFlags: 0

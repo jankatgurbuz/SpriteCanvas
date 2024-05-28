@@ -12,6 +12,8 @@ namespace Core.UI
         [SerializeField, SCHorizontalLine(EColor.Orange, 1, 0), CanvasKey]
         private string _canvasKey;
 
+        [SerializeField] private string _targetKey;
+
         [SerializeField, SCHorizontalLine(EColor.Orange, 1, 3)]
         protected Transform _itemPosition;
 
@@ -22,7 +24,7 @@ namespace Core.UI
         private void Start()
         {
             var spriteCanvas = SpriteCanvasManager.Instance.Get(_canvasKey);
-
+            SpriteCanvasManager.Instance.RegisterTarget(_targetKey, this);
             ArrangeLayers(spriteCanvas.SortingLayerName, spriteCanvas.SortingLayerOrder);
             Handle(spriteCanvas.ViewportHeight, spriteCanvas.ViewportWidth, spriteCanvas.ViewportPosition,
                 spriteCanvas.Balance);
