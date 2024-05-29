@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Core.ResponsiveOperations;
 using Core.UI;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ namespace Editor
         private const string _responsiveOperationFieldName = "_responsiveOperation";
         private const string _itemPositionFieldName = "_itemPosition";
         private const string _spriteRendererFieldName = "_spriteRenderer";
+        private const string _textMeshProFieldName = "_textMeshPro";
 
         private Transform _itemPosition;
 
@@ -88,6 +90,7 @@ namespace Editor
             var element = (UIElement)target;
             AssignComponent<Transform>(element, _itemPositionFieldName);
             AssignComponent<SpriteRenderer>(element, _spriteRendererFieldName);
+            AssignComponent<TextMeshPro>(element, _textMeshProFieldName);
         }
 
         private void AssignComponent<T>(UIElement uiElement, string fieldName) where T : Component
