@@ -6,7 +6,7 @@ namespace Core.UI
 {
     public class SpriteCanvas : MonoBehaviour
     {
-        [SerializeField] private string _canvasKey; 
+        [SerializeField] private string _canvasKey;
 
         [SerializeField] private Camera _camera;
 
@@ -28,9 +28,12 @@ namespace Core.UI
         public Vector3 ViewportPosition { get; private set; }
         public float Balance { get; private set; }
 
+        private static SpriteCanvasManager _spriteCanvasManager;
+
         private void Awake()
         {
-            SpriteCanvasManager.Instance.Register(_canvasKey, this);
+            CreateSpriteCanvasManager();
+            _spriteCanvasManager.Register(_canvasKey, this);
             CalculateCameraProp();
         }
 
@@ -50,6 +53,15 @@ namespace Core.UI
             }
 
             ViewportPosition = GetViewportCenterPosition();
+        }
+
+        private void CreateSpriteCanvasManager()
+        {
+            if (_spriteCanvasManager != null) return;
+
+            var managerObj = new GameObject("SpriteCanvasManager");
+            _spriteCanvasManager = managerObj.AddComponent<SpriteCanvasManager>();
+            Object.DontDestroyOnLoad(managerObj);
         }
 
         private Vector3 GetViewportCenterPosition()
