@@ -19,18 +19,49 @@ namespace Core.UI
 
         [SerializeField] protected int _orderInLayer;
         [SerializeField] protected SpriteRenderer _referenceSprite;
+
+        [SerializeField] protected bool _hasReference;
         public string CanvasKey => _canvasKey;
+
+        public abstract void SetUILayout(float height, float width, Vector3 viewportCenterPosition, float balance);
+        public abstract void ArrangeLayers(string sortingLayer, int sortingOrder);
 
         private void Start()
         {
             var spriteCanvas = SpriteCanvasManager.Instance.Get(_canvasKey);
             SpriteCanvasManager.Instance.RegisterTarget(_targetKey, this);
             ArrangeLayers(spriteCanvas.SortingLayerName, spriteCanvas.SortingLayerOrder);
-            Handle(spriteCanvas.ViewportHeight, spriteCanvas.ViewportWidth, spriteCanvas.ViewportPosition,
+            SetUILayout(spriteCanvas.ViewportHeight, spriteCanvas.ViewportWidth, spriteCanvas.ViewportPosition,
                 spriteCanvas.Balance);
         }
 
-        public abstract void Handle(float height, float width, Vector3 viewportCenterPosition, float balance);
-        public abstract void ArrangeLayers(string sortingLayer, int sortingOrder);
+        protected void Handle(Vector3 boundsSize, float screenHeight, float screenWidth,
+            Vector3 viewportCenterPosition, float balance)
+        {
+            if (!_hasReference)
+            {
+                _responsiveOperation.AdjustUI(screenHeight, screenWidth, boundsSize, _itemPosition,
+                    viewportCenterPosition, balance);
+            }
+            else
+            {
+                var referenceSpriteSize = _referenceSprite.sprite.bounds.size;
+                var referenceTransform = _referenceSprite.transform;
+                var globalReferenceSize = GetGlobalSize(referenceSpriteSize, referenceTransform);
+
+                _responsiveOperation.AdjustUI(
+                    globalReferenceSize.y,
+                    globalReferenceSize.x,
+                    boundsSize,
+                    _itemPosition,
+                    _referenceSprite.transform.position, balance);
+            }
+        }
+
+        private Vector3 GetGlobalSize(Vector3 localSize, Transform myTransform)
+        {
+            var globalScale = myTransform.lossyScale;
+            return new Vector3(localSize.x * globalScale.x, localSize.y * globalScale.y, localSize.z * globalScale.z);
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace DemoGame
     {
         [SerializeField] private int _rowLength;
         [SerializeField] private int _columnLength;
+        [SerializeField] private Material _material;
         [SerializeField] private GameObject _hand;
 
         private Grid _grid;
@@ -40,6 +41,7 @@ namespace DemoGame
                     obj.transform.position = GetGridPos(i, j);
                     obj.SetActive(true);
                     obj.GetComponent<SpriteRenderer>().sortingOrder = i;
+                    obj.GetComponent<SpriteRenderer>().material = _material;
 
                     _beadControl[i, j] = new BeadController()
                     {
