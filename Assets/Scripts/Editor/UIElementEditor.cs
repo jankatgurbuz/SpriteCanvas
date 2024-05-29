@@ -14,7 +14,7 @@ namespace Editor
     [CustomEditor(typeof(UIElement), true)]
     public class UIElementEditor : UnityEditor.Editor
     {
-        private readonly BindingFlags _bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance;
+        private readonly BindingFlags _bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy;
         private const string _responsiveOperationFieldName = "_responsiveOperation";
         private const string _itemPositionFieldName = "_itemPosition";
         private const string _spriteRendererFieldName = "_spriteRenderer";
@@ -96,11 +96,14 @@ namespace Editor
         private void AssignComponent<T>(UIElement uiElement, string fieldName) where T : Component
         {
             var component = GetValue<T>(uiElement, fieldName, out FieldInfo field);
-            if (component != null) return;
-
+            
             component = uiElement.GetComponent<T>();
             if (component != null)
             {
+                if (field ==null)
+                {
+                    return;
+                }
                 field.SetValue(uiElement, component);
 
                 EditorUtility.SetDirty(uiElement);

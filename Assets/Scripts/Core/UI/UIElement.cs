@@ -2,6 +2,7 @@ using Core.ResponsiveOperations;
 using Manager;
 using SpriteCanvasAttribute;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Core.UI
 {
@@ -21,18 +22,20 @@ namespace Core.UI
         [SerializeField] protected SpriteRenderer _referenceSprite;
 
         [SerializeField] protected bool _hasReference;
+        [SerializeField] protected SpriteCanvas _spriteCanvas;
         public string CanvasKey => _canvasKey;
 
         public abstract void SetUILayout(float height, float width, Vector3 viewportCenterPosition, float balance);
         public abstract void ArrangeLayers(string sortingLayer, int sortingOrder);
 
-        private void Start()
+        protected virtual void Start()
         {
-            var spriteCanvas = SpriteCanvasManager.Instance.Get(_canvasKey);
+            _spriteCanvas = SpriteCanvasManager.Instance.Get(_canvasKey);
             SpriteCanvasManager.Instance.RegisterTarget(_targetKey, this);
-            ArrangeLayers(spriteCanvas.SortingLayerName, spriteCanvas.SortingLayerOrder);
-            SetUILayout(spriteCanvas.ViewportHeight, spriteCanvas.ViewportWidth, spriteCanvas.ViewportPosition,
-                spriteCanvas.Balance);
+            ArrangeLayers(_spriteCanvas.SortingLayerName, _spriteCanvas.SortingLayerOrder);
+            SetUILayout(_spriteCanvas.ViewportHeight, _spriteCanvas.ViewportWidth,
+                _spriteCanvas.ViewportPosition,
+                _spriteCanvas.Balance);
         }
 
         protected void Handle(Vector3 boundsSize, float screenHeight, float screenWidth,

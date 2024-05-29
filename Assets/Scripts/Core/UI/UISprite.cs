@@ -4,7 +4,7 @@ namespace Core.UI
 {
     public class UISprite : UIElement
     {
-        [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] protected SpriteRenderer _spriteRenderer;
         [SerializeField] private Vector3 _spriteSize;
 
         public override void ArrangeLayers(string sortingLayer, int sortingOrder)
