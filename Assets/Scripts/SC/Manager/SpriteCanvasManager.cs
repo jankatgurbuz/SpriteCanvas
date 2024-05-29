@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
+using SC.Core.UI;
 using UnityEngine;
-using Core.UI;
 
-namespace Manager
+namespace SC.Manager
 {
     public class SpriteCanvasManager : MonoBehaviour
     {

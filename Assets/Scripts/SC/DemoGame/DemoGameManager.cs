@@ -1,13 +1,11 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Manager;
-using Unity.VisualScripting;
+using SC.Manager;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace DemoGame
+namespace SC.DemoGame
 {
     public class DemoGameManager : MonoBehaviour
     {

@@ -1,9 +1,9 @@
 using System.Reflection;
-using Core.UI;
+using SC.Core.UI;
 using UnityEditor;
 using UnityEngine;
 
-namespace Editor
+namespace SC.Editor
 {
     [CustomEditor(typeof(SpriteCanvas))]
     public class CameraViewportSizeEditor : UnityEditor.Editor

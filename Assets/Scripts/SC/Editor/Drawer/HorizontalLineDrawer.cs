@@ -1,8 +1,8 @@
-using SpriteCanvasAttribute;
+using SC.SpriteCanvasAttribute;
 using UnityEditor;
 using UnityEngine;
 
-namespace Editor.Drawer
+namespace SC.Editor.Drawer
 {
     [CustomPropertyDrawer(typeof(SCHorizontalLineAttribute))]
     public class HorizontalLineDrawer : DecoratorDrawer

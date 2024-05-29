@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SpriteCanvasAttribute
+namespace SC.SpriteCanvasAttribute
 {
     public class SCSortingLayerAttribute : PropertyAttribute
     {

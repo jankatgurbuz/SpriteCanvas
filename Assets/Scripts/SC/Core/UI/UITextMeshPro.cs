@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Core.UI
+namespace SC.Core.UI
 {
     public class UITextMeshPro : UIElement
     {

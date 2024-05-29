@@ -1,10 +1,9 @@
-using Core.ResponsiveOperations;
-using Manager;
-using SpriteCanvasAttribute;
+using SC.Core.ResponsiveOperations;
+using SC.Manager;
+using SC.SpriteCanvasAttribute;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Core.UI
+namespace SC.Core.UI
 {
     public abstract class UIElement : MonoBehaviour
     {
@@ -22,7 +21,7 @@ namespace Core.UI
         [SerializeField] protected SpriteRenderer _referenceSprite;
 
         [SerializeField] protected bool _hasReference;
-        [SerializeField] protected SpriteCanvas _spriteCanvas;
+        protected SpriteCanvas _spriteCanvas;
         public string CanvasKey => _canvasKey;
 
         public abstract void SetUILayout(float height, float width, Vector3 viewportCenterPosition, float balance);

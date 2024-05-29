@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Core.ResponsiveOperations;
-using Core.UI;
+using SC.Core.ResponsiveOperations;
+using SC.Core.UI;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
 
-namespace Editor
+namespace SC.Editor
 {
     [CanEditMultipleObjects]
     [CustomEditor(typeof(UIElement), true)]
