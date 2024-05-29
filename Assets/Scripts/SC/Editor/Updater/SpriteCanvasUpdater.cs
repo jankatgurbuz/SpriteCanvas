@@ -1,4 +1,4 @@
-using Core.UI;
+using SC.Core.UI;
 using UnityEditor;
 using UnityEngine;
 

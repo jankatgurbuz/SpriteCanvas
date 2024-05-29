@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Core.ResponsiveOperations
+namespace SC.Core.ResponsiveOperations
 {
     public interface IResponsiveOperation
     {

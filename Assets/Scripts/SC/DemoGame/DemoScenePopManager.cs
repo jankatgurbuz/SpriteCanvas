@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DemoGame
+namespace SC.DemoGame
 {
     public class DemoScenePopManager : MonoBehaviour
     {

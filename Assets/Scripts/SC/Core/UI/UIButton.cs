@@ -1,9 +1,8 @@
-using Manager;
+using SC.Manager;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
 
-namespace Core.UI
+namespace SC.Core.UI
 {
     public class UIButton : UISprite
     {

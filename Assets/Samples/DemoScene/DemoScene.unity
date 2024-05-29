@@ -150,8 +150,8 @@ Transform:
   m_GameObject: {fileID: 16508833}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.30500013, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.99999994}
+  m_LocalPosition: {x: -0.72999996, y: -0.30500013, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.49999997}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1211146595}
@@ -169,25 +169,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _responsiveOperation:
-    rid: 7831881342642552855
+    rid: 7831881362000052323
   _canvasKey: TopCanvas
   _targetKey: Purple
   _itemPosition: {fileID: 16508834}
   _orderInLayer: 22
   _referenceSprite: {fileID: 1211146598}
   _hasReference: 1
-  _spriteCanvas: {fileID: 0}
   _spriteRenderer: {fileID: 16508837}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
     version: 2
     RefIds:
-    - rid: 7831881342642552855
-      type: {class: BottomCenter, ns: Core.ResponsiveOperations, asm: Assembly-CSharp}
+    - rid: 7831881362000052323
+      type: {class: BottomLeft, ns: SC.Core.ResponsiveOperations, asm: Assembly-CSharp}
       data:
-        LocalScale: {x: 0.5, y: 0.5, z: 1}
+        LocalScale: {x: 0.5, y: 0.5, z: 0.5}
         _topOffset: 0.05
-        _horizontalOffset: 0
+        _horizontalOffset: 0.3
 --- !u!212 &16508837
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -267,8 +266,8 @@ Transform:
   m_GameObject: {fileID: 94823674}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.83000004, y: -0.30500013, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.99999994}
+  m_LocalPosition: {x: 0.73, y: -0.30500013, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.49999997}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1211146595}
@@ -286,25 +285,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _responsiveOperation:
-    rid: 7831881342642552857
+    rid: 7831881362000052325
   _canvasKey: TopCanvas
   _targetKey: Yellow
   _itemPosition: {fileID: 94823675}
   _orderInLayer: 22
   _referenceSprite: {fileID: 1211146598}
   _hasReference: 1
-  _spriteCanvas: {fileID: 0}
   _spriteRenderer: {fileID: 94823678}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
     version: 2
     RefIds:
-    - rid: 7831881342642552857
-      type: {class: BottomRight, ns: Core.ResponsiveOperations, asm: Assembly-CSharp}
+    - rid: 7831881362000052325
+      type: {class: BottomRight, ns: SC.Core.ResponsiveOperations, asm: Assembly-CSharp}
       data:
-        LocalScale: {x: 0.5, y: 0.5, z: 1}
+        LocalScale: {x: 0.5, y: 0.5, z: 0.5}
         _topOffset: 0.05
-        _horizontalOffset: 0.2
+        _horizontalOffset: 0.3
 --- !u!212 &94823678
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -468,7 +466,7 @@ Transform:
   m_GameObject: {fileID: 349766883}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.30500013, z: 0}
+  m_LocalPosition: {x: 0.73, y: 0.3050001, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.49999997}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -487,25 +485,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _responsiveOperation:
-    rid: 7831881342642552854
+    rid: 7831881362000052321
   _canvasKey: TopCanvas
   _targetKey: Orange
   _itemPosition: {fileID: 349766884}
   _orderInLayer: 22
   _referenceSprite: {fileID: 1211146598}
   _hasReference: 1
-  _spriteCanvas: {fileID: 0}
   _spriteRenderer: {fileID: 349766887}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
     version: 2
     RefIds:
-    - rid: 7831881342642552854
-      type: {class: TopCenter, ns: Core.ResponsiveOperations, asm: Assembly-CSharp}
+    - rid: 7831881362000052321
+      type: {class: TopRight, ns: SC.Core.ResponsiveOperations, asm: Assembly-CSharp}
       data:
         LocalScale: {x: 0.5, y: 0.5, z: 0.5}
         _topOffset: 0.05
-        _horizontalOffset: 0
+        _horizontalOffset: 0.3
 --- !u!212 &349766887
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -915,8 +912,8 @@ Transform:
   m_GameObject: {fileID: 788897654}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.5, y: 17.003, z: 0}
-  m_LocalScale: {x: 277.2512, y: 99.85, z: 1}
+  m_LocalPosition: {x: 4.5, y: 17, z: 0}
+  m_LocalScale: {x: 277.23215, y: 100, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 404344877}
@@ -934,23 +931,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _responsiveOperation:
-    rid: 7831881342642552838
+    rid: 7831881362000052308
   _canvasKey: TopCanvas
   _targetKey: 
   _itemPosition: {fileID: 788897655}
   _orderInLayer: 0
   _referenceSprite: {fileID: 0}
   _hasReference: 0
-  _spriteCanvas: {fileID: 0}
   _spriteRenderer: {fileID: 788897657}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
     version: 2
     RefIds:
-    - rid: 7831881342642552838
-      type: {class: TopStretch, ns: Core.ResponsiveOperations, asm: Assembly-CSharp}
+    - rid: 7831881362000052308
+      type: {class: TopStretch, ns: SC.Core.ResponsiveOperations, asm: Assembly-CSharp}
       data:
-        LocalScale: {x: 1, y: 99.85, z: 1}
+        LocalScale: {x: 1, y: 100, z: 1}
         _topOffset: 0
         _horizontalOffset: 0
         _edgeOffset: 0
@@ -1035,7 +1031,7 @@ RectTransform:
   m_GameObject: {fileID: 1064447758}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.0000002, y: 2, z: 1.9999999}
+  m_LocalScale: {x: 2, y: 2, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1356520693}
@@ -1058,21 +1054,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _responsiveOperation:
-    rid: 7831881362000052285
+    rid: 7831881362000052338
   _canvasKey: BottomCanvas
   _targetKey: 
   _itemPosition: {fileID: 1064447759}
   _orderInLayer: 99
   _referenceSprite: {fileID: 1356520694}
   _hasReference: 1
-  _spriteCanvas: {fileID: 0}
   _textMeshPro: {fileID: 1064447761}
   _textMeshProSize: {x: 1.2, y: 0.6, z: 0}
   references:
     version: 2
     RefIds:
-    - rid: 7831881362000052285
-      type: {class: Center, ns: Core.ResponsiveOperations, asm: Assembly-CSharp}
+    - rid: 7831881362000052338
+      type: {class: Center, ns: SC.Core.ResponsiveOperations, asm: Assembly-CSharp}
       data:
         LocalScale: {x: 1, y: 1, z: 1}
         _topOffset: 0
@@ -1238,8 +1233,8 @@ Transform:
   m_GameObject: {fileID: 1129966639}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.83000004, y: 0.30500013, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.99999994}
+  m_LocalPosition: {x: 0, y: -0.30500013, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.49999997}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1211146595}
@@ -1257,25 +1252,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _responsiveOperation:
-    rid: 7831881342642552856
+    rid: 7831881362000052324
   _canvasKey: TopCanvas
   _targetKey: Red
   _itemPosition: {fileID: 1129966640}
   _orderInLayer: 22
   _referenceSprite: {fileID: 1211146598}
   _hasReference: 1
-  _spriteCanvas: {fileID: 0}
   _spriteRenderer: {fileID: 1129966643}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
     version: 2
     RefIds:
-    - rid: 7831881342642552856
-      type: {class: TopRight, ns: Core.ResponsiveOperations, asm: Assembly-CSharp}
+    - rid: 7831881362000052324
+      type: {class: BottomCenter, ns: SC.Core.ResponsiveOperations, asm: Assembly-CSharp}
       data:
-        LocalScale: {x: 0.5, y: 0.5, z: 1}
+        LocalScale: {x: 0.5, y: 0.5, z: 0.5}
         _topOffset: 0.05
-        _horizontalOffset: 0.2
+        _horizontalOffset: 0
 --- !u!212 &1129966643
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1430,8 +1424,8 @@ Transform:
   m_GameObject: {fileID: 1211146594}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.008148148, y: -0.000070104856, z: 0}
-  m_LocalScale: {x: 0.009259259, y: 0.024036055, z: 2.4}
+  m_LocalPosition: {x: 0.0071876324, y: -0.00008620061, z: 0}
+  m_LocalScale: {x: 0.008657005, y: 0.024055328, z: 2.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1569241408}
@@ -1455,25 +1449,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _responsiveOperation:
-    rid: 7831881342642552850
+    rid: 7831881362000052312
   _canvasKey: TopCanvas
   _targetKey: 
   _itemPosition: {fileID: 1211146595}
   _orderInLayer: 20
   _referenceSprite: {fileID: 1645110079}
   _hasReference: 1
-  _spriteCanvas: {fileID: 0}
   _spriteRenderer: {fileID: 1211146598}
   _spriteSize: {x: 2.46, y: 1.35, z: 0}
   references:
     version: 2
     RefIds:
-    - rid: 7831881342642552850
-      type: {class: TopRight, ns: Core.ResponsiveOperations, asm: Assembly-CSharp}
+    - rid: 7831881362000052312
+      type: {class: TopRight, ns: SC.Core.ResponsiveOperations, asm: Assembly-CSharp}
       data:
         LocalScale: {x: 1, y: 1, z: 1}
         _topOffset: 0.2
-        _horizontalOffset: 0
+        _horizontalOffset: 0.2
 --- !u!212 &1211146598
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1553,8 +1546,8 @@ Transform:
   m_GameObject: {fileID: 1321324814}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.012592592, y: -0.000070104856, z: 0}
-  m_LocalScale: {x: 0.009259259, y: 0.024036055, z: 2.4}
+  m_LocalPosition: {x: -0.010650434, y: -0.00008620061, z: 0}
+  m_LocalScale: {x: 0.008657005, y: 0.024055328, z: 2.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1645110080}
@@ -1624,25 +1617,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _responsiveOperation:
-    rid: 7831881342642552849
+    rid: 7831881362000052327
   _canvasKey: TopCanvas
   _targetKey: 
   _itemPosition: {fileID: 1321324815}
   _orderInLayer: 1
   _referenceSprite: {fileID: 1645110079}
   _hasReference: 1
-  _spriteCanvas: {fileID: 0}
   _spriteRenderer: {fileID: 1321324817}
   _spriteSize: {x: 1.5, y: 1.35, z: 0}
   references:
     version: 2
     RefIds:
-    - rid: 7831881342642552849
-      type: {class: TopLeft, ns: Core.ResponsiveOperations, asm: Assembly-CSharp}
+    - rid: 7831881362000052327
+      type: {class: TopLeft, ns: SC.Core.ResponsiveOperations, asm: Assembly-CSharp}
       data:
         LocalScale: {x: 1, y: 1, z: 1}
         _topOffset: 0.2
-        _horizontalOffset: -0.48
+        _horizontalOffset: -0.2
 --- !u!1 &1351810434
 GameObject:
   m_ObjectHideFlags: 0
@@ -1748,8 +1740,8 @@ Transform:
   m_GameObject: {fileID: 1356520692}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.008276922, z: 0}
-  m_LocalScale: {x: 0.0043282053, y: 0.01846154, z: 1.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.0043285023, y: 0.017142858, z: 2.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1064447759}
@@ -1800,7 +1792,7 @@ SpriteRenderer:
   m_Color: {r: 0.21568626, g: 0.6534863, b: 0.7529412, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 1
+  m_DrawMode: 0
   m_Size: {x: 5.4, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -1820,14 +1812,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _responsiveOperation:
-    rid: 7831881362000052279
+    rid: 7831881362000052331
   _canvasKey: BottomCanvas
   _targetKey: 
   _itemPosition: {fileID: 1356520693}
   _orderInLayer: 18
   _referenceSprite: {fileID: 1929393234}
   _hasReference: 1
-  _spriteCanvas: {fileID: 0}
   _spriteRenderer: {fileID: 1356520694}
   _spriteSize: {x: 5.4, y: 1, z: 0}
   DownEvent:
@@ -1863,10 +1854,10 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 7831881362000052279
-      type: {class: TopCenter, ns: Core.ResponsiveOperations, asm: Assembly-CSharp}
+    - rid: 7831881362000052331
+      type: {class: Center, ns: SC.Core.ResponsiveOperations, asm: Assembly-CSharp}
       data:
-        LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+        LocalScale: {x: 0.5, y: 0.5, z: 1}
         _topOffset: 0
         _horizontalOffset: 0
 --- !u!114 &1356520696
@@ -2061,8 +2052,8 @@ Transform:
   m_GameObject: {fileID: 1569241407}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.83000004, y: 0.30500013, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.99999994}
+  m_LocalPosition: {x: -0.72999996, y: 0.3050001, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.49999997}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1211146595}
@@ -2080,25 +2071,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _responsiveOperation:
-    rid: 7831881342642552851
+    rid: 7831881362000052320
   _canvasKey: TopCanvas
   _targetKey: Blue
   _itemPosition: {fileID: 1569241408}
   _orderInLayer: 31
   _referenceSprite: {fileID: 1211146598}
   _hasReference: 1
-  _spriteCanvas: {fileID: 0}
   _spriteRenderer: {fileID: 1569241411}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
     version: 2
     RefIds:
-    - rid: 7831881342642552851
-      type: {class: TopLeft, ns: Core.ResponsiveOperations, asm: Assembly-CSharp}
+    - rid: 7831881362000052320
+      type: {class: TopLeft, ns: SC.Core.ResponsiveOperations, asm: Assembly-CSharp}
       data:
-        LocalScale: {x: 0.5, y: 0.5, z: 1}
+        LocalScale: {x: 0.5, y: 0.5, z: 0.5}
         _topOffset: 0.05
-        _horizontalOffset: 0.2
+        _horizontalOffset: 0.3
 --- !u!212 &1569241411
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2211,7 +2201,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1bc1adfe09a4215459e403f002a487df, type: 3}
-  m_Color: {r: 0.7529412, g: 0.21568628, b: 0.3137255, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2230,8 +2220,8 @@ Transform:
   m_GameObject: {fileID: 1645110077}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.5, y: 17.003, z: 0}
-  m_LocalScale: {x: 259.2, y: 99.85, z: 1}
+  m_LocalPosition: {x: 4.5, y: 17.0046, z: 0}
+  m_LocalScale: {x: 277.23215, y: 99.77, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1321324815}
@@ -2251,27 +2241,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _responsiveOperation:
-    rid: 7831881342642552838
+    rid: 7831881362000052309
   _canvasKey: TopCanvas
   _targetKey: 
   _itemPosition: {fileID: 1645110080}
   _orderInLayer: 0
   _referenceSprite: {fileID: 0}
   _hasReference: 0
-  _spriteCanvas: {fileID: 0}
   _spriteRenderer: {fileID: 1645110079}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
     version: 2
     RefIds:
-    - rid: 7831881342642552838
-      type: {class: TopStretch, ns: Core.ResponsiveOperations, asm: Assembly-CSharp}
+    - rid: 7831881362000052309
+      type: {class: TopStretch, ns: SC.Core.ResponsiveOperations, asm: Assembly-CSharp}
       data:
-        LocalScale: {x: 1, y: 99.85, z: 1}
+        LocalScale: {x: 1, y: 99.77, z: 1}
         _topOffset: 0
         _horizontalOffset: 0
         _edgeOffset: 0
-        _maxSize: 108
+        _maxSize: 125
 --- !u!1 &1923140216
 GameObject:
   m_ObjectHideFlags: 0
@@ -2374,8 +2363,8 @@ Transform:
   m_GameObject: {fileID: 1929393232}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.5, y: -3.6999993, z: 0}
-  m_LocalScale: {x: 277.2512, y: 65, z: 1}
+  m_LocalPosition: {x: 4.5, y: -3.6, z: 0}
+  m_LocalScale: {x: 277.23215, y: 70, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1356520693}
@@ -2446,23 +2435,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _responsiveOperation:
-    rid: 7831881362000052224
+    rid: 7831881362000052329
   _canvasKey: BottomCanvas
   _targetKey: 
   _itemPosition: {fileID: 1929393233}
   _orderInLayer: 0
   _referenceSprite: {fileID: 0}
   _hasReference: 0
-  _spriteCanvas: {fileID: 0}
   _spriteRenderer: {fileID: 1929393234}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
     version: 2
     RefIds:
-    - rid: 7831881362000052224
-      type: {class: BottomStretch, ns: Core.ResponsiveOperations, asm: Assembly-CSharp}
+    - rid: 7831881362000052329
+      type: {class: BottomStretch, ns: SC.Core.ResponsiveOperations, asm: Assembly-CSharp}
       data:
-        LocalScale: {x: 1, y: 65, z: 1}
+        LocalScale: {x: 1, y: 70, z: 1}
         _topOffset: 0
         _horizontalOffset: 0
         _edgeOffset: 0
@@ -2494,8 +2482,8 @@ Transform:
   m_GameObject: {fileID: 2016244201}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.83000004, y: -0.30500013, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.99999994}
+  m_LocalPosition: {x: 0, y: 0.3050001, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.49999997}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1211146595}
@@ -2513,25 +2501,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _responsiveOperation:
-    rid: 7831881342642552853
+    rid: 7831881362000052318
   _canvasKey: TopCanvas
   _targetKey: Green
   _itemPosition: {fileID: 2016244202}
   _orderInLayer: 22
   _referenceSprite: {fileID: 1211146598}
   _hasReference: 1
-  _spriteCanvas: {fileID: 0}
   _spriteRenderer: {fileID: 2016244205}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
     version: 2
     RefIds:
-    - rid: 7831881342642552853
-      type: {class: BottomLeft, ns: Core.ResponsiveOperations, asm: Assembly-CSharp}
+    - rid: 7831881362000052318
+      type: {class: TopCenter, ns: SC.Core.ResponsiveOperations, asm: Assembly-CSharp}
       data:
-        LocalScale: {x: 0.5, y: 0.5, z: 1}
+        LocalScale: {x: 0.5, y: 0.5, z: 0.5}
         _topOffset: 0.05
-        _horizontalOffset: 0.2
+        _horizontalOffset: 0
 --- !u!212 &2016244205
 SpriteRenderer:
   m_ObjectHideFlags: 0

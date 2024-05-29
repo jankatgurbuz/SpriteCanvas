@@ -1,8 +1,8 @@
-using Manager;
-using SpriteCanvasAttribute;
+using SC.Manager;
+using SC.SpriteCanvasAttribute;
 using UnityEngine;
 
-namespace Core.UI
+namespace SC.Core.UI
 {
     public class SpriteCanvas : MonoBehaviour
     {

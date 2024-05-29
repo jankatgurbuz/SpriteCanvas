@@ -1,10 +1,10 @@
 using System.Reflection;
-using Core.UI;
-using SpriteCanvasAttribute;
+using SC.Core.UI;
+using SC.SpriteCanvasAttribute;
 using UnityEditor;
 using UnityEngine;
 
-namespace Editor.Drawer
+namespace SC.Editor.Drawer
 {
     [CustomPropertyDrawer(typeof(CanvasKeyAttribute))]
     public class CanvasKeyAttributeDrawer : PropertyDrawer

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Core.UI
+namespace SC.Core.UI
 {
     public class UISprite : UIElement
     {
