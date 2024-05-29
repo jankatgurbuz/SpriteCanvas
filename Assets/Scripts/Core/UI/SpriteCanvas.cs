@@ -74,7 +74,7 @@ namespace Core.UI
             {
                 if (item.CanvasKey != _canvasKey) continue;
                 item.ArrangeLayers(_sortingLayerName, _sortingLayerOrder);
-                item.Handle(ViewportHeight, ViewportWidth, ViewportPosition, Balance);
+                item.SetUILayout(ViewportHeight, ViewportWidth, ViewportPosition, Balance);
             }
         }
 #endif
