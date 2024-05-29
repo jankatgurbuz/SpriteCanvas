@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Core.UI;
@@ -9,10 +10,11 @@ namespace Manager
         public static SpriteCanvasManager Instance;
         private Dictionary<string, SpriteCanvas> _spriteCanvasMap;
         private Dictionary<string, UIElement> _targetUI;
-
+        private List<UIButton> _uiButtons;
         private void Awake()
         {
             Instance = this;
+            _uiButtons = new List<UIButton>();
         }
 
         public void Register(string str, SpriteCanvas spriteCanvas)
@@ -43,7 +45,6 @@ namespace Manager
             if (targetKey == string.Empty) return;
             if (_targetUI.TryAdd(targetKey, uiElement)) return;
             
-            Debug.Log(targetKey);
             Debug.LogWarning("The targetKey already exists in the dictionary.");
         }
 
@@ -56,6 +57,31 @@ namespace Manager
 
             Debug.LogWarning("The targetKey does not exist in the dictionary.");
             return null;
+        }
+
+        public void RegisterButton(UIButton button)
+        {
+            _uiButtons.Add(button);
+        }
+
+        private void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                var pos = Input.mousePosition;
+                foreach (var item in _uiButtons)
+                {
+                    item.Down(pos);
+                }
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                var pos = Input.mousePosition;
+                foreach (var item in _uiButtons)
+                {
+                    item.Up(pos);
+                }
+            } 
         }
     }
 }
