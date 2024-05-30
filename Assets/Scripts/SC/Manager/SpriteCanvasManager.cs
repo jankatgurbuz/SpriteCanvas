@@ -40,11 +40,17 @@ namespace SC.Manager
         public void RegisterTarget(string targetKey, UIElement uiElement)
         {
             _targetUI ??= new Dictionary<string, UIElement>();
-            
-            if (targetKey == string.Empty) return;
-            if (_targetUI.TryAdd(targetKey, uiElement)) return;
-            
-            Debug.LogWarning("The targetKey already exists in the dictionary.");
+
+            if (targetKey != string.Empty)
+            {
+                if (!_targetUI.TryAdd(targetKey, uiElement))
+                    Debug.LogWarning("The targetKey already exists in the dictionary.");
+            }
+
+            if (uiElement is UIButton button)
+            {
+                _uiButtons.Add(button); 
+            }
         }
 
         public UIElement GetTarget(string targetKey)
@@ -57,12 +63,6 @@ namespace SC.Manager
             Debug.LogWarning("The targetKey does not exist in the dictionary.");
             return null;
         }
-
-        public void RegisterButton(UIButton button)
-        {
-            _uiButtons.Add(button);
-        }
-
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))

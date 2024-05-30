@@ -27,7 +27,7 @@ namespace SC.Core.UI
         public abstract void SetUILayout(float height, float width, Vector3 viewportCenterPosition, float balance);
         public abstract void ArrangeLayers(string sortingLayer, int sortingOrder);
 
-        protected virtual void Start()
+        protected void Start()
         {
             _spriteCanvas = SpriteCanvasManager.Instance.Get(_canvasKey);
             SpriteCanvasManager.Instance.RegisterTarget(_targetKey, this);
