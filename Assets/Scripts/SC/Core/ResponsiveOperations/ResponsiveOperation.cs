@@ -21,8 +21,14 @@ namespace SC.Core.ResponsiveOperations
         protected Vector3 GetPosition(float screenHeight, float screenWidth,
             Vector3 uiItemSize, Transform uiItemTransform, float balance, Vector2 positionFactors)
         {
-            var scaledHeight = uiItemSize.y * uiItemTransform.parent.TransformVector(uiItemTransform.localScale).y;
-            var scaledWidth = uiItemSize.x * uiItemTransform.parent.TransformVector(uiItemTransform.localScale).x;
+            var scale = uiItemTransform.localScale;
+            if (uiItemTransform.parent != null)
+            {
+                scale = uiItemTransform.parent.TransformVector(scale);
+            }
+
+            var scaledHeight = uiItemSize.y * scale.y;
+            var scaledWidth = uiItemSize.x * scale.x;
 
             var x = positionFactors.x * screenWidth - scaledWidth * positionFactors.x -
                     _horizontalOffset * Mathf.Sign(positionFactors.x) * balance;
@@ -63,10 +69,10 @@ namespace SC.Core.ResponsiveOperations
         public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
             Transform uiItemTransform, Vector3 referencePosition, float balance)
         {
-            var scale =GetScale(balance);
-            scale=uiItemTransform.parent.InverseTransformVector(scale);
+            var scale = GetScale(balance);
+            scale = uiItemTransform.parent.InverseTransformVector(scale);
             uiItemTransform.localScale = scale;
-            
+
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
                 uiItemTransform, balance, new Vector2(0, 0.5f));
         }
@@ -77,10 +83,10 @@ namespace SC.Core.ResponsiveOperations
         public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
             Transform uiItemTransform, Vector3 referencePosition, float balance)
         {
-            var scale =GetScale(balance);
-            scale=uiItemTransform.parent.InverseTransformVector(scale);
+            var scale = GetScale(balance);
+            scale = uiItemTransform.parent.InverseTransformVector(scale);
             uiItemTransform.localScale = scale;
-            
+
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
                 uiItemTransform, balance, new Vector2(0.5f, 0.5f));
         }
@@ -91,10 +97,10 @@ namespace SC.Core.ResponsiveOperations
         public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
             Transform uiItemTransform, Vector3 referencePosition, float balance)
         {
-            var scale =GetScale(balance);
-            scale=uiItemTransform.parent.InverseTransformVector(scale);
+            var scale = GetScale(balance);
+            scale = uiItemTransform.parent.InverseTransformVector(scale);
             uiItemTransform.localScale = scale;
-            
+
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
                 uiItemTransform, balance, new Vector2(-0.5f, 0.5f));
         }
@@ -108,10 +114,11 @@ namespace SC.Core.ResponsiveOperations
         public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
             Transform uiItemTransform, Vector3 referencePosition, float balance)
         {
-            var scale =GetScale(screenHeight, screenWidth, uiItemSize, balance, _edgeOffset, _maxSize, new Vector2(1, 0));
-            scale=uiItemTransform.parent.InverseTransformVector(scale);
+            var scale = GetScale(screenHeight, screenWidth, uiItemSize, balance, _edgeOffset, _maxSize,
+                new Vector2(1, 0));
+            scale = uiItemTransform.parent.InverseTransformVector(scale);
             uiItemTransform.localScale = scale;
-            
+
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
                 uiItemTransform, balance, new Vector2(0, 0.5f));
         }
@@ -122,10 +129,10 @@ namespace SC.Core.ResponsiveOperations
         public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
             Transform uiItemTransform, Vector3 referencePosition, float balance)
         {
-            var scale =GetScale(balance);
-            scale=uiItemTransform.parent.InverseTransformVector(scale);
+            var scale = GetScale(balance);
+            scale = uiItemTransform.parent.InverseTransformVector(scale);
             uiItemTransform.localScale = scale;
-            
+
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
                 uiItemTransform, balance, new Vector2(0, -0.5f));
         }
@@ -136,10 +143,10 @@ namespace SC.Core.ResponsiveOperations
         public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
             Transform uiItemTransform, Vector3 referencePosition, float balance)
         {
-            var scale =GetScale(balance);
-            scale=uiItemTransform.parent.InverseTransformVector(scale);
+            var scale = GetScale(balance);
+            scale = uiItemTransform.parent.InverseTransformVector(scale);
             uiItemTransform.localScale = scale;
-            
+
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
                 uiItemTransform, balance, new Vector2(0.5f, -0.5f));
         }
@@ -150,10 +157,10 @@ namespace SC.Core.ResponsiveOperations
         public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
             Transform uiItemTransform, Vector3 referencePosition, float balance)
         {
-            var scale =GetScale(balance);
-            scale=uiItemTransform.parent.InverseTransformVector(scale);
+            var scale = GetScale(balance);
+            scale = uiItemTransform.parent.InverseTransformVector(scale);
             uiItemTransform.localScale = scale;
-            
+
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
                 uiItemTransform, balance, new Vector2(-0.5f, -0.5f));
         }
@@ -169,7 +176,12 @@ namespace SC.Core.ResponsiveOperations
         {
             var scale = GetScale(screenHeight, screenWidth, uiItemSize, balance, _edgeOffset, _maxSize,
                 new Vector2(1, 0));
-            scale=uiItemTransform.parent.InverseTransformVector(scale);
+
+            if (uiItemTransform.parent != null)
+            {
+                scale = uiItemTransform.parent.InverseTransformVector(scale);
+            }
+
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
@@ -182,10 +194,10 @@ namespace SC.Core.ResponsiveOperations
         public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
             Transform uiItemTransform, Vector3 referencePosition, float balance)
         {
-            var scale =GetScale(balance);
-            scale=uiItemTransform.parent.InverseTransformVector(scale);
+            var scale = GetScale(balance);
+            scale = uiItemTransform.parent.InverseTransformVector(scale);
             uiItemTransform.localScale = scale;
-            
+
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
                 uiItemTransform, balance, new Vector2(0, 0));
         }
@@ -199,8 +211,9 @@ namespace SC.Core.ResponsiveOperations
         public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
             Transform uiItemTransform, Vector3 referencePosition, float balance)
         {
-            var scale =GetScale(screenHeight, screenWidth, uiItemSize, balance, _edgeOffset, _maxSize, new Vector2(0, 1));
-            scale=uiItemTransform.parent.InverseTransformVector(scale);
+            var scale = GetScale(screenHeight, screenWidth, uiItemSize, balance, _edgeOffset, _maxSize,
+                new Vector2(0, 1));
+            scale = uiItemTransform.parent.InverseTransformVector(scale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
@@ -216,8 +229,9 @@ namespace SC.Core.ResponsiveOperations
         public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
             Transform uiItemTransform, Vector3 referencePosition, float balance)
         {
-            var scale =GetScale(screenHeight, screenWidth, uiItemSize, balance, _edgeOffset, _maxSize, new Vector2(0, 1));
-            scale=uiItemTransform.parent.InverseTransformVector(scale);
+            var scale = GetScale(screenHeight, screenWidth, uiItemSize, balance, _edgeOffset, _maxSize,
+                new Vector2(0, 1));
+            scale = uiItemTransform.parent.InverseTransformVector(scale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
