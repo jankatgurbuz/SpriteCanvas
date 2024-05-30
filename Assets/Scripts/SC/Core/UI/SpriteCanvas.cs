@@ -24,7 +24,6 @@ namespace SC.Core.UI
         public int SortingLayerOrder => _sortingLayerOrder;
         public float ViewportHeight { get; private set; }
         public float ViewportWidth { get; private set; }
-
         public Vector3 ViewportPosition { get; private set; }
         public float Balance { get; private set; }
 
@@ -61,7 +60,7 @@ namespace SC.Core.UI
 
             var managerObj = new GameObject("SpriteCanvasManager");
             _spriteCanvasManager = managerObj.AddComponent<SpriteCanvasManager>();
-            Object.DontDestroyOnLoad(managerObj);
+            DontDestroyOnLoad(managerObj);
         }
 
         private Vector3 GetViewportCenterPosition()

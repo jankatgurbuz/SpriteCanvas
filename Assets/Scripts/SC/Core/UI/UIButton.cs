@@ -8,14 +8,6 @@ namespace SC.Core.UI
     {
         public UnityEvent DownEvent;
         public UnityEvent ClickEvent;
-
-        protected override void Start()
-        {
-            base.Start();
-
-            SpriteCanvasManager.Instance.RegisterButton(this);
-        }
-
         public void Down(Vector3 mousePosition)
         {
             Action(mousePosition, DownEvent);
