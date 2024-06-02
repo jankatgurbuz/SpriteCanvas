@@ -1,0 +1,26 @@
+{
+  "name": "com.jgurbuz.test",
+  "displayName": "Test",
+  "version": "1.0.0",
+  "unity": "2022.3",
+  "description": "A package for creating a canvas using sprites without Unity's Canvas system.",
+  "keywords": [
+    "sprite",
+    "canvas",
+    "ui",
+    "unity"
+  ],
+  "category": "UI",
+  "dependencies": {},
+  "samples": [
+    {
+      "displayName": "Demo Scene",
+      "description": "A sample scene demonstrating the usage of Sprite Canvas.",
+      "path": "Samples~/DemoScene"
+    }
+  ],
+  "author": {
+    "name": "Jankat Gürbüz",
+    "url": "https://github.com/jankatgurbuz"
+  }
+}
