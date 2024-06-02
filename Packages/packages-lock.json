@@ -1,11 +1,5 @@
 {
   "dependencies": {
-    "com.jgurbuz.test": {
-      "version": "file:SpriteCanvas",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
     "com.unity.2d.animation": {
       "version": "9.1.0",
       "depth": 1,
