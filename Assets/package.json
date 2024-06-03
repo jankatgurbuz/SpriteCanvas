@@ -12,13 +12,6 @@
   ],
   "category": "UI",
   "dependencies": {},
-  "samples": [
-    {
-      "displayName": "Demo Scene",
-      "description": "A sample scene demonstrating the usage of Sprite Canvas.",
-      "path": "Samples~/DemoScene"
-    }
-  ],
   "author": {
     "name": "Jankat Gürbüz",
     "url": "https://github.com/jankatgurbuz"
