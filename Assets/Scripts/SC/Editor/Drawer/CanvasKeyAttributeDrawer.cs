@@ -1,6 +1,6 @@
 using System.Reflection;
+using SC.Core.SpriteCanvasAttribute;
 using SC.Core.UI;
-using SC.SpriteCanvasAttribute;
 using UnityEditor;
 using UnityEngine;
 

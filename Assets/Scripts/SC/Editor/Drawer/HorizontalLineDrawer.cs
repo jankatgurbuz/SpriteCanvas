@@ -1,4 +1,4 @@
-using SC.SpriteCanvasAttribute;
+using SC.Core.SpriteCanvasAttribute;
 using UnityEditor;
 using UnityEngine;
 

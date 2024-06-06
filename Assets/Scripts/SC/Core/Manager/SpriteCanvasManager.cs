@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using SC.Core.UI;
 using UnityEngine;
 
-namespace SC.Manager
+namespace SC.Core.Manager
 {
     public class SpriteCanvasManager : MonoBehaviour
     {
