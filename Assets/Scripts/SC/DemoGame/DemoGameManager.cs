@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using SC.Manager;
+using SC.Core.Manager;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

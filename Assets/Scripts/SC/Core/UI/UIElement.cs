@@ -1,6 +1,6 @@
+using SC.Core.Manager;
 using SC.Core.ResponsiveOperations;
-using SC.Manager;
-using SC.SpriteCanvasAttribute;
+using SC.Core.SpriteCanvasAttribute;
 using UnityEngine;
 
 namespace SC.Core.UI

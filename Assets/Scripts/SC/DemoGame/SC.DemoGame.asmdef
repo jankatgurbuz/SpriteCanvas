@@ -1,0 +1,16 @@
+{
+    "name": "SC.DemoGame",
+    "rootNamespace": "",
+    "references": [
+        "GUID:844e74fad05ea4d97902c641f65cdd02"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

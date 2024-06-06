@@ -1,4 +1,3 @@
-using SC.Manager;
 using UnityEngine;
 using UnityEngine.Events;
 
