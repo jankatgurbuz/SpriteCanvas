@@ -19,7 +19,18 @@ namespace SC.Core.SpriteCanvasAttribute
             Color = color;
         }
     }
+
     public class CanvasKeyAttribute : PropertyAttribute
     {
+    }
+
+    public class SyncAlphaAttribute : PropertyAttribute
+    {
+        public bool RunTimeSync;
+
+        public SyncAlphaAttribute(bool runTimeSync = false)
+        {
+            this.RunTimeSync = runTimeSync;
+        }
     }
 }
