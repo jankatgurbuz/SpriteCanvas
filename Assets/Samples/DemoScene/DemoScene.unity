@@ -1054,7 +1054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _responsiveOperation:
-    rid: 7831881362000052338
+    rid: 7831881384217018370
   _canvasKey: BottomCanvas
   _targetKey: 
   _itemPosition: {fileID: 1064447759}
@@ -1066,7 +1066,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 7831881362000052338
+    - rid: 7831881384217018370
       type: {class: Center, ns: SC.Core.ResponsiveOperations, asm: Assembly-CSharp}
       data:
         LocalScale: {x: 1, y: 1, z: 1}
