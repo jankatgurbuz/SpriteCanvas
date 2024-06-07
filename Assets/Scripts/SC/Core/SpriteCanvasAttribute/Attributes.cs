@@ -1,3 +1,4 @@
+using SC.Core.UI;
 using UnityEngine;
 
 namespace SC.Core.SpriteCanvasAttribute
@@ -31,6 +32,17 @@ namespace SC.Core.SpriteCanvasAttribute
         public SyncAlphaAttribute(bool runTimeSync = false)
         {
             this.RunTimeSync = runTimeSync;
+        }
+    }
+    public class ConditionalFieldAttribute : PropertyAttribute
+    {
+        public string EnumFieldName;
+        public UIElement.RegisterType EnumValue;
+
+        public ConditionalFieldAttribute(string enumFieldName, UIElement.RegisterType enumValue)
+        {
+            EnumFieldName = enumFieldName;
+            EnumValue = enumValue;
         }
     }
 }

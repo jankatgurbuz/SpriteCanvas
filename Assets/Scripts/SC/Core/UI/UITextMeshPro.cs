@@ -14,8 +14,15 @@ namespace SC.Core.UI
             _textMeshPro.sortingOrder = Mathf.Max(sortingOrder, sortingOrder + _orderInLayer);
         }
 
-        public override void SetUILayout(float screenHeight, float screenWidth,
-            Vector3 viewportCenterPosition, float balance)
+        public override void SetUIElementProperties(SpriteCanvas.UIElementProperties elementProperties)
+        {
+            var color = _textMeshPro.color;
+            color.a = Mathf.Min(elementProperties.Alpha, _alpha);
+            _textMeshPro.color = color;
+        }
+
+        public override void SetUILayout(float screenHeight, float screenWidth, Vector3 viewportCenterPosition,
+            float balance)
         {
             _textMeshPro.rectTransform.sizeDelta = _textMeshProSize;
             Handle(_textMeshPro.bounds.size, screenHeight, screenWidth, viewportCenterPosition, balance);
