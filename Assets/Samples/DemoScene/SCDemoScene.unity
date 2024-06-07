@@ -170,12 +170,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _responsiveOperation:
     rid: 7568872166055739427
+  _registerType: 0
   _canvasKey: TopCanvas
+  _spriteCanvas: {fileID: 0}
   _targetKey: Purple
   _itemPosition: {fileID: 16508834}
   _orderInLayer: 2
   _referenceSprite: {fileID: 1211146598}
   _hasReference: 1
+  _alpha: 1
   _spriteRenderer: {fileID: 16508837}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -229,7 +232,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 43c2713d689aa4634ade7657ac1bc9ec, type: 3}
-  m_Color: {r: 0.99607843, g: 0.92156863, b: 0.76862746, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -286,12 +289,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _responsiveOperation:
     rid: 7568872166055739431
+  _registerType: 0
   _canvasKey: TopCanvas
+  _spriteCanvas: {fileID: 0}
   _targetKey: Yellow
   _itemPosition: {fileID: 94823675}
   _orderInLayer: 2
   _referenceSprite: {fileID: 1211146598}
   _hasReference: 1
+  _alpha: 1
   _spriteRenderer: {fileID: 94823678}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -486,12 +492,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _responsiveOperation:
     rid: 7568872166055739426
+  _registerType: 0
   _canvasKey: TopCanvas
+  _spriteCanvas: {fileID: 0}
   _targetKey: Orange
   _itemPosition: {fileID: 349766884}
   _orderInLayer: 2
   _referenceSprite: {fileID: 1211146598}
   _hasReference: 1
+  _alpha: 1
   _spriteRenderer: {fileID: 349766887}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -545,7 +554,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: a37d0b13dd19e4369bc02a9d2c60800b, type: 3}
-  m_Color: {r: 0.99607843, g: 0.92156863, b: 0.76862746, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -565,6 +574,7 @@ GameObject:
   m_Component:
   - component: {fileID: 404344877}
   - component: {fileID: 404344878}
+  - component: {fileID: 404344879}
   m_Layer: 0
   m_Name: TopCanvas
   m_TagString: Untagged
@@ -608,6 +618,22 @@ MonoBehaviour:
   _sortingLayerName: Default
   _sortingLayerOrder: 0
   _canvasScaler: 0
+  _uIElementProperties:
+    Alpha: 1
+    Interactable: 1
+--- !u!114 &404344879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404344875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 205297a7fc1734919a9c35717af4fbda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsActive: 1
 --- !u!1 &426712005
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,7 +662,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.5, y: 14.932, z: 0}
-  m_LocalScale: {x: 337.5, y: 5, z: 1}
+  m_LocalScale: {x: 383.559, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 404344877}
@@ -655,12 +681,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _responsiveOperation:
     rid: 7568872166055739439
+  _registerType: 0
   _canvasKey: TopCanvas
+  _spriteCanvas: {fileID: 0}
   _targetKey: 
   _itemPosition: {fileID: 426712006}
   _orderInLayer: 2
   _referenceSprite: {fileID: 788897657}
   _hasReference: 1
+  _alpha: 1
   _spriteRenderer: {fileID: 426712008}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -1032,7 +1061,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.5, y: 17, z: 0}
-  m_LocalScale: {x: 337.5, y: 100, z: 1}
+  m_LocalScale: {x: 383.559, y: 100, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 404344877}
@@ -1051,12 +1080,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _responsiveOperation:
     rid: 7568872166055739415
+  _registerType: 0
   _canvasKey: TopCanvas
+  _spriteCanvas: {fileID: 0}
   _targetKey: 
   _itemPosition: {fileID: 788897655}
   _orderInLayer: 0
   _referenceSprite: {fileID: 0}
   _hasReference: 0
+  _alpha: 1
   _spriteRenderer: {fileID: 788897657}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -1135,7 +1167,7 @@ GameObject:
   - component: {fileID: 1064447761}
   - component: {fileID: 1064447760}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: TestButtonTMPText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1173,19 +1205,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _responsiveOperation:
-    rid: 7568872166055739440
+    rid: 7568872167545765907
+  _registerType: 0
   _canvasKey: BottomCanvas
+  _spriteCanvas: {fileID: 0}
   _targetKey: 
   _itemPosition: {fileID: 1064447759}
   _orderInLayer: 99
   _referenceSprite: {fileID: 1356520694}
   _hasReference: 1
+  _alpha: 1
   _textMeshPro: {fileID: 1064447761}
   _textMeshProSize: {x: 1.2, y: 0.6, z: 0}
   references:
     version: 2
     RefIds:
-    - rid: 7568872166055739440
+    - rid: 7568872167545765907
       type: {class: Center, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
         LocalScale: {x: 1, y: 1, z: 1}
@@ -1372,12 +1407,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _responsiveOperation:
     rid: 7568872166055739429
+  _registerType: 0
   _canvasKey: TopCanvas
+  _spriteCanvas: {fileID: 0}
   _targetKey: Red
   _itemPosition: {fileID: 1129966640}
   _orderInLayer: 2
   _referenceSprite: {fileID: 1211146598}
   _hasReference: 1
+  _alpha: 1
   _spriteRenderer: {fileID: 1129966643}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -1431,7 +1469,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: b366179bb986d4fe6aa30b5aa2ee5c08, type: 3}
-  m_Color: {r: 0.99607843, g: 0.92156863, b: 0.76862746, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1569,12 +1607,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _responsiveOperation:
     rid: 7568872166055739421
+  _registerType: 0
   _canvasKey: TopCanvas
+  _spriteCanvas: {fileID: 0}
   _targetKey: 
   _itemPosition: {fileID: 1211146595}
   _orderInLayer: 1
   _referenceSprite: {fileID: 1645110079}
   _hasReference: 1
+  _alpha: 1
   _spriteRenderer: {fileID: 1211146598}
   _spriteSize: {x: 2.46, y: 1.35, z: 0}
   references:
@@ -1737,12 +1778,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _responsiveOperation:
     rid: 7568872166055739418
+  _registerType: 0
   _canvasKey: TopCanvas
+  _spriteCanvas: {fileID: 0}
   _targetKey: 
   _itemPosition: {fileID: 1321324815}
   _orderInLayer: 1
   _referenceSprite: {fileID: 1645110079}
   _hasReference: 1
+  _alpha: 1
   _spriteRenderer: {fileID: 1321324817}
   _spriteSize: {x: 1.5, y: 1.35, z: 0}
   references:
@@ -1765,6 +1809,7 @@ GameObject:
   - component: {fileID: 1351810435}
   - component: {fileID: 1351810437}
   - component: {fileID: 1351810436}
+  - component: {fileID: 1351810438}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -1831,6 +1876,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351810434}
   m_CullTransparentMesh: 1
+--- !u!225 &1351810438
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351810434}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1356520692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,7 +1917,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0035555556, y: 0.01846154, z: 2.4}
+  m_LocalScale: {x: 0.0031285933, y: 0.01846154, z: 2.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1064447759}
@@ -1932,12 +1989,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _responsiveOperation:
     rid: 7568872166055739405
+  _registerType: 0
   _canvasKey: BottomCanvas
+  _spriteCanvas: {fileID: 0}
   _targetKey: 
   _itemPosition: {fileID: 1356520693}
   _orderInLayer: 18
   _referenceSprite: {fileID: 1929393234}
   _hasReference: 1
+  _alpha: 1
   _spriteRenderer: {fileID: 1356520694}
   _spriteSize: {x: 5.4, y: 1, z: 0}
   DownEvent:
@@ -2128,6 +2188,9 @@ MonoBehaviour:
   _sortingLayerName: Default
   _sortingLayerOrder: 0
   _canvasScaler: 0
+  _uIElementProperties:
+    Alpha: 1
+    Interactable: 1
 --- !u!4 &1455885519
 Transform:
   m_ObjectHideFlags: 0
@@ -2192,12 +2255,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _responsiveOperation:
     rid: 7568872166055739423
+  _registerType: 0
   _canvasKey: TopCanvas
+  _spriteCanvas: {fileID: 0}
   _targetKey: Blue
   _itemPosition: {fileID: 1569241408}
   _orderInLayer: 2
   _referenceSprite: {fileID: 1211146598}
   _hasReference: 1
+  _alpha: 1
   _spriteRenderer: {fileID: 1569241411}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -2251,7 +2317,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 2d5760358363549f19361ec61ca7730d, type: 3}
-  m_Color: {r: 0.99607843, g: 0.92156863, b: 0.76862746, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2362,12 +2428,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _responsiveOperation:
     rid: 7568872166055739417
+  _registerType: 0
   _canvasKey: TopCanvas
+  _spriteCanvas: {fileID: 0}
   _targetKey: 
   _itemPosition: {fileID: 1645110080}
   _orderInLayer: 1
   _referenceSprite: {fileID: 0}
   _hasReference: 0
+  _alpha: 1
   _spriteRenderer: {fileID: 1645110079}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -2409,7 +2478,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.5, y: -2.3319993, z: 0}
-  m_LocalScale: {x: 337.5, y: 5, z: 1}
+  m_LocalScale: {x: 383.559, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1455885519}
@@ -2428,12 +2497,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _responsiveOperation:
     rid: 7568872166055739441
-  _canvasKey: TopCanvas
+  _registerType: 0
+  _canvasKey: BottomCanvas
+  _spriteCanvas: {fileID: 0}
   _targetKey: 
   _itemPosition: {fileID: 1922011240}
   _orderInLayer: 2
   _referenceSprite: {fileID: 1929393234}
   _hasReference: 1
+  _alpha: 1
   _spriteRenderer: {fileID: 1922011242}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -2602,7 +2674,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.5, y: -3.6999993, z: 0}
-  m_LocalScale: {x: 337.5, y: 65, z: 1}
+  m_LocalScale: {x: 383.559, y: 65, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1356520693}
@@ -2674,12 +2746,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _responsiveOperation:
     rid: 7568872166055739401
+  _registerType: 0
   _canvasKey: BottomCanvas
+  _spriteCanvas: {fileID: 0}
   _targetKey: 
   _itemPosition: {fileID: 1929393233}
   _orderInLayer: 0
   _referenceSprite: {fileID: 0}
   _hasReference: 0
+  _alpha: 1
   _spriteRenderer: {fileID: 1929393234}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -2740,12 +2815,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _responsiveOperation:
     rid: 7568872166055739424
+  _registerType: 0
   _canvasKey: TopCanvas
+  _spriteCanvas: {fileID: 0}
   _targetKey: Green
   _itemPosition: {fileID: 2016244202}
   _orderInLayer: 2
   _referenceSprite: {fileID: 1211146598}
   _hasReference: 1
+  _alpha: 1
   _spriteRenderer: {fileID: 2016244205}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -2799,7 +2877,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: b8ce87522dfe24be7826cc3f39f71210, type: 3}
-  m_Color: {r: 0.99607843, g: 0.92156863, b: 0.76862746, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

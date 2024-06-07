@@ -13,6 +13,13 @@ namespace SC.Core.UI
             _spriteRenderer.sortingOrder = Mathf.Max(sortingOrder, sortingOrder + _orderInLayer);
         }
 
+        public override void SetUIElementProperties(SpriteCanvas.UIElementProperties elementProperties)
+        {
+            var color = _spriteRenderer.color;
+            color.a = Mathf.Min(elementProperties.Alpha, _alpha);
+            _spriteRenderer.color = color;
+        }
+
         public override void SetUILayout(float screenHeight, float screenWidth,
             Vector3 viewportCenterPosition, float balance)
         {

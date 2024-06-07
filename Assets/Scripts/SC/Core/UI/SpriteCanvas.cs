@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using SC.Core.Manager;
 using SC.Core.SpriteCanvasAttribute;
 using UnityEngine;
@@ -19,6 +21,9 @@ namespace SC.Core.UI
 
         [SerializeField] private CanvasScaler _canvasScaler;
 
+        [SerializeField] private UIElementProperties _uIElementProperties;
+
+        public UIElementProperties ElementProperties => _uIElementProperties;
         public Camera Camera => _camera;
         public string SortingLayerName => _sortingLayerName;
         public int SortingLayerOrder => _sortingLayerOrder;
@@ -29,11 +34,25 @@ namespace SC.Core.UI
 
         private static SpriteCanvasManager _spriteCanvasManager;
 
+        private List<UIElement> _uiElements;
+
         private void Awake()
         {
+            _uiElements = new List<UIElement>();
             CreateSpriteCanvasManager();
-            _spriteCanvasManager.Register(_canvasKey, this);
+            _spriteCanvasManager.SpriteCanvasRegister(_canvasKey, this);
             CalculateCameraProp();
+        }
+
+        private void CreateSpriteCanvasManager()
+        {
+            if (_spriteCanvasManager != null) return;
+
+            var managerObj = new GameObject("SpriteCanvasManager");
+            _spriteCanvasManager = managerObj.AddComponent<SpriteCanvasManager>();
+            DontDestroyOnLoad(managerObj);
+
+            _spriteCanvasManager.Initialize();
         }
 
         private void CalculateCameraProp()
@@ -54,25 +73,51 @@ namespace SC.Core.UI
             ViewportPosition = GetViewportCenterPosition();
         }
 
-        private void CreateSpriteCanvasManager()
-        {
-            if (_spriteCanvasManager != null) return;
-
-            var managerObj = new GameObject("SpriteCanvasManager");
-            _spriteCanvasManager = managerObj.AddComponent<SpriteCanvasManager>();
-            DontDestroyOnLoad(managerObj);
-        }
-
         private Vector3 GetViewportCenterPosition()
         {
             var viewportCenter = new Vector3(0.5f, 0.5f, _planeDistance);
             return _camera.ViewportToWorldPoint(viewportCenter);
         }
 
+        public void ShowAllUIs()
+        {
+            _uIElementProperties.Alpha = 1;
+            _uIElementProperties.Interactable = true;
+
+            foreach (var item in _uiElements)
+            {
+                item.SetUIElementProperties(_uIElementProperties);
+            }
+        }
+
+        public void HideAllUIs()
+        {
+            _uIElementProperties.Alpha = 0;
+            _uIElementProperties.Interactable = true;
+            
+            foreach (var item in _uiElements)
+            {
+                item.SetUIElementProperties(_uIElementProperties);
+            }
+        }
+
+        public void AddUI(UIElement ui)
+        {
+            _uiElements.Add(ui);
+        }
+
         public enum CanvasScaler
         {
             Height,
             Width
+        }
+
+        [System.Serializable]
+        public class UIElementProperties
+        {
+            [Range(0f, 1f)] public float Alpha = 1;
+
+            public bool Interactable = true;
         }
 
 #if UNITY_EDITOR
@@ -83,9 +128,39 @@ namespace SC.Core.UI
             var objects = FindObjectsOfType<UIElement>();
             foreach (var item in objects)
             {
-                if (item.CanvasKey != _canvasKey) continue;
+                var field = typeof(UIElement).GetField("_registerType",
+                    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+
+                var value = (UIElement.RegisterType)field.GetValue(item);
+
+                switch (value)
+                {
+                    case UIElement.RegisterType.Hierarchy:
+                        break;
+                    case UIElement.RegisterType.Reference:
+                        var r = typeof(UIElement).GetField("_spriteCanvas",
+                            System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+
+                        var reference = (SpriteCanvas)r.GetValue(item);
+                        if (reference == null)
+                        {
+                            continue;
+                        }
+
+                        if (reference != this)
+                        {
+                            continue;
+                        }
+
+                        break;
+                    case UIElement.RegisterType.Key:
+                        if (item.CanvasKey != _canvasKey) continue;
+                        break;
+                }
+
                 item.ArrangeLayers(_sortingLayerName, _sortingLayerOrder);
                 item.SetUILayout(ViewportHeight, ViewportWidth, ViewportPosition, Balance);
+                item.SetUIElementProperties(ElementProperties);
             }
         }
 #endif

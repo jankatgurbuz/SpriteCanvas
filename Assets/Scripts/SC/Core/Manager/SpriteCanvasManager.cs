@@ -16,17 +16,20 @@ namespace SC.Core.Manager
             _uiButtons = new List<UIButton>();
         }
 
-        public void Register(string str, SpriteCanvas spriteCanvas)
+        public void Initialize()
         {
-            _spriteCanvasMap ??= new Dictionary<string, SpriteCanvas>();
+            _spriteCanvasMap = new Dictionary<string, SpriteCanvas>();
+        }
 
+        public void SpriteCanvasRegister(string str, SpriteCanvas spriteCanvas)
+        {
             if (!_spriteCanvasMap.TryAdd(str, spriteCanvas))
             {
                 Debug.LogError($"Failed to register SpriteCanvas with key {str}. It might already exist in the map.");
             }
         }
 
-        public SpriteCanvas Get(string key)
+        public SpriteCanvas GetSpriteCanvas(string key)
         {
             if (_spriteCanvasMap.TryGetValue(key, out var spriteCanvas))
             {
