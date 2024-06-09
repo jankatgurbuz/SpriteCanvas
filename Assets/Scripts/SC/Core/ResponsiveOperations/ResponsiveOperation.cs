@@ -36,7 +36,7 @@ namespace SC.Core.ResponsiveOperations
             var y = positionFactors.y * screenHeight - scaledHeight * positionFactors.y -
                     _topOffset * Mathf.Sign(positionFactors.y) * balance;
 
-            var z = 0;
+            var z = 0; // todo set
 
             return new Vector3(x, y, z);
         }
@@ -46,21 +46,34 @@ namespace SC.Core.ResponsiveOperations
             return LocalScale * balance;
         }
 
+        protected Vector3 InverseTransformVector(Transform uiItemTransform, Vector3 scale)
+        {
+            if (uiItemTransform.parent != null)
+            {
+                scale = uiItemTransform.parent.InverseTransformVector(scale);
+            }
+
+            return scale;
+        }
+
         protected Vector3 GetScale(float screenHeight, float screenWidth, Vector3 uiItemSize, float balance,
             float edgeOffset, float maxSize, Vector2 positionFactors)
         {
-            var scaleRatioX = screenWidth / uiItemSize.x;
-            var scaleRatioY = screenHeight / uiItemSize.y;
+            var primaryDimension = screenHeight * (1 - positionFactors.x) + screenWidth * positionFactors.x;
+            var itemSizeDimension = uiItemSize.y * (1 - positionFactors.x) + uiItemSize.x * positionFactors.x;
 
-            var clampedX = Mathf.Clamp(scaleRatioX - edgeOffset * balance * positionFactors.x, 0,
-                maxSize * balance * positionFactors.x);
-            var clampedY = Mathf.Clamp(scaleRatioY - edgeOffset * balance * positionFactors.y, 0,
-                maxSize * balance * positionFactors.y);
+            var scaleRatio = primaryDimension / itemSizeDimension;
+            var positionBalanceFactor =
+                positionFactors.y * (1 - positionFactors.x) +
+                positionFactors.x * positionFactors.x; 
+            
+            var clampedScale = Mathf.Clamp(scaleRatio - edgeOffset * balance * positionBalanceFactor, 0,
+                maxSize * balance * positionBalanceFactor);
 
-            var finalX = Mathf.Max(clampedX, LocalScale.x);
-            var finalY = Mathf.Max(clampedY, LocalScale.y);
+            var finalScaleX = balance * LocalScale.x * (1 - positionFactors.x) + clampedScale * positionFactors.x;
+            var finalScaleY = clampedScale * (1 - positionFactors.x) + balance * LocalScale.y * positionFactors.x;
 
-            return new Vector3(finalX, finalY, LocalScale.z);
+            return new Vector3(finalScaleX, finalScaleY, LocalScale.z);
         }
     }
 
@@ -70,7 +83,7 @@ namespace SC.Core.ResponsiveOperations
             Transform uiItemTransform, Vector3 referencePosition, float balance)
         {
             var scale = GetScale(balance);
-            scale = uiItemTransform.parent.InverseTransformVector(scale);
+            scale = InverseTransformVector(uiItemTransform, scale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
@@ -84,7 +97,7 @@ namespace SC.Core.ResponsiveOperations
             Transform uiItemTransform, Vector3 referencePosition, float balance)
         {
             var scale = GetScale(balance);
-            scale = uiItemTransform.parent.InverseTransformVector(scale);
+            scale = InverseTransformVector(uiItemTransform, scale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
@@ -98,7 +111,7 @@ namespace SC.Core.ResponsiveOperations
             Transform uiItemTransform, Vector3 referencePosition, float balance)
         {
             var scale = GetScale(balance);
-            scale = uiItemTransform.parent.InverseTransformVector(scale);
+            scale = InverseTransformVector(uiItemTransform, scale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
@@ -116,7 +129,7 @@ namespace SC.Core.ResponsiveOperations
         {
             var scale = GetScale(screenHeight, screenWidth, uiItemSize, balance, _edgeOffset, _maxSize,
                 new Vector2(1, 0));
-            scale = uiItemTransform.parent.InverseTransformVector(scale);
+            scale = InverseTransformVector(uiItemTransform, scale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
@@ -130,7 +143,7 @@ namespace SC.Core.ResponsiveOperations
             Transform uiItemTransform, Vector3 referencePosition, float balance)
         {
             var scale = GetScale(balance);
-            scale = uiItemTransform.parent.InverseTransformVector(scale);
+            scale = InverseTransformVector(uiItemTransform, scale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
@@ -144,7 +157,7 @@ namespace SC.Core.ResponsiveOperations
             Transform uiItemTransform, Vector3 referencePosition, float balance)
         {
             var scale = GetScale(balance);
-            scale = uiItemTransform.parent.InverseTransformVector(scale);
+            scale = InverseTransformVector(uiItemTransform, scale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
@@ -158,7 +171,7 @@ namespace SC.Core.ResponsiveOperations
             Transform uiItemTransform, Vector3 referencePosition, float balance)
         {
             var scale = GetScale(balance);
-            scale = uiItemTransform.parent.InverseTransformVector(scale);
+            scale = InverseTransformVector(uiItemTransform, scale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
@@ -177,10 +190,7 @@ namespace SC.Core.ResponsiveOperations
             var scale = GetScale(screenHeight, screenWidth, uiItemSize, balance, _edgeOffset, _maxSize,
                 new Vector2(1, 0));
 
-            if (uiItemTransform.parent != null)
-            {
-                scale = uiItemTransform.parent.InverseTransformVector(scale);
-            }
+            scale = InverseTransformVector(uiItemTransform, scale);
 
             uiItemTransform.localScale = scale;
 
@@ -195,7 +205,7 @@ namespace SC.Core.ResponsiveOperations
             Transform uiItemTransform, Vector3 referencePosition, float balance)
         {
             var scale = GetScale(balance);
-            scale = uiItemTransform.parent.InverseTransformVector(scale);
+            scale = InverseTransformVector(uiItemTransform, scale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
@@ -213,7 +223,7 @@ namespace SC.Core.ResponsiveOperations
         {
             var scale = GetScale(screenHeight, screenWidth, uiItemSize, balance, _edgeOffset, _maxSize,
                 new Vector2(0, 1));
-            scale = uiItemTransform.parent.InverseTransformVector(scale);
+            scale = InverseTransformVector(uiItemTransform, scale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
@@ -231,7 +241,7 @@ namespace SC.Core.ResponsiveOperations
         {
             var scale = GetScale(screenHeight, screenWidth, uiItemSize, balance, _edgeOffset, _maxSize,
                 new Vector2(0, 1));
-            scale = uiItemTransform.parent.InverseTransformVector(scale);
+            scale = InverseTransformVector(uiItemTransform, scale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,

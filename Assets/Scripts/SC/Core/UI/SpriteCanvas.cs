@@ -12,7 +12,7 @@ namespace SC.Core.UI
 
         [SerializeField] private Camera _camera;
 
-        [SerializeField] private float _planeDistance;
+        [SerializeField] private float _planeDistance = 10;
 
         [SCHorizontalLine(EColor.Orange), SerializeField, SCSortingLayer]
         private string _sortingLayerName;
@@ -57,6 +57,11 @@ namespace SC.Core.UI
 
         private void CalculateCameraProp()
         {
+            if (_camera == null)
+            {
+                return;
+            }
+
             if (_camera.orthographic)
             {
                 ViewportHeight = 2f * _camera.orthographicSize;
@@ -93,8 +98,8 @@ namespace SC.Core.UI
         public void HideAllUIs()
         {
             _uIElementProperties.Alpha = 0;
-            _uIElementProperties.Interactable = true;
-            
+            _uIElementProperties.Interactable = false;
+
             foreach (var item in _uiElements)
             {
                 item.SetUIElementProperties(_uIElementProperties);
@@ -136,12 +141,35 @@ namespace SC.Core.UI
                 switch (value)
                 {
                     case UIElement.RegisterType.Hierarchy:
+                        SpriteCanvas sc = null;
+                        var currentParent = item.transform.parent;
+
+                        while (currentParent != null)
+                        {
+                            if (currentParent.TryGetComponent(out SpriteCanvas spriteCanvas))
+                                sc = spriteCanvas;
+
+                            currentParent = currentParent.parent;
+                        }
+
+                        if (sc == null)
+                        {
+                            continue;
+                        }
+
+                        if (sc != this)
+                        {
+                            continue;
+                        }
+
                         break;
                     case UIElement.RegisterType.Reference:
                         var r = typeof(UIElement).GetField("_spriteCanvas",
                             System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
 
                         var reference = (SpriteCanvas)r.GetValue(item);
+
+
                         if (reference == null)
                         {
                             continue;
