@@ -98,9 +98,11 @@ namespace SC.Core.UI
             }
             else
             {
-                var referenceSpriteSize = _referenceSprite.sprite.bounds.size;
-                var referenceTransform = _referenceSprite.transform;
-                var globalReferenceSize = GetGlobalSize(referenceSpriteSize, referenceTransform);
+                Vector3 referenceSpriteSize = _referenceSprite.drawMode == SpriteDrawMode.Simple
+                    ? _referenceSprite.sprite.bounds.size
+                    : _referenceSprite.size;
+
+                var globalReferenceSize = GetGlobalSize(referenceSpriteSize, _referenceSprite.transform);
 
                 _responsiveOperation.AdjustUI(
                     globalReferenceSize.y,
@@ -110,6 +112,8 @@ namespace SC.Core.UI
                     _referenceSprite.transform.position, balance);
             }
         }
+
+
 
         private Vector3 GetGlobalSize(Vector3 localSize, Transform myTransform)
         {
