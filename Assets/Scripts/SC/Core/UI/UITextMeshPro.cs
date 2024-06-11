@@ -6,7 +6,8 @@ namespace SC.Core.UI
     public class UITextMeshPro : UIElement
     {
         [SerializeField] private TextMeshPro _textMeshPro;
-        [SerializeField] private Vector3 _textMeshProSize;
+        [SerializeField] private Vector3 _textMeshProSize = new Vector3(20, 20, 0);
+        [SerializeField] private bool _ignoreSize;
 
         public override void ArrangeLayers(string sortingLayer, int sortingOrder)
         {
@@ -25,7 +26,7 @@ namespace SC.Core.UI
             float balance)
         {
             _textMeshPro.rectTransform.sizeDelta = _textMeshProSize;
-            Handle(_textMeshPro.bounds.size, screenHeight, screenWidth, viewportCenterPosition, balance);
+            Handle(_textMeshPro.rectTransform.sizeDelta, screenHeight, screenWidth, viewportCenterPosition, balance);
         }
     }
 }
