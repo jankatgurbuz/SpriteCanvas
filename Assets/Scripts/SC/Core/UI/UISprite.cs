@@ -24,7 +24,11 @@ namespace SC.Core.UI
             Vector3 viewportCenterPosition, float balance)
         {
             _spriteRenderer.size = _spriteSize;
-            Handle(_spriteRenderer.sprite.bounds.size, screenHeight, screenWidth, viewportCenterPosition, balance);
+            
+            Vector3 size = _spriteRenderer.drawMode == SpriteDrawMode.Simple
+                ? _spriteRenderer.sprite.bounds.size
+                : _spriteRenderer.size;
+            Handle(size, screenHeight, screenWidth, viewportCenterPosition, balance);
         }
     }
 }
