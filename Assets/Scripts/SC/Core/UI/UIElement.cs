@@ -114,7 +114,6 @@ namespace SC.Core.UI
         }
 
 
-
         private Vector3 GetGlobalSize(Vector3 localSize, Transform myTransform)
         {
             var globalScale = myTransform.lossyScale;

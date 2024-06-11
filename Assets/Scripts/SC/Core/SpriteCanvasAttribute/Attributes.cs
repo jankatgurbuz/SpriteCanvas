@@ -31,7 +31,7 @@ namespace SC.Core.SpriteCanvasAttribute
 
         public SyncAlphaAttribute(bool runTimeSync = false)
         {
-            this.RunTimeSync = runTimeSync;
+            RunTimeSync = runTimeSync;
         }
     }
     public class ConditionalFieldAttribute : PropertyAttribute
