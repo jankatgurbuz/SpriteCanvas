@@ -40,7 +40,7 @@ namespace SC.Core.UI
             _uiElements = new List<UIElement>();
             CreateSpriteCanvasManager();
             _spriteCanvasManager.SpriteCanvasRegister(_canvasKey, this);
-            CalculateCameraProp();
+            UpdateCameraViewportProperties();
         }
 
         private void CreateSpriteCanvasManager()
@@ -54,28 +54,18 @@ namespace SC.Core.UI
             _spriteCanvasManager.Initialize();
         }
 
-        private void CalculateCameraProp()
+        private void UpdateCameraViewportProperties()
         {
-            if (_camera == null)
-            {
-                return;
-            }
+            if (_camera == null) return;
+            ViewportHeight = _camera.orthographic
+                ? 2f * _camera.orthographicSize
+                : 2.0f * _planeDistance * Mathf.Tan(_camera.fieldOfView * 0.5f * Mathf.Deg2Rad);
 
-            if (_camera.orthographic)
-            {
-                ViewportHeight = 2f * _camera.orthographicSize;
-                ViewportWidth = ViewportHeight * _camera.aspect;
-                Balance = _camera.orthographicSize / 5f;
-            }
-            else
-            {
-                ViewportHeight = 2.0f * _planeDistance * Mathf.Tan(_camera.fieldOfView * 0.5f * Mathf.Deg2Rad);
-                ViewportWidth = ViewportHeight * _camera.aspect;
-                Balance = _canvasScaler == CanvasScaler.Height ? ViewportHeight / 10f : ViewportWidth / 10;
-            }
-
+            ViewportWidth = ViewportHeight * _camera.aspect;
+            Balance = _canvasScaler == CanvasScaler.Height ? ViewportHeight * 0.1f : ViewportWidth * 0.1f;
             ViewportPosition = GetViewportCenterPosition();
         }
+
 
         private Vector3 GetViewportCenterPosition()
         {
@@ -128,7 +118,7 @@ namespace SC.Core.UI
         public void UpdateForEditor()
         {
             if (Application.isPlaying) return;
-            CalculateCameraProp();
+            UpdateCameraViewportProperties();
             var objects = FindObjectsOfType<UIElement>();
             foreach (var item in objects)
             {
