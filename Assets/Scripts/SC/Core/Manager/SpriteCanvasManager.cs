@@ -23,6 +23,10 @@ namespace SC.Core.Manager
 
         public void SpriteCanvasRegister(string str, SpriteCanvas spriteCanvas)
         {
+            if (str == string.Empty)
+            {
+                return;
+            }
             if (!_spriteCanvasMap.TryAdd(str, spriteCanvas))
             {
                 Debug.LogError($"Failed to register SpriteCanvas with key {str}. It might already exist in the map.");

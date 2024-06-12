@@ -3,7 +3,6 @@ using SC.Core.Manager;
 using SC.Core.ResponsiveOperations;
 using SC.Core.SpriteCanvasAttribute;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace SC.Core.UI
 {
@@ -20,10 +19,10 @@ namespace SC.Core.UI
         [SerializeField, ConditionalField("_registerType", RegisterType.Reference)]
         protected SpriteCanvas _spriteCanvas;
 
-        [SerializeField] private string _targetKey;
-
         [SerializeField, SCHorizontalLine(EColor.Orange, 1, 3)]
-        protected Transform _itemPosition;
+        private string _targetKey;
+
+        [SerializeField] protected Transform _itemPosition;
 
         [SerializeField] protected int _orderInLayer;
         [SerializeField] protected SpriteRenderer _referenceSprite;
