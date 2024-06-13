@@ -1,10 +1,9 @@
 using System;
 using System.Reflection;
 using SC.Core.UI;
-using SC.Editor.KeyContainer;
+using SC.Editor.Helpers;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace SC.Editor.Utilities
 {
@@ -27,7 +26,14 @@ namespace SC.Editor.Utilities
         private void OnEnable()
         {
             _stringList = Resources.Load<SOKeyContainer>(KeyContainer);
+            EditorApplication.update += SpriteCanvasUpdater.OnEditorUpdate;
         }
+
+        private void OnDisable()
+        {
+            EditorApplication.update -= SpriteCanvasUpdater.OnEditorUpdate;
+        }
+
         public override void OnInspectorGUI()
         {
             if (_stringList == null)
@@ -169,9 +175,6 @@ namespace SC.Editor.Utilities
     {
         private void OnSceneGUI()
         {
-            // var isCalculateViewportSize = CalculateViewportSize();
-            // if (!isCalculateViewportSize) return;
-
             _planeDistance = (float)GetValue<SpriteCanvas>(target, PlaneDistanceFieldName);
             _camera = (Camera)GetValue<SpriteCanvas>(target, CameraFieldName);
 

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SC.Editor.KeyContainer
+namespace SC.Editor.Helpers
 {
     public class SOKeyContainer : ScriptableObject
     {

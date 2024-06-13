@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using SC.Core.ResponsiveOperations;
 using SC.Core.UI;
+using SC.Editor.Helpers;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -34,6 +35,12 @@ namespace SC.Editor.Utilities
             _initFlag = false;
             _implementingTypes = GenerateTypeInstances<IResponsiveOperation>();
             _typeNames = ConvertTypeListToArray(_implementingTypes);
+            EditorApplication.update += SpriteCanvasUpdater.OnEditorUpdate;
+        }
+
+        private void OnDisable()
+        {
+            EditorApplication.update -= SpriteCanvasUpdater.OnEditorUpdate;
         }
 
         public override void OnInspectorGUI()
