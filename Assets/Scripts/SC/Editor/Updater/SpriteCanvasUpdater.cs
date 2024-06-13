@@ -2,7 +2,7 @@ using SC.Core.UI;
 using UnityEditor;
 using UnityEngine;
 
-namespace Editor.Updater
+namespace SC.Editor.Updater
 {
     [InitializeOnLoad]
     public class SpriteCanvasUpdater

@@ -13,10 +13,10 @@ namespace SC.Core.UI
         [SerializeField, SCHorizontalLine(EColor.Orange, 1, 0)]
         private RegisterType _registerType;
 
-        [SerializeField, ConditionalField("_registerType", RegisterType.Key), CanvasKey]
+        [SerializeField, ConditionalVisibility("_registerType", RegisterType.Key), CanvasKeyValidator]
         private string _canvasKey;
 
-        [SerializeField, ConditionalField("_registerType", RegisterType.Reference)]
+        [SerializeField, ConditionalVisibility("_registerType", RegisterType.Reference)]
         protected SpriteCanvas _spriteCanvas;
 
         [SerializeField, SCHorizontalLine(EColor.Orange, 1, 3)]

@@ -4,10 +4,10 @@ using SC.Core.UI;
 using UnityEditor;
 using UnityEngine;
 
-namespace SC.Editor.Drawer
+namespace SC.Editor.Attributes
 {
-    [CustomPropertyDrawer(typeof(CanvasKeyAttribute))]
-    public class CanvasKeyAttributeDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(CanvasKeyValidatorAttribute))]
+    public class CanvasKeyValidatorDrawer : PropertyDrawer
     {
         private readonly BindingFlags _bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance;
 

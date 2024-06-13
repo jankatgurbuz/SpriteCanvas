@@ -8,25 +8,24 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 
-namespace SC.Editor.KeyContainer
+namespace SC.Editor.Utilities
 {
     [CustomEditor(typeof(UIElement), true)]
     public class UIElementEditor : UnityEditor.Editor
     {
-        private const string _responsiveOperationFieldName = "_responsiveOperation";
-        private const string _itemPositionFieldName = "_itemPosition";
-        private const string _spriteRendererFieldName = "_spriteRenderer";
-        private const string _textMeshProFieldName = "_textMeshPro";
+        private const string ResponsiveOperationFieldName = "_responsiveOperation";
+        private const string ItemPositionFieldName = "_itemPosition";
+        private const string SpriteRendererFieldName = "_spriteRenderer";
+        private const string TextMeshProFieldName = "_textMeshPro";
+        private const string RegisterTypeFieldName = "_registerType";
+        private const string CanvasKey = "_canvasKey";
+        private const string SpriteCanvasFieldName = "_spriteCanvas";
         private const int ItemsPerPage = 5;
 
-        private readonly BindingFlags _bindingFlags =
-            BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy;
-
-        private List<string> _keyList;
-        private List<IResponsiveOperation> _implementingTypes;
-        private string[] _typeNames;
-
         private Transform _itemPosition;
+        private List<IResponsiveOperation> _implementingTypes;
+        private List<string> _keyList;
+        private string[] _typeNames;
         private int _currentPage;
         private bool _initFlag;
 
@@ -50,9 +49,9 @@ namespace SC.Editor.KeyContainer
             {
                 enterChildren = false;
                 EditorGUILayout.PropertyField(prop, true);
-                if (prop.name != "_spriteCanvas") continue;
+                if (prop.name != SpriteCanvasFieldName) continue;
 
-                var value = (UIElement.RegisterType)GetValue<UIElement>(target, "_registerType");
+                var value = (UIElement.RegisterType)GetValue<UIElement>(target, RegisterTypeFieldName);
                 if (value != UIElement.RegisterType.Key) continue;
                 ListElements();
                 PageNavigation();
@@ -63,9 +62,9 @@ namespace SC.Editor.KeyContainer
 
         private void AssignComponent()
         {
-            AssignComponent<Transform>(_itemPositionFieldName);
-            AssignComponent<SpriteRenderer>(_spriteRendererFieldName);
-            AssignComponent<TextMeshPro>(_textMeshProFieldName);
+            AssignComponent<Transform>(ItemPositionFieldName);
+            AssignComponent<SpriteRenderer>(SpriteRendererFieldName);
+            AssignComponent<TextMeshPro>(TextMeshProFieldName);
 
             void AssignComponent<T>(string fieldName) where T : Component
             {
@@ -80,7 +79,7 @@ namespace SC.Editor.KeyContainer
 
         private void FillResponsiveField()
         {
-            var data = GetValue<UIElement>(target, _responsiveOperationFieldName);
+            var data = GetValue<UIElement>(target, ResponsiveOperationFieldName);
             var currentIndex = FindTypeIndexInArray(_implementingTypes, (ResponsiveOperation)data);
 
             EditorGUI.BeginChangeCheck();
@@ -91,7 +90,7 @@ namespace SC.Editor.KeyContainer
 
                 if (data == null || data.GetType() != spriteUIOperationHandler.GetType())
                 {
-                    SetValue<UIElement>(target, _responsiveOperationFieldName, spriteUIOperationHandler);
+                    SetValue<UIElement>(target, ResponsiveOperationFieldName, spriteUIOperationHandler);
                 }
 
                 EditorUtility.SetDirty(target);
@@ -101,15 +100,11 @@ namespace SC.Editor.KeyContainer
 
         private List<string> CreateCanvasKeyList()
         {
-            var sc = Resources.FindObjectsOfTypeAll<SpriteCanvas>();
             var list = new List<string>();
+            var sc = Resources.FindObjectsOfTypeAll<SpriteCanvas>();
             foreach (var spriteCanvas in sc)
             {
-                var field = spriteCanvas.GetType()
-                    .GetField("_canvasKey", BindingFlags.NonPublic | BindingFlags.Instance);
-                if (field == null) continue;
-
-                var value = field.GetValue(spriteCanvas);
+                var value = GetValue<SpriteCanvas>(spriteCanvas, CanvasKey);
 
                 if (value is not string str) continue;
                 if (str == "") continue;
@@ -135,7 +130,7 @@ namespace SC.Editor.KeyContainer
                 GUILayout.FlexibleSpace();
                 if (GUILayout.Button(_keyList[i], GUILayout.Width(150), GUILayout.Height(25)))
                 {
-                    SetValue<UIElement>(target, "_canvasKey", _keyList[i]);
+                    SetValue<UIElement>(target, CanvasKey, _keyList[i]);
                     EditorUtility.SetDirty(uICanvas);
                 }
 
@@ -171,7 +166,9 @@ namespace SC.Editor.KeyContainer
         // helpers
         private FieldInfo GetField<T>(string fieldName, Type type)
         {
-            var field = typeof(T).GetField(fieldName, _bindingFlags) ?? type.GetField(fieldName, _bindingFlags);
+            const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance |
+                                       BindingFlags.FlattenHierarchy;
+            var field = typeof(T).GetField(fieldName, flags) ?? type.GetField(fieldName, flags);
             return field;
         }
 
@@ -208,10 +205,7 @@ namespace SC.Editor.KeyContainer
 
         private static int FindTypeIndexInArray<T>(List<T> array, T field)
         {
-            if (field == null)
-                return 0;
-
-            return array.FindIndex(type => type.GetType() == field.GetType());
+            return field == null ? 0 : array.FindIndex(type => type.GetType() == field.GetType());
         }
     }
 }

@@ -3,7 +3,7 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 
-namespace SC.Editor.Drawer
+namespace SC.Editor.Attributes
 {
     [CustomPropertyDrawer(typeof(SyncAlphaAttribute))]
     public class SyncAlphaDrawer : PropertyDrawer
