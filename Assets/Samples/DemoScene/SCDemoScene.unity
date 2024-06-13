@@ -2164,7 +2164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _responsiveOperation:
     rid: 7568872166055739418
-  _registerType: 0
+  _registerType: 2
   _canvasKey: TopCanvas
   _spriteCanvas: {fileID: 0}
   _targetKey: 
