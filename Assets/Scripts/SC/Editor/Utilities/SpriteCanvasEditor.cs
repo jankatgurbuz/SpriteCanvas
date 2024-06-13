@@ -1,25 +1,32 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
 using SC.Core.UI;
+using SC.Editor.KeyContainer;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
-namespace SC.Editor.KeyContainer
+namespace SC.Editor.Utilities
 {
-    [CustomEditor(typeof(SpriteCanvas))]
-    public class SpriteCanvasEditor : UnityEditor.Editor
+    [CustomEditor(typeof(SpriteCanvas), true)]
+    public partial class SpriteCanvasEditor : UnityEditor.Editor
     {
+        private const string CanvasKey = "_canvasKey";
+        private const string KeyContainer = "KeyContainer";
+        private const string PlaneDistanceFieldName = "_planeDistance";
+        private const string CameraFieldName = "_camera";
+        private const int ItemsPerPage = 5;
+
         private SOKeyContainer _stringList;
         private string _newKey = "";
         private int _currentPage;
-        private const int ItemsPerPage = 5;
         private bool _showKeyArea;
+        private float _planeDistance;
+        private Camera _camera;
 
         private void OnEnable()
         {
-            _stringList = Resources.Load<SOKeyContainer>("KeyContainer");
+            _stringList = Resources.Load<SOKeyContainer>(KeyContainer);
         }
         public override void OnInspectorGUI()
         {
@@ -29,7 +36,7 @@ namespace SC.Editor.KeyContainer
                 return;
             }
 
-            DrawPropertiesExcluding(serializedObject, "m_Script", "_canvasKey");
+            DrawPropertiesExcluding(serializedObject, "m_Script", CanvasKey);
             EditorGUILayout.Space(5);
 
             _showKeyArea = EditorGUILayout.Toggle("Show Key Area", _showKeyArea);
@@ -50,16 +57,15 @@ namespace SC.Editor.KeyContainer
 
         private void DisableKeyArea()
         {
-            var uICanvas = (SpriteCanvas)target;
             EditorGUILayout.BeginHorizontal();
             EditorGUI.BeginDisabledGroup(true);
-            EditorGUILayout.TextField("Canvas Key:", GetValue());
+            EditorGUILayout.TextField("Canvas Key:", (string)GetValue<SpriteCanvas>(target, CanvasKey));
             EditorGUI.EndDisabledGroup();
 
             if (GUILayout.Button("Clear", GUILayout.Width(60)))
             {
-                SetValue(string.Empty);
-                EditorUtility.SetDirty(uICanvas);
+                SetValue<SpriteCanvas>(target, CanvasKey, string.Empty);
+                EditorUtility.SetDirty(target);
             }
 
             EditorGUILayout.EndHorizontal();
@@ -67,7 +73,6 @@ namespace SC.Editor.KeyContainer
 
         private void ListElements()
         {
-            var uICanvas = (SpriteCanvas)target;
             EditorGUILayout.LabelField("-Select Key From List-", EditorStyles.boldLabel);
 
             if (_stringList.SpriteCanvasKey is not { Count: > 0 }) return;
@@ -82,8 +87,8 @@ namespace SC.Editor.KeyContainer
 
                 if (GUILayout.Button(_stringList.SpriteCanvasKey[i], GUILayout.Width(150), GUILayout.Height(25)))
                 {
-                    SetValue(_stringList.SpriteCanvasKey[i]);
-                    EditorUtility.SetDirty(uICanvas);
+                    SetValue<SpriteCanvas>(target, CanvasKey, _stringList.SpriteCanvasKey[i]);
+                    EditorUtility.SetDirty(target);
                 }
 
                 if (GUILayout.Button("-", GUILayout.Width(20), GUILayout.Height(25)))
@@ -134,25 +139,70 @@ namespace SC.Editor.KeyContainer
                 _stringList.SpriteCanvasKey.Add(_newKey);
                 EditorUtility.SetDirty(_stringList);
                 _currentPage = (_stringList.SpriteCanvasKey.Count - 1) / ItemsPerPage;
-                SetValue(_newKey);
+                SetValue<SpriteCanvas>(target, CanvasKey, _newKey);
                 EditorUtility.SetDirty(uICanvas);
             }
         }
-        private FieldInfo GetField()
+
+        private FieldInfo GetField<T>(string fieldName, Type type)
         {
-            return typeof(SpriteCanvas).GetField("_canvasKey", BindingFlags.Instance | BindingFlags.NonPublic);
+            const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance |
+                                       BindingFlags.FlattenHierarchy;
+            var field = typeof(T).GetField(fieldName, flags) ?? type.GetField(fieldName, flags);
+            return field;
         }
 
-        private string GetValue()
+        private object GetValue<T>(object obj, string fieldName)
         {
-            var field = GetField();
-            return (string)field.GetValue(target);
+            var info = GetField<T>(fieldName, obj.GetType());
+            return info?.GetValue(obj);
         }
 
-        private void SetValue(string value)
+        private void SetValue<T>(object obj, string fieldName, object value)
         {
-            var field = GetField();
-            field.SetValue(target, value);
+            var field = GetField<T>(fieldName, obj.GetType());
+            field?.SetValue(obj, value);
+        }
+    }
+
+    public partial class SpriteCanvasEditor
+    {
+        private void OnSceneGUI()
+        {
+            // var isCalculateViewportSize = CalculateViewportSize();
+            // if (!isCalculateViewportSize) return;
+
+            _planeDistance = (float)GetValue<SpriteCanvas>(target, PlaneDistanceFieldName);
+            _camera = (Camera)GetValue<SpriteCanvas>(target, CameraFieldName);
+
+            if (_camera == null || _planeDistance == 0) return;
+
+            Draw();
+        }
+
+        private void Draw()
+        {
+            var topLeft = _camera.ViewportToWorldPoint(new Vector3(0, 1, _planeDistance));
+            var topRight = _camera.ViewportToWorldPoint(new Vector3(1, 1, _planeDistance));
+            var bottomLeft = _camera.ViewportToWorldPoint(new Vector3(0, 0, _planeDistance));
+            var bottomRight = _camera.ViewportToWorldPoint(new Vector3(1, 0, _planeDistance));
+
+            Handles.color = Color.red;
+
+            Handles.DrawLine(topLeft, topRight);
+            Handles.DrawLine(topRight, bottomRight);
+            Handles.DrawLine(bottomRight, bottomLeft);
+            Handles.DrawLine(bottomLeft, topLeft);
+
+            var cameraTopLeft = _camera.ViewportToWorldPoint(new Vector3(0, 1, 0));
+            var cameraTopRight = _camera.ViewportToWorldPoint(new Vector3(1, 1, 0));
+            var cameraBottomLeft = _camera.ViewportToWorldPoint(new Vector3(0, 0, 0));
+            var cameraBottomRight = _camera.ViewportToWorldPoint(new Vector3(1, 0, 0));
+
+            Handles.DrawLine(topLeft, cameraTopLeft);
+            Handles.DrawLine(topRight, cameraTopRight);
+            Handles.DrawLine(bottomLeft, cameraBottomLeft);
+            Handles.DrawLine(bottomRight, cameraBottomRight);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace SC.Core.SpriteCanvasAttribute
         }
     }
 
-    public class CanvasKeyAttribute : PropertyAttribute
+    public class CanvasKeyValidatorAttribute : PropertyAttribute
     {
     }
 
@@ -34,12 +34,12 @@ namespace SC.Core.SpriteCanvasAttribute
             RunTimeSync = runTimeSync;
         }
     }
-    public class ConditionalFieldAttribute : PropertyAttribute
+    public class ConditionalVisibilityAttribute : PropertyAttribute
     {
         public string EnumFieldName;
         public UIElement.RegisterType EnumValue;
 
-        public ConditionalFieldAttribute(string enumFieldName, UIElement.RegisterType enumValue)
+        public ConditionalVisibilityAttribute(string enumFieldName, UIElement.RegisterType enumValue)
         {
             EnumFieldName = enumFieldName;
             EnumValue = enumValue;

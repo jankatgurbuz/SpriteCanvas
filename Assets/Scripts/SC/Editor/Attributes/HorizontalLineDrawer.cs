@@ -2,7 +2,7 @@ using SC.Core.SpriteCanvasAttribute;
 using UnityEditor;
 using UnityEngine;
 
-namespace SC.Editor.Drawer
+namespace SC.Editor.Attributes
 {
     [CustomPropertyDrawer(typeof(SCHorizontalLineAttribute))]
     public class HorizontalLineDrawer : DecoratorDrawer
