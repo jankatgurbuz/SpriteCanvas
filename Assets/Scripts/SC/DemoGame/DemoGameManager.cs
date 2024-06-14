@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using SC.Core.Manager;
+using Unity.Plastic.Antlr3.Runtime.Misc;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -18,9 +19,11 @@ namespace SC.DemoGame
         private DemoGameBeads _beads;
 
         private BeadController[,] _beadControl;
-
+        public event Action PopAction;
+        public static DemoGameManager Instance;
         private void Awake()
         {
+            Instance = this;
             _grid = GetComponent<Grid>();
             _beads = GetComponent<DemoGameBeads>();
             Create();
@@ -59,7 +62,7 @@ namespace SC.DemoGame
             {
                 while (CheckPop(out List<BeadController> beadControllers))
                 {
-                    yield return new WaitForSeconds(0.25f);
+                    yield return new WaitForSeconds(0.1f);
                     yield return StartCoroutine(HandMovement(beadControllers.First()));
                     Pop(beadControllers);
                     yield return new WaitForEndOfFrame();
@@ -92,10 +95,10 @@ namespace SC.DemoGame
                 var targetPosition = GetGridPos(first.Row, first.Column);
                 var normal = (targetPosition - _hand.transform.position).normalized;
                 _hand.transform.position += normal * (Time.deltaTime * 10);
-                if (Vector3.Distance(_hand.transform.position, targetPosition) < 0.01f)
+                if (Vector3.Distance(_hand.transform.position, targetPosition) < 0.1f)
                 {
                     _hand.transform.position = targetPosition;
-                    yield return new WaitForSeconds(0.25f);
+                    yield return new WaitForSeconds(0.1f);
 
                     break;
                 }
@@ -117,8 +120,9 @@ namespace SC.DemoGame
                 var targetPosition = SpriteCanvasManager.Instance.GetTarget(name).transform.position;
                 var normal = (targetPosition - obj.transform.position).normalized;
                 obj.transform.position += normal * (Time.deltaTime * 10);
-                if (Vector3.Distance(obj.transform.position, targetPosition) < 0.01f)
+                if (Vector3.Distance(obj.transform.position, targetPosition) < 0.1f)
                 {
+                    PopAction?.Invoke();
                     obj.transform.position = targetPosition;
                     Destroy(obj);
                     break;

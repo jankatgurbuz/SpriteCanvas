@@ -191,7 +191,7 @@ namespace SC.Editor.Utilities
             var bottomRight = _camera.ViewportToWorldPoint(new Vector3(1, 0, _planeDistance));
 
             var thickness = 2;
-            Handles.color = Color.green;
+            Handles.color = new Color32(255, 128, 0, 255);
 
             Handles.DrawLine(topLeft, topRight,thickness);
             Handles.DrawLine(topRight, bottomRight,thickness);
@@ -207,6 +207,13 @@ namespace SC.Editor.Utilities
             Handles.DrawLine(topRight, cameraTopRight,thickness);
             Handles.DrawLine(bottomLeft, cameraBottomLeft,thickness);
             Handles.DrawLine(bottomRight, cameraBottomRight,thickness);
+            
+            // White color lines for the main camera
+            Handles.color = Color.white;
+            Handles.DrawLine(cameraTopLeft, cameraTopRight, thickness-1);
+            Handles.DrawLine(cameraTopRight, cameraBottomRight, thickness-1);
+            Handles.DrawLine(cameraBottomRight, cameraBottomLeft, thickness-1);
+            Handles.DrawLine(cameraBottomLeft, cameraTopLeft, thickness-1);
         }
     }
 }
