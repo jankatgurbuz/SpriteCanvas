@@ -48,7 +48,7 @@ namespace SC.Core.Manager
         {
             _targetUI ??= new Dictionary<string, UIElement>();
 
-            if (targetKey != string.Empty)
+            if (!string.IsNullOrEmpty(targetKey))
             {
                 if (!_targetUI.TryAdd(targetKey, uiElement))
                     Debug.LogWarning("The targetKey already exists in the dictionary.");

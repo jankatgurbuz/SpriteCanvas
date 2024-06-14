@@ -190,22 +190,23 @@ namespace SC.Editor.Utilities
             var bottomLeft = _camera.ViewportToWorldPoint(new Vector3(0, 0, _planeDistance));
             var bottomRight = _camera.ViewportToWorldPoint(new Vector3(1, 0, _planeDistance));
 
-            Handles.color = Color.red;
+            var thickness = 2;
+            Handles.color = Color.green;
 
-            Handles.DrawLine(topLeft, topRight);
-            Handles.DrawLine(topRight, bottomRight);
-            Handles.DrawLine(bottomRight, bottomLeft);
-            Handles.DrawLine(bottomLeft, topLeft);
+            Handles.DrawLine(topLeft, topRight,thickness);
+            Handles.DrawLine(topRight, bottomRight,thickness);
+            Handles.DrawLine(bottomRight, bottomLeft,thickness);
+            Handles.DrawLine(bottomLeft, topLeft,thickness);
 
             var cameraTopLeft = _camera.ViewportToWorldPoint(new Vector3(0, 1, 0));
             var cameraTopRight = _camera.ViewportToWorldPoint(new Vector3(1, 1, 0));
             var cameraBottomLeft = _camera.ViewportToWorldPoint(new Vector3(0, 0, 0));
             var cameraBottomRight = _camera.ViewportToWorldPoint(new Vector3(1, 0, 0));
 
-            Handles.DrawLine(topLeft, cameraTopLeft);
-            Handles.DrawLine(topRight, cameraTopRight);
-            Handles.DrawLine(bottomLeft, cameraBottomLeft);
-            Handles.DrawLine(bottomRight, cameraBottomRight);
+            Handles.DrawLine(topLeft, cameraTopLeft,thickness);
+            Handles.DrawLine(topRight, cameraTopRight,thickness);
+            Handles.DrawLine(bottomLeft, cameraBottomLeft,thickness);
+            Handles.DrawLine(bottomRight, cameraBottomRight,thickness);
         }
     }
 }
