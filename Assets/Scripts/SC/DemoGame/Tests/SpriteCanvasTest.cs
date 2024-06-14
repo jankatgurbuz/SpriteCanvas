@@ -18,7 +18,6 @@ namespace SC.DemoGame.Tests
             {
                 GetComponent<SpriteCanvas>().HideAllUIs();
             }
-           
         }
     }
 }
