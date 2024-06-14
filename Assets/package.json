@@ -1,7 +1,7 @@
 {
   "name": "com.jgurbuz.spritecanvas",
   "displayName": "Sprite Canvas",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "unity": "2022.3",
   "description": "A package for creating a canvas using sprites without Unity's Canvas system.",
   "keywords": [
@@ -13,7 +13,7 @@
   "category": "UI",
   "dependencies": {},
   "author": {
-    "name": "Jankat Gürbüz",
+    "name": "Jankat Gurbuz",
     "url": "https://github.com/jankatgurbuz"
   }
 }
