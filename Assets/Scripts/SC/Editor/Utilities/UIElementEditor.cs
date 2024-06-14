@@ -77,10 +77,12 @@ namespace SC.Editor.Utilities
             {
                 var currentValue = GetValue<T>(target, fieldName);
                 var component = ((UIElement)target).GetComponent<T>();
-                if (component != null && currentValue == null)
-                {
+            
+                // if (component != null && currentValue == null)
+                // {
                     SetValue<UIElement>(target, fieldName, component);
-                }
+                // }
+                // todo: check
             }
         }
 
