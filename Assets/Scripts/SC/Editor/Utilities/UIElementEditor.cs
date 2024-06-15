@@ -92,7 +92,7 @@ namespace SC.Editor.Utilities
             var currentIndex = FindTypeIndexInArray(_implementingTypes, (ResponsiveOperation)data);
 
             EditorGUI.BeginChangeCheck();
-            var selectedIndex = EditorGUILayout.Popup("Responsive", currentIndex, _typeNames);
+            var selectedIndex = EditorGUILayout.Popup("Anchor Presets", currentIndex, _typeNames);
             if (!_initFlag || EditorGUI.EndChangeCheck())
             {
                 var spriteUIOperationHandler = _implementingTypes[selectedIndex];
