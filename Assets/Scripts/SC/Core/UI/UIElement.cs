@@ -78,7 +78,7 @@ namespace SC.Core.UI
             SpriteCanvasManager.Instance.RegisterTarget(_targetKey, this);
         }
 
-        private void Adjust()
+        public void Adjust()
         {
             ArrangeLayers(_spriteCanvas.SortingLayerName, _spriteCanvas.SortingLayerOrder);
             SetUILayout(_spriteCanvas.ViewportHeight, _spriteCanvas.ViewportWidth,
