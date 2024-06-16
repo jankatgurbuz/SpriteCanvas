@@ -3,6 +3,7 @@ using SC.Core.Manager;
 using SC.Core.ResponsiveOperations;
 using SC.Core.SpriteCanvasAttribute;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SC.Core.UI
 {
@@ -23,17 +24,30 @@ namespace SC.Core.UI
         private string _targetKey;
 
         [SerializeField] protected Transform _itemPosition;
-
         [SerializeField] protected int _orderInLayer;
-        [SerializeField] protected SpriteRenderer _referenceSprite;
         [SerializeField] protected bool _hasReference;
+        [SerializeField] protected UIElement _referenceElement;
         [SerializeField, SyncAlpha] protected float _alpha = 1;
+
+        private bool _isChecked = true;
 
         public string CanvasKey => _canvasKey;
 
         public abstract void SetUILayout(float height, float width, Vector3 viewportCenterPosition, float balance);
         public abstract void ArrangeLayers(string sortingLayer, int sortingOrder);
         public abstract void SetUIElementProperties(SpriteCanvas.UIElementProperties elementProperties);
+        protected abstract Vector3 GetBoundsSize();
+        protected abstract Vector3 GetSize();
+
+        protected virtual SpriteDrawMode GetDrawMode()
+        {
+            return SpriteDrawMode.Simple;
+        }
+
+        public void InitialCheck()
+        {
+            _isChecked = false;
+        }
 
         protected void Start()
         {
@@ -80,11 +94,15 @@ namespace SC.Core.UI
 
         public void Adjust()
         {
+            if (!_isChecked && _hasReference)
+                _referenceElement.Adjust();
+            
             ArrangeLayers(_spriteCanvas.SortingLayerName, _spriteCanvas.SortingLayerOrder);
             SetUILayout(_spriteCanvas.ViewportHeight, _spriteCanvas.ViewportWidth,
                 _spriteCanvas.ViewportPosition,
                 _spriteCanvas.Balance);
             SetUIElementProperties(_spriteCanvas.ElementProperties);
+            _isChecked = true;
         }
 
         protected void Handle(Vector3 boundsSize, float screenHeight, float screenWidth,
@@ -97,18 +115,18 @@ namespace SC.Core.UI
             }
             else
             {
-                Vector3 referenceSpriteSize = _referenceSprite.drawMode == SpriteDrawMode.Simple
-                    ? _referenceSprite.sprite.bounds.size
-                    : _referenceSprite.size;
+                Vector3 referenceSpriteSize = _referenceElement.GetDrawMode() == SpriteDrawMode.Simple
+                    ? _referenceElement.GetBoundsSize()
+                    : _referenceElement.GetSize();
 
-                var globalReferenceSize = GetGlobalSize(referenceSpriteSize, _referenceSprite.transform);
+                var globalReferenceSize = GetGlobalSize(referenceSpriteSize, _referenceElement.transform);
 
                 _responsiveOperation.AdjustUI(
                     globalReferenceSize.y,
                     globalReferenceSize.x,
                     boundsSize,
                     _itemPosition,
-                    _referenceSprite.transform.position, balance);
+                    _referenceElement.transform.position, balance);
             }
         }
 
