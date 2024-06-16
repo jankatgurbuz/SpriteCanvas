@@ -43,6 +43,16 @@ namespace SC.Core.UI
             UpdateCameraViewportProperties();
         }
 
+        public void Adjust()
+        {
+            UpdateCameraViewportProperties();
+
+            foreach (var item in _uiElements)
+            {
+                item.Adjust();
+            }
+        }
+
         private void CreateSpriteCanvasManager()
         {
             if (_spriteCanvasManager != null) return;
