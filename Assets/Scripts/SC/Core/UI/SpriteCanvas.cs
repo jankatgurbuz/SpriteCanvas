@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using SC.Core.Manager;
 using SC.Core.SpriteCanvasAttribute;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace SC.Core.UI
 {
@@ -46,11 +48,8 @@ namespace SC.Core.UI
         public void Adjust()
         {
             UpdateCameraViewportProperties();
-
-            foreach (var item in _uiElements)
-            {
-                item.Adjust();
-            }
+            _uiElements.ForEach(x => x.InitialCheck());
+            _uiElements.ForEach(x => x.Adjust());
         }
 
         private void CreateSpriteCanvasManager()
@@ -122,6 +121,6 @@ namespace SC.Core.UI
             [Range(0f, 1f)] public float Alpha = 1;
 
             public bool Interactable = true;
-        } 
+        }
     }
 }

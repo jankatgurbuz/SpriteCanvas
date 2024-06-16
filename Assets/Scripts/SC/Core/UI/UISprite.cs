@@ -33,5 +33,20 @@ namespace SC.Core.UI
                 : _spriteRenderer.size;
             Handle(size, screenHeight, screenWidth, viewportCenterPosition, balance);
         }
+
+        protected override SpriteDrawMode GetDrawMode()
+        {
+            return _spriteRenderer.drawMode;
+        }
+
+        protected override Vector3 GetBoundsSize()
+        {
+            return _spriteRenderer.sprite.bounds.size;
+        }
+
+        protected override Vector3 GetSize()
+        {
+            return _spriteRenderer.size;
+        }
     }
 }

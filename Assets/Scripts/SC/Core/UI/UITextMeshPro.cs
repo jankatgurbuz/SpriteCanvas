@@ -23,13 +23,22 @@ namespace SC.Core.UI
             color.a = Mathf.Min(elementProperties.Alpha, _alpha);
             _textMeshPro.color = color;
         }
-
         public override void SetUILayout(float screenHeight, float screenWidth, Vector3 viewportCenterPosition,
             float balance)
         {
             if (_textMeshPro == null) return;
             _textMeshPro.rectTransform.sizeDelta = _textMeshProSize;
             Handle(_textMeshPro.rectTransform.sizeDelta, screenHeight, screenWidth, viewportCenterPosition, balance);
+        }
+        
+        protected override Vector3 GetBoundsSize()
+        {
+            return _textMeshPro.rectTransform.sizeDelta;
+        }
+
+        protected override Vector3 GetSize()
+        {
+            return _textMeshPro.rectTransform.sizeDelta;
         }
     }
 }
