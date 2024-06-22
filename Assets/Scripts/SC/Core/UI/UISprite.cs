@@ -1,3 +1,4 @@
+using SC.Core.Helper;
 using UnityEngine;
 
 namespace SC.Core.UI
@@ -23,15 +24,15 @@ namespace SC.Core.UI
         }
 
         public override void SetUILayout(float screenHeight, float screenWidth,
-            Vector3 viewportCenterPosition, float balance)
+            Vector3 viewportCenterPosition, float balance, Vector3 groupAxisConstraint)
         {
             if (_spriteRenderer == null) return;
             _spriteRenderer.size = _spriteSize;
 
             Vector3 size = _spriteRenderer.drawMode == SpriteDrawMode.Simple
-                ? _spriteRenderer.sprite.bounds.size
+                ? _spriteRenderer.sprite.bounds.size // todo
                 : _spriteRenderer.size;
-            Handle(size, screenHeight, screenWidth, viewportCenterPosition, balance);
+            Handle(size, screenHeight, screenWidth, viewportCenterPosition, balance,groupAxisConstraint);
         }
 
         protected override SpriteDrawMode GetDrawMode()
@@ -39,14 +40,19 @@ namespace SC.Core.UI
             return _spriteRenderer.drawMode;
         }
 
-        protected override Vector3 GetBoundsSize()
+        public override Vector3 GetBoundarySize()
         {
             return _spriteRenderer.sprite.bounds.size;
         }
 
-        protected override Vector3 GetSize()
+        public override Vector3 GetElementSize()
         {
             return _spriteRenderer.size;
+        }
+
+        public override Vector3 GetRenderBoundarySize()
+        {
+            return _spriteRenderer.bounds.size;
         }
     }
 }

@@ -172,13 +172,14 @@ MonoBehaviour:
     rid: 7568872166055739427
   _registerType: 0
   _canvasKey: TopCanvas
-  _spriteCanvas: {fileID: 0}
+  _spriteCanvas: {fileID: 404344878}
   _targetKey: Purple
   _itemPosition: {fileID: 16508834}
   _orderInLayer: 2
   _hasReference: 1
   _referenceElement: {fileID: 1211146596}
   _alpha: 1
+  _isGroupChecked: 0
   _spriteRenderer: {fileID: 16508837}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -269,7 +270,7 @@ Transform:
   m_GameObject: {fileID: 94823674}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.72999984, y: -0.3450004, z: 0}
+  m_LocalPosition: {x: 0.7299998, y: -0.3450004, z: 0}
   m_LocalScale: {x: 0.49999997, y: 0.49999997, z: 0.49999997}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -291,13 +292,14 @@ MonoBehaviour:
     rid: 7568872166055739431
   _registerType: 0
   _canvasKey: TopCanvas
-  _spriteCanvas: {fileID: 0}
+  _spriteCanvas: {fileID: 404344878}
   _targetKey: Yellow
   _itemPosition: {fileID: 94823675}
   _orderInLayer: 2
   _hasReference: 1
   _referenceElement: {fileID: 1211146596}
   _alpha: 1
+  _isGroupChecked: 0
   _spriteRenderer: {fileID: 94823678}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -472,7 +474,7 @@ Transform:
   m_GameObject: {fileID: 349766883}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.72999984, y: 0.3450004, z: 0}
+  m_LocalPosition: {x: 0.7299998, y: 0.3450004, z: 0}
   m_LocalScale: {x: 0.49999997, y: 0.49999997, z: 0.49999997}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -494,13 +496,14 @@ MonoBehaviour:
     rid: 7568872166055739426
   _registerType: 0
   _canvasKey: TopCanvas
-  _spriteCanvas: {fileID: 0}
+  _spriteCanvas: {fileID: 404344878}
   _targetKey: Orange
   _itemPosition: {fileID: 349766884}
   _orderInLayer: 2
   _hasReference: 1
   _referenceElement: {fileID: 1211146596}
   _alpha: 1
+  _isGroupChecked: 0
   _spriteRenderer: {fileID: 349766887}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -621,6 +624,19 @@ MonoBehaviour:
   _uIElementProperties:
     Alpha: 1
     Interactable: 1
+  _uiElements:
+  - {fileID: 16508835}
+  - {fileID: 94823676}
+  - {fileID: 349766885}
+  - {fileID: 426712007}
+  - {fileID: 788897656}
+  - {fileID: 1090733704}
+  - {fileID: 1129966641}
+  - {fileID: 1211146596}
+  - {fileID: 1321324818}
+  - {fileID: 1569241409}
+  - {fileID: 1645110081}
+  - {fileID: 2016244203}
 --- !u!114 &404344879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,7 +678,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.5, y: 14.776, z: 0}
-  m_LocalScale: {x: 276.9231, y: 4.8, z: 1}
+  m_LocalScale: {x: 419.0955, y: 4.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 404344877}
@@ -683,13 +699,14 @@ MonoBehaviour:
     rid: 7568872166055739439
   _registerType: 2
   _canvasKey: TopCanvas
-  _spriteCanvas: {fileID: 0}
+  _spriteCanvas: {fileID: 404344878}
   _targetKey: 
   _itemPosition: {fileID: 426712006}
   _orderInLayer: 2
   _hasReference: 1
   _referenceElement: {fileID: 788897656}
   _alpha: 1
+  _isGroupChecked: 0
   _spriteRenderer: {fileID: 426712008}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -1061,7 +1078,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.5, y: 16.84, z: 0}
-  m_LocalScale: {x: 276.9231, y: 108.00001, z: 1}
+  m_LocalScale: {x: 419.0955, y: 108.00001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 404344877}
@@ -1082,13 +1099,14 @@ MonoBehaviour:
     rid: 7568872166055739415
   _registerType: 0
   _canvasKey: MainMenu
-  _spriteCanvas: {fileID: 0}
+  _spriteCanvas: {fileID: 404344878}
   _targetKey: 
   _itemPosition: {fileID: 788897655}
   _orderInLayer: 0
   _hasReference: 0
   _referenceElement: {fileID: 0}
   _alpha: 1
+  _isGroupChecked: 0
   _spriteRenderer: {fileID: 788897657}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -1182,7 +1200,7 @@ RectTransform:
   m_GameObject: {fileID: 1064447758}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.9999999, y: 1.9999999, z: 0.99999994}
+  m_LocalScale: {x: 2, y: 1.9999999, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1356520693}
@@ -1208,13 +1226,14 @@ MonoBehaviour:
     rid: 7568872275334660146
   _registerType: 0
   _canvasKey: BottomCanvas
-  _spriteCanvas: {fileID: 0}
+  _spriteCanvas: {fileID: 1455885518}
   _targetKey: 
   _itemPosition: {fileID: 1064447759}
   _orderInLayer: 99
   _hasReference: 1
   _referenceElement: {fileID: 1356520695}
   _alpha: 1
+  _isGroupChecked: 0
   _textMeshPro: {fileID: 1064447761}
   _textMeshProSize: {x: 1.2, y: 0.6, z: 0}
   _ignoreSize: 0
@@ -1397,7 +1416,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000000107460295, y: 0}
+  m_AnchoredPosition: {x: 0.00000011641531, y: 0}
   m_SizeDelta: {x: 1.5, y: 1.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1090733704
@@ -1416,13 +1435,14 @@ MonoBehaviour:
     rid: 7568872275334660150
   _registerType: 0
   _canvasKey: 
-  _spriteCanvas: {fileID: 0}
+  _spriteCanvas: {fileID: 404344878}
   _targetKey: 
   _itemPosition: {fileID: 1090733703}
   _orderInLayer: 2
   _hasReference: 1
   _referenceElement: {fileID: 1321324818}
   _alpha: 1
+  _isGroupChecked: 0
   _textMeshPro: {fileID: 1090733705}
   _textMeshProSize: {x: 1.5, y: 1.5, z: 0}
   _ignoreSize: 0
@@ -1631,13 +1651,14 @@ MonoBehaviour:
     rid: 7568872166055739429
   _registerType: 0
   _canvasKey: TopCanvas
-  _spriteCanvas: {fileID: 0}
+  _spriteCanvas: {fileID: 404344878}
   _targetKey: Red
   _itemPosition: {fileID: 1129966640}
   _orderInLayer: 2
   _hasReference: 1
   _referenceElement: {fileID: 1211146596}
   _alpha: 1
+  _isGroupChecked: 0
   _spriteRenderer: {fileID: 1129966643}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -1728,8 +1749,8 @@ Transform:
   m_GameObject: {fileID: 1211146594}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0076066656, y: 0.00055555056, z: 0}
-  m_LocalScale: {x: 0.008666666, y: 0.02222222, z: 2.4}
+  m_LocalPosition: {x: 0.008559999, y: 0.00055555056, z: 0}
+  m_LocalScale: {x: 0.008, y: 0.02222222, z: 2.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1569241408}
@@ -1756,13 +1777,14 @@ MonoBehaviour:
     rid: 7568872166055739421
   _registerType: 0
   _canvasKey: TopCanvas
-  _spriteCanvas: {fileID: 0}
+  _spriteCanvas: {fileID: 404344878}
   _targetKey: 
   _itemPosition: {fileID: 1211146595}
   _orderInLayer: 1
   _hasReference: 1
   _referenceElement: {fileID: 1645110081}
   _alpha: 1
+  _isGroupChecked: 0
   _spriteRenderer: {fileID: 1211146598}
   _spriteSize: {x: 2.46, y: 1.35, z: 0}
   references:
@@ -1853,8 +1875,8 @@ Transform:
   m_GameObject: {fileID: 1321324814}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.011766665, y: 0.00055555056, z: 0}
-  m_LocalScale: {x: 0.008666666, y: 0.02222222, z: 2.4}
+  m_LocalPosition: {x: -0.0123999985, y: 0.00055555056, z: 0}
+  m_LocalScale: {x: 0.008, y: 0.02222222, z: 2.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1090733703}
@@ -1928,13 +1950,14 @@ MonoBehaviour:
     rid: 7568872392557068289
   _registerType: 2
   _canvasKey: TopCanvas
-  _spriteCanvas: {fileID: 0}
+  _spriteCanvas: {fileID: 404344878}
   _targetKey: 
   _itemPosition: {fileID: 1321324815}
   _orderInLayer: 1
   _hasReference: 1
   _referenceElement: {fileID: 1645110081}
   _alpha: 1
+  _isGroupChecked: 0
   _spriteRenderer: {fileID: 1321324817}
   _spriteSize: {x: 1.5, y: 1.35, z: 0}
   references:
@@ -1975,7 +1998,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.004333333, y: 0.016666668, z: 2.4}
+  m_LocalScale: {x: 0.0028633093, y: 0.016666668, z: 2.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1064447759}
@@ -2049,13 +2072,14 @@ MonoBehaviour:
     rid: 7568872166055739405
   _registerType: 0
   _canvasKey: BottomCanvas
-  _spriteCanvas: {fileID: 0}
+  _spriteCanvas: {fileID: 1455885518}
   _targetKey: 
   _itemPosition: {fileID: 1356520693}
   _orderInLayer: 18
   _hasReference: 1
   _referenceElement: {fileID: 1929393235}
   _alpha: 1
+  _isGroupChecked: 0
   _spriteRenderer: {fileID: 1356520694}
   _spriteSize: {x: 5.4, y: 1, z: 0}
   DownEvent:
@@ -2147,6 +2171,11 @@ MonoBehaviour:
   _uIElementProperties:
     Alpha: 1
     Interactable: 1
+  _uiElements:
+  - {fileID: 1064447760}
+  - {fileID: 1356520695}
+  - {fileID: 1922011241}
+  - {fileID: 1929393235}
 --- !u!4 &1455885519
 Transform:
   m_ObjectHideFlags: 0
@@ -2213,13 +2242,14 @@ MonoBehaviour:
     rid: 7568872166055739423
   _registerType: 0
   _canvasKey: TopCanvas
-  _spriteCanvas: {fileID: 0}
+  _spriteCanvas: {fileID: 404344878}
   _targetKey: Blue
   _itemPosition: {fileID: 1569241408}
   _orderInLayer: 2
   _hasReference: 1
   _referenceElement: {fileID: 1211146596}
   _alpha: 1
+  _isGroupChecked: 0
   _spriteRenderer: {fileID: 1569241411}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -2363,7 +2393,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.5, y: 16.84, z: 0}
-  m_LocalScale: {x: 276.9231, y: 108.00001, z: 1}
+  m_LocalScale: {x: 300, y: 108.00001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1321324815}
@@ -2386,13 +2416,14 @@ MonoBehaviour:
     rid: 7568872166055739417
   _registerType: 2
   _canvasKey: TopCanvas
-  _spriteCanvas: {fileID: 0}
+  _spriteCanvas: {fileID: 404344878}
   _targetKey: 
   _itemPosition: {fileID: 1645110080}
   _orderInLayer: 1
   _hasReference: 0
   _referenceElement: {fileID: 0}
   _alpha: 0
+  _isGroupChecked: 0
   _spriteRenderer: {fileID: 1645110079}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -2434,7 +2465,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.5, y: -2.096, z: 0}
-  m_LocalScale: {x: 276.9231, y: 4.8, z: 1}
+  m_LocalScale: {x: 419.0955, y: 4.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1455885519}
@@ -2455,13 +2486,14 @@ MonoBehaviour:
     rid: 7568872331812012032
   _registerType: 0
   _canvasKey: BottomCanvas
-  _spriteCanvas: {fileID: 0}
+  _spriteCanvas: {fileID: 1455885518}
   _targetKey: 
   _itemPosition: {fileID: 1922011240}
   _orderInLayer: 2
   _hasReference: 1
   _referenceElement: {fileID: 1929393235}
   _alpha: 1
+  _isGroupChecked: 0
   _spriteRenderer: {fileID: 1922011242}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -2555,7 +2587,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.5, y: -3.56, z: 0}
-  m_LocalScale: {x: 276.9231, y: 72, z: 1}
+  m_LocalScale: {x: 419.0955, y: 72, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1356520693}
@@ -2629,13 +2661,14 @@ MonoBehaviour:
     rid: 7568872166055739401
   _registerType: 0
   _canvasKey: BottomCanvas
-  _spriteCanvas: {fileID: 0}
+  _spriteCanvas: {fileID: 1455885518}
   _targetKey: 
   _itemPosition: {fileID: 1929393233}
   _orderInLayer: 0
   _hasReference: 0
   _referenceElement: {fileID: 0}
   _alpha: 1
+  _isGroupChecked: 0
   _spriteRenderer: {fileID: 1929393234}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -2698,13 +2731,14 @@ MonoBehaviour:
     rid: 7568872166055739424
   _registerType: 0
   _canvasKey: TopCanvas
-  _spriteCanvas: {fileID: 0}
+  _spriteCanvas: {fileID: 404344878}
   _targetKey: Green
   _itemPosition: {fileID: 2016244202}
   _orderInLayer: 2
   _hasReference: 1
   _referenceElement: {fileID: 1211146596}
   _alpha: 1
+  _isGroupChecked: 0
   _spriteRenderer: {fileID: 2016244205}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
