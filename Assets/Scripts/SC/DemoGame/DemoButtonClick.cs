@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using Action = Unity.Plastic.Antlr3.Runtime.Misc.Action;
-
 namespace SC.DemoGame
 {
     public class DemoButtonClick : MonoBehaviour

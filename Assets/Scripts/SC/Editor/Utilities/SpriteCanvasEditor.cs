@@ -193,27 +193,27 @@ namespace SC.Editor.Utilities
             var thickness = 2;
             Handles.color = new Color32(255, 128, 0, 255);
 
-            Handles.DrawLine(topLeft, topRight,thickness);
-            Handles.DrawLine(topRight, bottomRight,thickness);
-            Handles.DrawLine(bottomRight, bottomLeft,thickness);
-            Handles.DrawLine(bottomLeft, topLeft,thickness);
+            Handles.DrawLine(topLeft, topRight, thickness);
+            Handles.DrawLine(topRight, bottomRight, thickness);
+            Handles.DrawLine(bottomRight, bottomLeft, thickness);
+            Handles.DrawLine(bottomLeft, topLeft, thickness);
 
             var cameraTopLeft = _camera.ViewportToWorldPoint(new Vector3(0, 1, 0));
             var cameraTopRight = _camera.ViewportToWorldPoint(new Vector3(1, 1, 0));
             var cameraBottomLeft = _camera.ViewportToWorldPoint(new Vector3(0, 0, 0));
             var cameraBottomRight = _camera.ViewportToWorldPoint(new Vector3(1, 0, 0));
 
-            Handles.DrawLine(topLeft, cameraTopLeft,thickness);
-            Handles.DrawLine(topRight, cameraTopRight,thickness);
-            Handles.DrawLine(bottomLeft, cameraBottomLeft,thickness);
-            Handles.DrawLine(bottomRight, cameraBottomRight,thickness);
-            
+            Handles.DrawLine(topLeft, cameraTopLeft, thickness);
+            Handles.DrawLine(topRight, cameraTopRight, thickness);
+            Handles.DrawLine(bottomLeft, cameraBottomLeft, thickness);
+            Handles.DrawLine(bottomRight, cameraBottomRight, thickness);
+
             // White color lines for the main camera
             Handles.color = Color.white;
-            Handles.DrawLine(cameraTopLeft, cameraTopRight, thickness-1);
-            Handles.DrawLine(cameraTopRight, cameraBottomRight, thickness-1);
-            Handles.DrawLine(cameraBottomRight, cameraBottomLeft, thickness-1);
-            Handles.DrawLine(cameraBottomLeft, cameraTopLeft, thickness-1);
+            Handles.DrawLine(cameraTopLeft, cameraTopRight, thickness - 1);
+            Handles.DrawLine(cameraTopRight, cameraBottomRight, thickness - 1);
+            Handles.DrawLine(cameraBottomRight, cameraBottomLeft, thickness - 1);
+            Handles.DrawLine(cameraBottomLeft, cameraTopLeft, thickness - 1);
         }
     }
 }

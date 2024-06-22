@@ -5,7 +5,9 @@ namespace SC.Core.ResponsiveOperations
     public interface IResponsiveOperation
     {
         public void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize, Transform uiItemTransform,
-            Vector3 referencePosition, float balance);
+            Vector3 referencePosition, float balance, Vector3 groupAxisConstraint);
+
+        // public void SetScale(Vector3 scale);
     }
 
     public abstract class ResponsiveOperation : IResponsiveOperation
@@ -16,7 +18,13 @@ namespace SC.Core.ResponsiveOperations
 
         public abstract void AdjustUI(float screenHeight, float screenWidth,
             Vector3 uiItemSize, Transform uiItemTransform,
-            Vector3 referencePosition, float balance);
+            Vector3 referencePosition, float balance, Vector3 groupAxisConstraint);
+        
+
+        // public void SetScale(Vector3 scale)
+        // {
+        //     LocalScale = scale;
+        // }
 
         protected Vector3 GetPosition(float screenHeight, float screenWidth,
             Vector3 uiItemSize, Transform uiItemTransform, float balance, Vector2 positionFactors)
@@ -65,8 +73,8 @@ namespace SC.Core.ResponsiveOperations
             var scaleRatio = primaryDimension / itemSizeDimension;
             var positionBalanceFactor =
                 positionFactors.y * (1 - positionFactors.x) +
-                positionFactors.x * positionFactors.x; 
-            
+                positionFactors.x * positionFactors.x;
+
             var clampedScale = Mathf.Clamp(scaleRatio - edgeOffset * balance * positionBalanceFactor, 0,
                 maxSize * balance * positionBalanceFactor);
 
@@ -75,15 +83,26 @@ namespace SC.Core.ResponsiveOperations
 
             return new Vector3(finalScaleX, finalScaleY, LocalScale.z);
         }
+
+        public Vector3 ScaleWithGroup(Vector3 scale, Vector3 groupAxisConstraint, Vector3 uiItemScale)
+        {
+            var multiplication = new Vector3(scale.x * groupAxisConstraint.x, scale.y * groupAxisConstraint.y);
+
+            return new Vector3(
+                multiplication.x != 0 ? multiplication.x : uiItemScale.x,
+                multiplication.y != 0 ? multiplication.y : uiItemScale.y,
+                uiItemScale.z);
+        }
     }
 
     public class TopCenter : ResponsiveOperation
     {
         public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance)
+            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint)
         {
             var scale = GetScale(balance);
             scale = InverseTransformVector(uiItemTransform, scale);
+            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
@@ -94,10 +113,11 @@ namespace SC.Core.ResponsiveOperations
     public class TopRight : ResponsiveOperation
     {
         public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance)
+            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint)
         {
             var scale = GetScale(balance);
             scale = InverseTransformVector(uiItemTransform, scale);
+            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
@@ -108,10 +128,11 @@ namespace SC.Core.ResponsiveOperations
     public class TopLeft : ResponsiveOperation
     {
         public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance)
+            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint)
         {
             var scale = GetScale(balance);
             scale = InverseTransformVector(uiItemTransform, scale);
+            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
@@ -125,11 +146,12 @@ namespace SC.Core.ResponsiveOperations
         [SerializeField] private float _maxSize = 10_000;
 
         public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance)
+            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint)
         {
             var scale = GetScale(screenHeight, screenWidth, uiItemSize, balance, _edgeOffset, _maxSize,
                 new Vector2(1, 0));
             scale = InverseTransformVector(uiItemTransform, scale);
+            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
@@ -140,10 +162,11 @@ namespace SC.Core.ResponsiveOperations
     public class BottomCenter : ResponsiveOperation
     {
         public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance)
+            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint)
         {
             var scale = GetScale(balance);
             scale = InverseTransformVector(uiItemTransform, scale);
+            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
@@ -154,10 +177,11 @@ namespace SC.Core.ResponsiveOperations
     public class BottomRight : ResponsiveOperation
     {
         public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance)
+            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint)
         {
             var scale = GetScale(balance);
             scale = InverseTransformVector(uiItemTransform, scale);
+            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
@@ -168,10 +192,11 @@ namespace SC.Core.ResponsiveOperations
     public class BottomLeft : ResponsiveOperation
     {
         public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance)
+            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint)
         {
             var scale = GetScale(balance);
             scale = InverseTransformVector(uiItemTransform, scale);
+            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
@@ -185,13 +210,13 @@ namespace SC.Core.ResponsiveOperations
         [SerializeField] private float _maxSize = 10_000;
 
         public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance)
+            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint)
         {
             var scale = GetScale(screenHeight, screenWidth, uiItemSize, balance, _edgeOffset, _maxSize,
                 new Vector2(1, 0));
 
             scale = InverseTransformVector(uiItemTransform, scale);
-
+            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
@@ -202,10 +227,11 @@ namespace SC.Core.ResponsiveOperations
     public class Center : ResponsiveOperation
     {
         public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance)
+            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint)
         {
             var scale = GetScale(balance);
             scale = InverseTransformVector(uiItemTransform, scale);
+            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
@@ -219,11 +245,12 @@ namespace SC.Core.ResponsiveOperations
         [SerializeField] private float _maxSize = 10_000;
 
         public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance)
+            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint)
         {
             var scale = GetScale(screenHeight, screenWidth, uiItemSize, balance, _edgeOffset, _maxSize,
                 new Vector2(0, 1));
             scale = InverseTransformVector(uiItemTransform, scale);
+            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
             uiItemTransform.localScale = scale;
 
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
@@ -237,13 +264,14 @@ namespace SC.Core.ResponsiveOperations
         [SerializeField] private float _maxSize = 10_000;
 
         public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance)
+            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint)
         {
             var scale = GetScale(screenHeight, screenWidth, uiItemSize, balance, _edgeOffset, _maxSize,
                 new Vector2(0, 1));
             scale = InverseTransformVector(uiItemTransform, scale);
+            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
             uiItemTransform.localScale = scale;
-
+            
             uiItemTransform.position = referencePosition + GetPosition(screenHeight, screenWidth, uiItemSize,
                 uiItemTransform, balance, new Vector2(0.5f, 0));
         }

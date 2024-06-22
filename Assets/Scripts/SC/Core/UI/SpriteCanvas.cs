@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 using SC.Core.Manager;
 using SC.Core.SpriteCanvasAttribute;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using EColor = SC.Core.SpriteCanvasAttribute.EColor;
 
 namespace SC.Core.UI
 {
@@ -23,10 +22,11 @@ namespace SC.Core.UI
         [SerializeField] private CanvasScaler _canvasScaler;
 
         [SerializeField] private UIElementProperties _uIElementProperties;
-
+        [SerializeField] private List<UIElement> _uiElements;
         public UIElementProperties ElementProperties => _uIElementProperties;
         public Camera Camera => _camera;
         public string SortingLayerName => _sortingLayerName;
+        public string CanvasKey => _canvasKey;
         public int SortingLayerOrder => _sortingLayerOrder;
         public float ViewportHeight { get; private set; }
         public float ViewportWidth { get; private set; }
@@ -35,21 +35,31 @@ namespace SC.Core.UI
 
         private static SpriteCanvasManager _spriteCanvasManager;
 
-        private List<UIElement> _uiElements;
-
         private void Awake()
         {
-            _uiElements = new List<UIElement>();
             CreateSpriteCanvasManager();
             _spriteCanvasManager.SpriteCanvasRegister(_canvasKey, this);
-            UpdateCameraViewportProperties();
+            AdjustDependentUIElements();
         }
 
-        public void Adjust()
+        public void AdjustDependentUIElements()
         {
+            RemoveNullElements();
             UpdateCameraViewportProperties();
             _uiElements.ForEach(x => x.InitialCheck());
             _uiElements.ForEach(x => x.Adjust());
+        }
+
+        private void RemoveNullElements()
+        {
+            var initialCount = _uiElements.Count;
+            _uiElements.RemoveAll(item => item == null);
+            var removedCount = initialCount - _uiElements.Count;
+
+            if (removedCount > 0)
+            {
+                Debug.LogWarning($"{removedCount} null UI elements were removed from the list.");
+            }
         }
 
         private void CreateSpriteCanvasManager()
@@ -58,6 +68,7 @@ namespace SC.Core.UI
 
             var managerObj = new GameObject("SpriteCanvasManager");
             _spriteCanvasManager = managerObj.AddComponent<SpriteCanvasManager>();
+
             DontDestroyOnLoad(managerObj);
 
             _spriteCanvasManager.Initialize();
@@ -106,6 +117,7 @@ namespace SC.Core.UI
 
         public void AddUI(UIElement ui)
         {
+            if (_uiElements.Contains(ui)) return;
             _uiElements.Add(ui);
         }
 
