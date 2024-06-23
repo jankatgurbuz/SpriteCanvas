@@ -31,7 +31,7 @@ namespace SC.Core.UI
         [SerializeField, SyncAlpha] protected float _alpha = 1;
 
         private bool _isChecked = true;
-        [FormerlySerializedAs("_isChecked2")] public bool _isGroupChecked = true;
+        private bool _isGroupChecked = true;
         public string CanvasKey => _canvasKey;
         public IResponsiveOperation ResponsiveOperation => _responsiveOperation;
         public Vector3 GroupAxisConstraint { get; private set; } = Vector3.one;
@@ -40,7 +40,7 @@ namespace SC.Core.UI
             Vector3 groupAxisConstraint);
 
         public abstract void ArrangeLayers(string sortingLayer, int sortingOrder);
-        public abstract void SetUIElementProperties(SpriteCanvas.UIElementProperties elementProperties);
+        public abstract void SetUIElementProperties(UIElementProperties elementProperties);
         public abstract Vector3 GetBoundarySize();
         public abstract Vector3 GetElementSize();
         public abstract Vector3 GetRenderBoundarySize();

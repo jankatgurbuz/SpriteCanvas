@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using SC.Core.Manager;
 using SC.Core.SpriteCanvasAttribute;
 using UnityEngine;
@@ -22,7 +23,7 @@ namespace SC.Core.UI
         [SerializeField] private CanvasScaler _canvasScaler;
 
         [SerializeField] private UIElementProperties _uIElementProperties;
-        [SerializeField] private List<UIElement> _uiElements;
+        [SerializeField, ReadOnly] private List<UIElement> _uiElements;
         public UIElementProperties ElementProperties => _uIElementProperties;
         public Camera Camera => _camera;
         public string SortingLayerName => _sortingLayerName;
@@ -34,6 +35,12 @@ namespace SC.Core.UI
         public float Balance { get; private set; }
 
         private static SpriteCanvasManager _spriteCanvasManager;
+
+        private enum CanvasScaler
+        {
+            Height,
+            Width
+        }
 
         private void Awake()
         {
@@ -119,20 +126,6 @@ namespace SC.Core.UI
         {
             if (_uiElements.Contains(ui)) return;
             _uiElements.Add(ui);
-        }
-
-        public enum CanvasScaler
-        {
-            Height,
-            Width
-        }
-
-        [System.Serializable]
-        public class UIElementProperties
-        {
-            [Range(0f, 1f)] public float Alpha = 1;
-
-            public bool Interactable = true;
-        }
+        } 
     }
 }

@@ -16,7 +16,7 @@ namespace SC.Core.UI
             _textMeshPro.sortingOrder = Mathf.Max(sortingOrder, sortingOrder + _orderInLayer);
         }
 
-        public override void SetUIElementProperties(SpriteCanvas.UIElementProperties elementProperties)
+        public override void SetUIElementProperties(UIElementProperties elementProperties)
         {
             if (_textMeshPro == null) return;
             var color = _textMeshPro.color;

@@ -34,7 +34,7 @@ namespace SC.Core.UI
             }
         }
 
-        public override void SetUIElementProperties(SpriteCanvas.UIElementProperties elementProperties)
+        public override void SetUIElementProperties(UIElementProperties elementProperties)
         {
             base.SetUIElementProperties(elementProperties);
             _interactable = elementProperties.Interactable;
