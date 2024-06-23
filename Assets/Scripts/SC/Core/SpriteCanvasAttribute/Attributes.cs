@@ -45,4 +45,7 @@ namespace SC.Core.SpriteCanvasAttribute
             EnumValue = enumValue;
         }
     }
+    public class ReadOnlyAttribute : PropertyAttribute
+    {
+    }
 }
