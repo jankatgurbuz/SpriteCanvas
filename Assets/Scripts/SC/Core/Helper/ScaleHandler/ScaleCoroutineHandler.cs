@@ -64,6 +64,13 @@ namespace SC.Core.Helper.ScaleHandler
                 uiGroup.GetUIElement.SpriteCanvas.AdjustDependentUIElements();
                 yield return null;
             }
+            
+            for (var index = 0; index < uiGroup.GetUIElementList.Count; index++)
+            {
+                var item = uiGroup.GetUIElementList[index];
+                item.ScaleRatio = index == currentSelectedIndex ? selectedItemScale : unselectedItemScale;
+            }
+            uiGroup.GetUIElement.SpriteCanvas.AdjustDependentUIElements();
         }
     }
 }
