@@ -64,6 +64,13 @@ namespace SC.Core.Helper.ScaleHandler
                 uiGroup.GetUIElement.SpriteCanvas.AdjustDependentUIElements();
                 await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken);
             }
+            
+            for (var index = 0; index < uiGroup.GetUIElementList.Count; index++)
+            {
+                var item = uiGroup.GetUIElementList[index];
+                item.ScaleRatio = index == currentSelectedIndex ? selectedItemScale : unselectedItemScale;
+            }
+            uiGroup.GetUIElement.SpriteCanvas.AdjustDependentUIElements();
         }
     }
 }
