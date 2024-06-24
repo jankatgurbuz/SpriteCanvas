@@ -32,7 +32,7 @@ namespace SC.Core.UI
 
         private bool _isChecked = true;
         private bool _isGroupChecked = true;
-        public string CanvasKey => _canvasKey;
+        public SpriteCanvas SpriteCanvas => _spriteCanvas;
         public IResponsiveOperation ResponsiveOperation => _responsiveOperation;
         public Vector3 GroupAxisConstraint { get; private set; } = Vector3.one;
 
