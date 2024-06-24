@@ -1,3 +1,4 @@
+using System;
 using SC.Core.UI;
 using UnityEngine;
 
@@ -47,5 +48,18 @@ namespace SC.Core.SpriteCanvasAttribute
     }
     public class ReadOnlyAttribute : PropertyAttribute
     {
+    }
+    
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+    public class ButtonAttribute : PropertyAttribute
+    {
+        public string MethodName { get; private set; }
+        public Type TargetType { get; private set; }
+
+        public ButtonAttribute(string methodName, Type targetType)
+        {
+            MethodName = methodName;
+            TargetType = targetType;
+        }
     }
 }

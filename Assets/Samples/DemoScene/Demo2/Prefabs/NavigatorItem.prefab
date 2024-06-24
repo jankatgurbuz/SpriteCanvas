@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3322669511833619160
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28,14 +28,14 @@ RectTransform:
   m_GameObject: {fileID: 2383112661408902446}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.017308412, y: 0.033333335, z: 1}
+  m_LocalScale: {x: 1.0000001, y: 0.040000003, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4636578179340045533}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.0033333302}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1.8, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &2582828000864272169
@@ -195,7 +195,6 @@ MonoBehaviour:
   _hasReference: 1
   _referenceElement: {fileID: 7149719307074181754}
   _alpha: 1
-  _isGroupChecked: 0
   _textMeshPro: {fileID: 3373613799233040168}
   _textMeshProSize: {x: 1.8, y: 1, z: 0}
   _ignoreSize: 0
@@ -316,7 +315,6 @@ MonoBehaviour:
   _hasReference: 1
   _referenceElement: {fileID: 2064719369102379095}
   _alpha: 1
-  _isGroupChecked: 0
   _spriteRenderer: {fileID: 4647199381048568791}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -355,8 +353,8 @@ Transform:
   m_GameObject: {fileID: 3890524003416017083}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.020077884, y: 0, z: 0}
-  m_LocalScale: {x: -0.0008654206, y: 0.020763049, z: 1}
+  m_LocalPosition: {x: -0.024500001, y: 0, z: 0}
+  m_LocalScale: {x: -0.05, y: 0.020096388, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4636578179340045533}
@@ -436,7 +434,6 @@ MonoBehaviour:
   _hasReference: 1
   _referenceElement: {fileID: 7149719307074181754}
   _alpha: 1
-  _isGroupChecked: 0
   _spriteRenderer: {fileID: 7721672296066109956}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -461,6 +458,8 @@ GameObject:
   - component: {fileID: 4636578179340045533}
   - component: {fileID: 7839894622988420493}
   - component: {fileID: 7149719307074181754}
+  - component: {fileID: 7184310876801860661}
+  - component: {fileID: 8808146756233752052}
   m_Layer: 0
   m_Name: NavigatorItem
   m_TagString: Untagged
@@ -478,7 +477,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.015999999, y: 0, z: 0}
-  m_LocalScale: {x: 0.49999997, y: 0.8571428, z: 1}
+  m_LocalScale: {x: 0.008015504, y: 0.9304057, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4948955015187607712}
@@ -562,7 +561,6 @@ MonoBehaviour:
   _hasReference: 1
   _referenceElement: {fileID: 0}
   _alpha: 1
-  _isGroupChecked: 0
   _spriteRenderer: {fileID: 7839894622988420493}
   _spriteSize: {x: 0, y: 0, z: 0}
   DownEvent:
@@ -570,16 +568,56 @@ MonoBehaviour:
       m_Calls: []
   ClickEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7184310876801860661}
+        m_TargetAssemblyTypeName: SC.DemoGame.DemoGameButtonClickForGroup, SC.DemoGame
+        m_MethodName: Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   references:
     version: 2
     RefIds:
     - rid: 7568872531315130399
       type: {class: BottomCenter, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 1, y: 25, z: 1}
+        LocalScale: {x: 1, y: 21, z: 1}
         _topOffset: 0
         _horizontalOffset: 0
+--- !u!114 &7184310876801860661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4589578909341419922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83b5c612e879b4d499fe5e4acd671f99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonIndex: 0
+  _groupSelector: {fileID: 0}
+--- !u!114 &8808146756233752052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4589578909341419922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36ba3fdbe1d0e4bae8e3cb5d8422dbe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 7184310876801860661}
+  _tmpProText: {fileID: 3373613799233040168}
 --- !u!1 &5733320523236600049
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,8 +645,8 @@ Transform:
   m_GameObject: {fileID: 5733320523236600049}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.0033333302, z: 0}
-  m_LocalScale: {x: 0.008654206, y: 0.016666668, z: 2.4}
+  m_LocalPosition: {x: 0, y: 0.003999996, z: 0}
+  m_LocalScale: {x: 0.50000006, y: 0.020000001, z: 2.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5697848859103467360}
@@ -689,7 +727,6 @@ MonoBehaviour:
   _hasReference: 1
   _referenceElement: {fileID: 7149719307074181754}
   _alpha: 1
-  _isGroupChecked: 0
   _spriteRenderer: {fileID: 5780852769384489697}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -699,7 +736,7 @@ MonoBehaviour:
       type: {class: Center, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
         LocalScale: {x: 0.5, y: 0.5, z: 1}
-        _topOffset: -0.1
+        _topOffset: 0
         _horizontalOffset: 0
 --- !u!1 &6789900037372077875
 GameObject:
@@ -728,8 +765,8 @@ Transform:
   m_GameObject: {fileID: 6789900037372077875}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.020077884, y: 0, z: 0}
-  m_LocalScale: {x: -0.0008654206, y: 0.020763049, z: 1}
+  m_LocalPosition: {x: 0.024500001, y: 0, z: 0}
+  m_LocalScale: {x: -0.05, y: 0.020096388, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4636578179340045533}
@@ -809,7 +846,6 @@ MonoBehaviour:
   _hasReference: 1
   _referenceElement: {fileID: 7149719307074181754}
   _alpha: 1
-  _isGroupChecked: 0
   _spriteRenderer: {fileID: 4454771806298095404}
   _spriteSize: {x: 0, y: 0, z: 0}
   references:
@@ -818,7 +854,7 @@ MonoBehaviour:
     - rid: 7568872531315130393
       type: {class: RightStretch, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: -0.05, y: 1, z: 1}
+        LocalScale: {x: -0.075, y: 1, z: 1}
         _topOffset: 0
         _horizontalOffset: 0
         _edgeOffset: 0.1

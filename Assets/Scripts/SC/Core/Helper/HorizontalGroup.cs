@@ -11,13 +11,17 @@ namespace SC.Core.Helper
         [SerializeField] private float _space;
         private UIElement _uiElement;
         public List<UIElementProperty> GetUIElementList => _childUIElementList;
+        public UIElement GetUIElement => _uiElement;
 
         private bool Initialize()
         {
-            if (!TryGetComponent(out _uiElement))
+            if (_uiElement == null)
             {
-                Debug.LogWarning("UIElement component not found.");
-                return false;
+                if (!TryGetComponent(out _uiElement))
+                {
+                    Debug.LogWarning("UIElement component not found.");
+                    return false;
+                }
             }
 
             if (GetUIElementList.Any(item => item.UIElement == null))
