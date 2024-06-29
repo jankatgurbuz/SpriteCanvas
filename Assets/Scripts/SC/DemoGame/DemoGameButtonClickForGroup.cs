@@ -9,7 +9,7 @@ namespace SC.DemoGame
         [SerializeField] private GroupSelector _groupSelector;
 
         public int ButtonIndex => _buttonIndex;
-        
+
         public void Click()
         {
             _groupSelector.UpdateItemScales(_buttonIndex);
