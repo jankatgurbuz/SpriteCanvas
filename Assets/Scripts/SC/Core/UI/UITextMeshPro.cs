@@ -24,12 +24,15 @@ namespace SC.Core.UI
             _textMeshPro.color = color;
         }
 
-        public override void SetUILayout(float screenHeight, float screenWidth, Vector3 viewportCenterPosition,
-            float balance, Vector3 groupAxisConstraint)
+        public override void SetUILayout(float spriteCanvasViewportHeight, float spriteCanvasViewportWidth,
+            Vector3 spriteCanvasViewportPosition, float spriteCanvasBalance, Vector3 groupAxisConstraint,
+            bool ignoreXPosition, bool ignoreYPosition, bool ignoreXScale, bool ignoreYScale)
         {
             if (_textMeshPro == null) return;
             _textMeshPro.rectTransform.sizeDelta = _textMeshProSize;
-            Handle(_textMeshPro.rectTransform.sizeDelta, screenHeight, screenWidth, viewportCenterPosition, balance,groupAxisConstraint);
+            Handle(_textMeshPro.rectTransform.sizeDelta, spriteCanvasViewportHeight, spriteCanvasViewportWidth,
+                spriteCanvasViewportPosition, spriteCanvasBalance, groupAxisConstraint, ignoreXPosition,
+                ignoreYPosition, ignoreXScale, ignoreYScale);
         }
 
         public override Vector3 GetBoundarySize()

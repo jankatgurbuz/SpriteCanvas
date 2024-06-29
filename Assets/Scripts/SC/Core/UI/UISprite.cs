@@ -23,16 +23,19 @@ namespace SC.Core.UI
             _spriteRenderer.color = color;
         }
 
-        public override void SetUILayout(float screenHeight, float screenWidth,
-            Vector3 viewportCenterPosition, float balance, Vector3 groupAxisConstraint)
+        public override void SetUILayout(float spriteCanvasViewportHeight, float spriteCanvasViewportWidth,
+            Vector3 spriteCanvasViewportPosition, float spriteCanvasBalance, Vector3 groupAxisConstraint,
+            bool ignoreXPosition, bool ignoreYPosition, bool ignoreXScale, bool ignoreYScale)
         {
             if (_spriteRenderer == null) return;
             _spriteRenderer.size = _spriteSize;
 
             Vector3 size = _spriteRenderer.drawMode == SpriteDrawMode.Simple
-                ? _spriteRenderer.sprite.bounds.size // todo
+                ? _spriteRenderer.sprite.bounds.size // todo !!
                 : _spriteRenderer.size;
-            Handle(size, screenHeight, screenWidth, viewportCenterPosition, balance,groupAxisConstraint);
+            Handle(size, spriteCanvasViewportHeight, spriteCanvasViewportWidth, spriteCanvasViewportPosition,
+                spriteCanvasBalance, groupAxisConstraint, ignoreXPosition,
+                ignoreYPosition, ignoreXScale, ignoreYScale);
         }
 
         protected override SpriteDrawMode GetDrawMode()

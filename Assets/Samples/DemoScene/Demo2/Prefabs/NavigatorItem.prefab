@@ -26,9 +26,9 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2383112661408902446}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000001, y: 0.040000003, z: 1}
+  m_LocalScale: {x: 1, y: 0.039999995, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4636578179340045533}
@@ -192,6 +192,10 @@ MonoBehaviour:
   _targetKey: 
   _itemPosition: {fileID: 3322669511833619160}
   _orderInLayer: 5
+  _ignoreXPosition: 0
+  _ignoreYPosition: 0
+  _ignoreXScale: 0
+  _ignoreYScale: 0
   _hasReference: 1
   _referenceElement: {fileID: 7149719307074181754}
   _alpha: 1
@@ -312,6 +316,10 @@ MonoBehaviour:
   _targetKey: 
   _itemPosition: {fileID: 5697848859103467360}
   _orderInLayer: 3
+  _ignoreXPosition: 0
+  _ignoreYPosition: 0
+  _ignoreXScale: 0
+  _ignoreYScale: 0
   _hasReference: 1
   _referenceElement: {fileID: 2064719369102379095}
   _alpha: 1
@@ -352,9 +360,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3890524003416017083}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.024500001, y: 0, z: 0}
-  m_LocalScale: {x: -0.05, y: 0.020096388, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.024500003, y: 0, z: 0}
+  m_LocalScale: {x: -0.049999997, y: 0.02009639, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4636578179340045533}
@@ -431,6 +439,10 @@ MonoBehaviour:
   _targetKey: 
   _itemPosition: {fileID: 5704145527635446420}
   _orderInLayer: 2
+  _ignoreXPosition: 0
+  _ignoreYPosition: 0
+  _ignoreXScale: 0
+  _ignoreYScale: 0
   _hasReference: 1
   _referenceElement: {fileID: 7149719307074181754}
   _alpha: 1
@@ -480,10 +492,10 @@ Transform:
   m_LocalScale: {x: 0.008015504, y: 0.9304057, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4948955015187607712}
-  - {fileID: 416652763975539162}
-  - {fileID: 5704145527635446420}
   - {fileID: 3322669511833619160}
+  - {fileID: 5704145527635446420}
+  - {fileID: 416652763975539162}
+  - {fileID: 4948955015187607712}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7839894622988420493
@@ -558,6 +570,10 @@ MonoBehaviour:
   _targetKey: 
   _itemPosition: {fileID: 4636578179340045533}
   _orderInLayer: 1
+  _ignoreXPosition: 0
+  _ignoreYPosition: 0
+  _ignoreXScale: 0
+  _ignoreYScale: 0
   _hasReference: 1
   _referenceElement: {fileID: 0}
   _alpha: 1
@@ -618,6 +634,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _button: {fileID: 7184310876801860661}
   _tmpProText: {fileID: 3373613799233040168}
+  _uiElement: {fileID: 2064719369102379095}
+  _parent: {fileID: 4636578179340045533}
 --- !u!1 &5733320523236600049
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,8 +663,8 @@ Transform:
   m_GameObject: {fileID: 5733320523236600049}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.003999996, z: 0}
-  m_LocalScale: {x: 0.50000006, y: 0.020000001, z: 2.4}
+  m_LocalPosition: {x: 0, y: 0.0040000016, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.019999998, z: 2.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5697848859103467360}
@@ -724,6 +742,10 @@ MonoBehaviour:
   _targetKey: 
   _itemPosition: {fileID: 4948955015187607712}
   _orderInLayer: 2
+  _ignoreXPosition: 0
+  _ignoreYPosition: 0
+  _ignoreXScale: 0
+  _ignoreYScale: 0
   _hasReference: 1
   _referenceElement: {fileID: 7149719307074181754}
   _alpha: 1
@@ -764,9 +786,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6789900037372077875}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.024500001, y: 0, z: 0}
-  m_LocalScale: {x: -0.05, y: 0.020096388, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.024500003, y: 0, z: 0}
+  m_LocalScale: {x: -0.049999997, y: 0.02009639, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4636578179340045533}
@@ -843,6 +865,10 @@ MonoBehaviour:
   _targetKey: 
   _itemPosition: {fileID: 416652763975539162}
   _orderInLayer: 2
+  _ignoreXPosition: 0
+  _ignoreYPosition: 0
+  _ignoreXScale: 0
+  _ignoreYScale: 0
   _hasReference: 1
   _referenceElement: {fileID: 7149719307074181754}
   _alpha: 1

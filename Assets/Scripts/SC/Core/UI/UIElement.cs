@@ -26,18 +26,49 @@ namespace SC.Core.UI
 
         [SerializeField] protected Transform _itemPosition;
         [SerializeField] protected int _orderInLayer;
+        [SerializeField] protected bool _ignoreXPosition;
+        [SerializeField] protected bool _ignoreYPosition;
+        [SerializeField] protected bool _ignoreXScale;
+        [SerializeField] protected bool _ignoreYScale;
         [SerializeField] protected bool _hasReference;
         [SerializeField] protected UIElement _referenceElement;
         [SerializeField, SyncAlpha] protected float _alpha = 1;
+        //[SerializeField] private bool _ignoreProperties;
 
         private bool _isChecked = true;
         private bool _isGroupChecked = true;
         public SpriteCanvas SpriteCanvas => _spriteCanvas;
         public IResponsiveOperation ResponsiveOperation => _responsiveOperation;
+
+        public bool IgnoreXPosition
+        {
+            get => _ignoreXPosition;
+            set => _ignoreXPosition = value;
+        }
+
+        public bool IgnoreYPosition
+        {
+            get => _ignoreYPosition;
+            set => _ignoreYPosition = value;
+        }
+
+        public bool IgnoreXScale
+        {
+            get => _ignoreXScale;
+            set => _ignoreXScale = value;
+        }
+
+        public bool IgnoreYScale
+        {
+            get => _ignoreYScale;
+            set => _ignoreYScale = value;
+        }
+
         public Vector3 GroupAxisConstraint { get; private set; } = Vector3.one;
 
-        public abstract void SetUILayout(float height, float width, Vector3 viewportCenterPosition, float balance,
-            Vector3 groupAxisConstraint);
+        public abstract void SetUILayout(float spriteCanvasViewportHeight, float spriteCanvasViewportWidth,
+            Vector3 spriteCanvasViewportPosition, float spriteCanvasBalance, Vector3 groupAxisConstraint,
+            bool ignoreXPosition, bool ignoreYPosition, bool ignoreXScale, bool ignoreYScale);
 
         public abstract void ArrangeLayers(string sortingLayer, int sortingOrder);
         public abstract void SetUIElementProperties(UIElementProperties elementProperties);
@@ -125,6 +156,8 @@ namespace SC.Core.UI
 
         public void Adjust()
         {
+            // if (_ignoreProperties) return;
+
             if (!_isChecked && _hasReference)
             {
                 _referenceElement.Adjust();
@@ -136,12 +169,17 @@ namespace SC.Core.UI
                 _spriteCanvas.ViewportHeight,
                 _spriteCanvas.ViewportWidth,
                 _spriteCanvas.ViewportPosition,
-                _spriteCanvas.Balance, GroupAxisConstraint);
+                _spriteCanvas.Balance, GroupAxisConstraint,
+                _ignoreXPosition,
+                _ignoreYPosition,
+                _ignoreXScale,
+                _ignoreYScale);
             SetUIElementProperties(_spriteCanvas.ElementProperties);
             AdjustGroup();
 
             _isChecked = true;
         }
+
 
         private void AdjustGroup()
         {
@@ -174,12 +212,14 @@ namespace SC.Core.UI
         }
 
         protected void Handle(Vector3 boundsSize, float screenHeight, float screenWidth,
-            Vector3 viewportCenterPosition, float balance, Vector3 groupAxisConstraint)
+            Vector3 viewportCenterPosition, float balance, Vector3 groupAxisConstraint,
+            bool ignoreXPosition, bool ignoreYPosition, bool ignoreXScale, bool ignoreYScale)
         {
             if (!_hasReference)
             {
                 _responsiveOperation.AdjustUI(screenHeight, screenWidth, boundsSize, _itemPosition,
-                    viewportCenterPosition, balance, groupAxisConstraint);
+                    viewportCenterPosition, balance, groupAxisConstraint,
+                    ignoreXPosition, ignoreYPosition, ignoreXScale, ignoreYScale);
             }
             else
             {
@@ -194,7 +234,8 @@ namespace SC.Core.UI
                     globalReferenceSize.x,
                     boundsSize,
                     _itemPosition,
-                    _referenceElement.transform.position, balance, groupAxisConstraint);
+                    _referenceElement.transform.position, balance, groupAxisConstraint,
+                    ignoreXPosition, ignoreYPosition, ignoreXScale, ignoreYScale);
             }
         }
 
