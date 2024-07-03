@@ -33,9 +33,9 @@ namespace SC.DemoGame
             {
                 _tmpProText.gameObject.SetActive(true);
                 
-                _uiElement.IgnoreYPosition = true;
-                _uiElement.IgnoreYScale = true;
-                _uiElement.IgnoreXScale = true;
+                _uiElement.UIElementProperties.IgnoreYPosition = true;
+                _uiElement.UIElementProperties.IgnoreXPosition = true;
+                _uiElement.UIElementProperties.IgnoreXScale = true;
 
                 _uiElement.transform.SetParent(_parent.parent);
                 _uiElement.transform.localScale = _newScale;
@@ -47,9 +47,9 @@ namespace SC.DemoGame
                 _uiElement.transform.SetParent(_parent);
                 _tmpProText.gameObject.SetActive(false);
 
-                _uiElement.IgnoreYPosition = false;
-                _uiElement.IgnoreYScale = false;
-                _uiElement.IgnoreXScale = false;
+                _uiElement.UIElementProperties.IgnoreYPosition = false;
+                _uiElement.UIElementProperties.IgnoreXPosition = false;
+                _uiElement.UIElementProperties.IgnoreXScale = false;
             }
         }
     }

@@ -1,5 +1,6 @@
 using System;
 using SC.Core.Helper;
+using SC.Core.Helper.UIElementHelper;
 using SC.Core.Manager;
 using SC.Core.ResponsiveOperations;
 using SC.Core.SpriteCanvasAttribute;
@@ -12,112 +13,66 @@ namespace SC.Core.UI
     {
         [SerializeReference] protected IResponsiveOperation _responsiveOperation;
 
-        [SerializeField, SCHorizontalLine(EColor.Orange, 1, 0)]
-        private RegisterType _registerType;
-
-        [SerializeField, ConditionalVisibility("_registerType", RegisterType.Key), CanvasKeyValidator]
-        private string _canvasKey;
-
-        [SerializeField, ConditionalVisibility("_registerType", RegisterType.Reference)]
-        protected SpriteCanvas _spriteCanvas;
+        [SerializeField, SCHorizontalLine(EColor.Orange, 1, 3)]
+        private RegisterProperties _register;
 
         [SerializeField, SCHorizontalLine(EColor.Orange, 1, 3)]
-        private string _targetKey;
+        private UIElementProperties _uIElementProperties;
 
-        [SerializeField] protected Transform _itemPosition;
-        [SerializeField] protected int _orderInLayer;
-        [SerializeField] protected bool _ignoreXPosition;
-        [SerializeField] protected bool _ignoreYPosition;
-        [SerializeField] protected bool _ignoreXScale;
-        [SerializeField] protected bool _ignoreYScale;
-        [SerializeField] protected bool _hasReference;
+        [SerializeField, HideInInspector] protected Transform _itemPosition;
+
+        [SerializeField, SCHorizontalLine(EColor.Orange, 1, 3)]
+        protected bool _hasReference;
+
         [SerializeField] protected UIElement _referenceElement;
-        [SerializeField, SyncAlpha] protected float _alpha = 1;
-        //[SerializeField] private bool _ignoreProperties;
+
+        [SerializeField, SyncAlpha, SCHorizontalLine(EColor.Orange, 1, 3)]
+        protected float _alpha = 1;
 
         private bool _isChecked = true;
         private bool _isGroupChecked = true;
-        public SpriteCanvas SpriteCanvas => _spriteCanvas;
+        private Vector3 _groupAxisConstraint = Vector3.one;
+
         public IResponsiveOperation ResponsiveOperation => _responsiveOperation;
-
-        public bool IgnoreXPosition
-        {
-            get => _ignoreXPosition;
-            set => _ignoreXPosition = value;
-        }
-
-        public bool IgnoreYPosition
-        {
-            get => _ignoreYPosition;
-            set => _ignoreYPosition = value;
-        }
-
-        public bool IgnoreXScale
-        {
-            get => _ignoreXScale;
-            set => _ignoreXScale = value;
-        }
-
-        public bool IgnoreYScale
-        {
-            get => _ignoreYScale;
-            set => _ignoreYScale = value;
-        }
-
-        public Vector3 GroupAxisConstraint { get; private set; } = Vector3.one;
-
-        public abstract void SetUILayout(float spriteCanvasViewportHeight, float spriteCanvasViewportWidth,
-            Vector3 spriteCanvasViewportPosition, float spriteCanvasBalance, Vector3 groupAxisConstraint,
-            bool ignoreXPosition, bool ignoreYPosition, bool ignoreXScale, bool ignoreYScale);
-
-        public abstract void ArrangeLayers(string sortingLayer, int sortingOrder);
-        public abstract void SetUIElementProperties(UIElementProperties elementProperties);
+        public UIElementProperties UIElementProperties => _uIElementProperties;
+        public RegisterProperties Register => _register;
+        public Vector3 GroupAxisConstraint => _groupAxisConstraint;
+        protected abstract void SetUILayout();
+        protected abstract void ArrangeLayers(string sortingLayer, int sortingOrder);
+        public abstract void SetUIElementProperties(UIElementSettings elementProperties);
         public abstract Vector3 GetBoundarySize();
         public abstract Vector3 GetElementSize();
         public abstract Vector3 GetRenderBoundarySize();
-
-        protected virtual SpriteDrawMode GetDrawMode()
-        {
-            return SpriteDrawMode.Simple;
-        }
+        protected virtual SpriteDrawMode GetDrawMode() => SpriteDrawMode.Simple;
 
         private void Start()
         {
             Initialize();
         }
 
-        public void InitialCheck()
-        {
-            _isChecked = false;
-            _isGroupChecked = false;
-        }
-
         public void Initialize()
         {
             GetSpriteCanvas();
-            Register();
+            InitRegister();
         }
 
         private void GetSpriteCanvas()
         {
-            switch (_registerType)
+            switch (_register.RegisterType)
             {
                 case RegisterType.Hierarchy:
-                    _spriteCanvas = FindParentSpriteCanvas(transform);
+                    _register.SpriteCanvas = FindParentSpriteCanvas(transform);
 
-                    if (_spriteCanvas == null)
-                    {
-                        Debug.LogError("No SpriteCanvas found in parent hierarchy.");
-                    }
-
+                    if (_register.SpriteCanvas == null)
+                        Debug.LogWarningFormat("No SpriteCanvas found in parent hierarchy. " +
+                                               "Object name: <color=orange>\"{0}\"</color>", gameObject.name);
                     break;
 
                 case RegisterType.Reference:
-                    if (_spriteCanvas == null)
-                    {
-                        Debug.LogError("SpriteCanvas reference is not assigned! Please drag and drop a reference.");
-                    }
-
+                    if (_register.SpriteCanvas == null)
+                        Debug.LogWarningFormat(
+                            "SpriteCanvas reference is not assigned! Please drag and drop a reference. " +
+                            "Object name: <color=orange>\"{0}\"</color>", gameObject.name);
                     break;
 
                 case RegisterType.Key:
@@ -126,60 +81,25 @@ namespace SC.Core.UI
 
                     foreach (var item in spriteCanvasArray)
                     {
-                        if (item.CanvasKey == _canvasKey)
-                        {
-                            _spriteCanvas = item;
-                        }
+                        if (item.CanvasKey != _register.CanvasKey) continue;
+                        _register.SpriteCanvas = item;
                     }
 #endif
                     if (Application.isPlaying)
                     {
-                        _spriteCanvas = SpriteCanvasManager.Instance.GetSpriteCanvas(_canvasKey);
+                        _register.SpriteCanvas = SpriteCanvasManager.Instance.GetSpriteCanvas(_register.CanvasKey);
                     }
 
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
 
-        private void Register()
+        private void InitRegister()
         {
-            _spriteCanvas.AddUI(this);
-            if (SpriteCanvasManager.Instance == null)
-            {
-                return;
-            }
-
-            SpriteCanvasManager.Instance.RegisterTarget(_targetKey, this);
+            if (_register.SpriteCanvas == null || SpriteCanvasManager.Instance == null) return;
+            _register.SpriteCanvas.AddUI(this);
+            SpriteCanvasManager.Instance.RegisterTarget(_uIElementProperties.TargetKey, this);
         }
-
-        public void Adjust()
-        {
-            // if (_ignoreProperties) return;
-
-            if (!_isChecked && _hasReference)
-            {
-                _referenceElement.Adjust();
-            }
-
-            _ = CheckGroup();
-            ArrangeLayers(_spriteCanvas.SortingLayerName, _spriteCanvas.SortingLayerOrder);
-            SetUILayout(
-                _spriteCanvas.ViewportHeight,
-                _spriteCanvas.ViewportWidth,
-                _spriteCanvas.ViewportPosition,
-                _spriteCanvas.Balance, GroupAxisConstraint,
-                _ignoreXPosition,
-                _ignoreYPosition,
-                _ignoreXScale,
-                _ignoreYScale);
-            SetUIElementProperties(_spriteCanvas.ElementProperties);
-            AdjustGroup();
-
-            _isChecked = true;
-        }
-
 
         private void AdjustGroup()
         {
@@ -198,51 +118,16 @@ namespace SC.Core.UI
         private IGroup CheckGroup()
         {
             var check = TryGetComponent(out IGroup group);
-            if (check)
+            if (!check) return group;
+
+            var vec = group is HorizontalGroup ? new Vector3(0, 1) : new Vector3(1, 0);
+            group.GetUIElementList.ForEach(x =>
             {
-                var vec = group is HorizontalGroup ? new Vector3(0, 1) : new Vector3(1, 0);
-                group.GetUIElementList.ForEach(x =>
-                {
-                    if (x.UIElement != null)
-                        x.UIElement.GroupAxisConstraint = vec;
-                });
-            }
+                if (x.UIElement != null)
+                    x.UIElement._groupAxisConstraint = vec;
+            });
 
             return group;
-        }
-
-        protected void Handle(Vector3 boundsSize, float screenHeight, float screenWidth,
-            Vector3 viewportCenterPosition, float balance, Vector3 groupAxisConstraint,
-            bool ignoreXPosition, bool ignoreYPosition, bool ignoreXScale, bool ignoreYScale)
-        {
-            if (!_hasReference)
-            {
-                _responsiveOperation.AdjustUI(screenHeight, screenWidth, boundsSize, _itemPosition,
-                    viewportCenterPosition, balance, groupAxisConstraint,
-                    ignoreXPosition, ignoreYPosition, ignoreXScale, ignoreYScale);
-            }
-            else
-            {
-                Vector3 referenceSpriteSize = _referenceElement.GetDrawMode() == SpriteDrawMode.Simple
-                    ? _referenceElement.GetBoundarySize()
-                    : _referenceElement.GetElementSize();
-
-                var globalReferenceSize = GetGlobalSize(referenceSpriteSize, _referenceElement.transform);
-
-                _responsiveOperation.AdjustUI(
-                    globalReferenceSize.y,
-                    globalReferenceSize.x,
-                    boundsSize,
-                    _itemPosition,
-                    _referenceElement.transform.position, balance, groupAxisConstraint,
-                    ignoreXPosition, ignoreYPosition, ignoreXScale, ignoreYScale);
-            }
-        }
-
-        private Vector3 GetGlobalSize(Vector3 localSize, Transform myTransform)
-        {
-            var globalScale = myTransform.lossyScale;
-            return new Vector3(localSize.x * globalScale.x, localSize.y * globalScale.y, localSize.z * globalScale.z);
         }
 
         private SpriteCanvas FindParentSpriteCanvas(Transform child)
@@ -260,11 +145,26 @@ namespace SC.Core.UI
             return null;
         }
 
-        public enum RegisterType
+        public void Adjust()
         {
-            Hierarchy,
-            Reference,
-            Key
+            if (!_isChecked && _hasReference)
+            {
+                _referenceElement.Adjust();
+            }
+
+            _ = CheckGroup();
+            ArrangeLayers(_register.SpriteCanvas.SortingLayerName, _register.SpriteCanvas.SortingLayerOrder);
+            SetUILayout();
+            SetUIElementProperties(_register.SpriteCanvas.ElementProperties);
+            AdjustGroup();
+
+            _isChecked = true;
+        }
+
+        public void ResetFlags()
+        {
+            _isChecked = false;
+            _isGroupChecked = false;
         }
     }
 }

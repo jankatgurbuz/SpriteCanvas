@@ -1,14 +1,12 @@
+using SC.Core.Helper.UIElementHelper;
+using SC.Core.UI;
 using UnityEngine;
 
 namespace SC.Core.ResponsiveOperations
 {
     public interface IResponsiveOperation
     {
-        public void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize, Transform uiItemTransform,
-            Vector3 referencePosition, float balance, Vector3 groupAxisConstraint, bool ignoreXPosition,
-            bool ignoreYPosition, bool ignoreXScale, bool ignoreYScale);
-
-        // public void SetScale(Vector3 scale);
+        public void AdjustUI(ResponsiveUIProp prop);
     }
 
     public abstract class ResponsiveOperation : IResponsiveOperation
@@ -16,19 +14,34 @@ namespace SC.Core.ResponsiveOperations
         [SerializeField] protected Vector3 LocalScale = new(1, 1, 1);
         [SerializeField] protected float _topOffset;
         [SerializeField] protected float _horizontalOffset;
+        public abstract void AdjustUI(ResponsiveUIProp prop);
 
-        public abstract void AdjustUI(float screenHeight, float screenWidth,
-            Vector3 uiItemSize, Transform uiItemTransform,
-            Vector3 referencePosition, float balance, Vector3 groupAxisConstraint,
-            bool ignoreXPosition, bool ignoreYPosition, bool ignoreXScale, bool ignoreYScale);
+        protected Vector3 AdjustScale(ResponsiveUIProp prop)
+        {
+            var scale = GetScale(prop.Balance);
+            scale = InverseTransformVector(prop.UiItemTransform, scale);
+            scale = ScaleWithGroup(scale, prop.GroupAxisConstraint, prop.UiItemTransform.localScale);
+            scale = IgnoreScale(scale, prop.IgnoreXScale, prop.IgnoreYScale, prop.UiItemTransform);
+            return scale;
+        }
 
+        protected Vector3 AdjustScale(ResponsiveUIProp prop, float edgeOffset, float maxSize, Vector2 pivot)
+        {
+            var scale = GetScale(prop.Height, prop.Width, prop.UiItemSize, prop.Balance, edgeOffset, maxSize, pivot);
+            scale = InverseTransformVector(prop.UiItemTransform, scale);
+            scale = ScaleWithGroup(scale, prop.GroupAxisConstraint, prop.UiItemTransform.localScale);
+            scale = IgnoreScale(scale, prop.IgnoreXScale, prop.IgnoreYScale, prop.UiItemTransform);
+            return scale;
+        }
 
-        // public void SetScale(Vector3 scale)
-        // {
-        //     LocalScale = scale;
-        // }
+        protected Vector3 AdjustPosition(ResponsiveUIProp prop, Vector2 pivot)
+        {
+            return GetPosition(prop.Height, prop.Width, prop.UiItemSize,
+                prop.UiItemTransform, prop.Balance, prop.ReferencePosition, pivot,
+                prop.IgnoreXPosition, prop.IgnoreYPosition);
+        }
 
-        protected Vector3 GetPosition(float screenHeight, float screenWidth,
+        private Vector3 GetPosition(float screenHeight, float screenWidth,
             Vector3 uiItemSize, Transform uiItemTransform, float balance, Vector3 referencePosition,
             Vector2 positionFactors, bool ignoreXPosition, bool ignoreYPosition)
         {
@@ -57,12 +70,12 @@ namespace SC.Core.ResponsiveOperations
                 position.z);
         }
 
-        protected Vector3 GetScale(float balance)
+        private Vector3 GetScale(float balance)
         {
             return LocalScale * balance;
         }
 
-        protected Vector3 InverseTransformVector(Transform uiItemTransform, Vector3 scale)
+        private Vector3 InverseTransformVector(Transform uiItemTransform, Vector3 scale)
         {
             if (uiItemTransform.parent != null)
             {
@@ -72,7 +85,7 @@ namespace SC.Core.ResponsiveOperations
             return scale;
         }
 
-        protected Vector3 GetScale(float screenHeight, float screenWidth, Vector3 uiItemSize, float balance,
+        private Vector3 GetScale(float screenHeight, float screenWidth, Vector3 uiItemSize, float balance,
             float edgeOffset, float maxSize, Vector2 positionFactors)
         {
             var primaryDimension = screenHeight * (1 - positionFactors.x) + screenWidth * positionFactors.x;
@@ -92,7 +105,7 @@ namespace SC.Core.ResponsiveOperations
             return new Vector3(finalScaleX, finalScaleY, LocalScale.z);
         }
 
-        protected Vector3 ScaleWithGroup(Vector3 scale, Vector3 groupAxisConstraint, Vector3 uiItemScale)
+        private Vector3 ScaleWithGroup(Vector3 scale, Vector3 groupAxisConstraint, Vector3 uiItemScale)
         {
             var multiplication = new Vector3(scale.x * groupAxisConstraint.x, scale.y * groupAxisConstraint.y);
 
@@ -102,7 +115,7 @@ namespace SC.Core.ResponsiveOperations
                 uiItemScale.z);
         }
 
-        protected Vector3 IgnoreScale(Vector3 scale, bool ignoreXScale, bool ignoreYScale, Transform uiItemTransform)
+        private Vector3 IgnoreScale(Vector3 scale, bool ignoreXScale, bool ignoreYScale, Transform uiItemTransform)
         {
             return new Vector3(
                 !ignoreXScale ? scale.x : uiItemTransform.localScale.x,
@@ -113,54 +126,28 @@ namespace SC.Core.ResponsiveOperations
 
     public class TopCenter : ResponsiveOperation
     {
-        public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint,
-            bool ignoreXPosition, bool ignoreYPosition, bool ignoreXScale, bool ignoreYScale)
+        public override void AdjustUI(ResponsiveUIProp prop)
         {
-            var scale = GetScale(balance);
-            scale = InverseTransformVector(uiItemTransform, scale);
-            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
-            scale = IgnoreScale(scale, ignoreXScale, ignoreYScale, uiItemTransform);
-
-            uiItemTransform.localScale = scale;
-
-            uiItemTransform.position = GetPosition(screenHeight, screenWidth, uiItemSize,
-                uiItemTransform, balance, referencePosition, new Vector2(0, 0.5f), ignoreXPosition, ignoreYPosition);
+            prop.UiItemTransform.localScale = AdjustScale(prop);
+            prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(0, 0.5f));
         }
     }
 
     public class TopRight : ResponsiveOperation
     {
-        public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint,
-            bool ignoreXPosition, bool ignoreYPosition, bool ignoreXScale, bool ignoreYScale)
+        public override void AdjustUI(ResponsiveUIProp prop)
         {
-            var scale = GetScale(balance);
-            scale = InverseTransformVector(uiItemTransform, scale);
-            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
-            scale = IgnoreScale(scale, ignoreXScale, ignoreYScale, uiItemTransform);
-            uiItemTransform.localScale = scale;
-
-            uiItemTransform.position = GetPosition(screenHeight, screenWidth, uiItemSize,
-                uiItemTransform, balance, referencePosition, new Vector2(0.5f, 0.5f), ignoreXPosition, ignoreYPosition);
+            prop.UiItemTransform.localScale = AdjustScale(prop);
+            prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(0.5f, 0.5f));
         }
     }
 
     public class TopLeft : ResponsiveOperation
     {
-        public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint,
-            bool ignoreXPosition, bool ignoreYPosition, bool ignoreXScale, bool ignoreYScale)
+        public override void AdjustUI(ResponsiveUIProp prop)
         {
-            var scale = GetScale(balance);
-            scale = InverseTransformVector(uiItemTransform, scale);
-            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
-            scale = IgnoreScale(scale, ignoreXScale, ignoreYScale, uiItemTransform);
-            uiItemTransform.localScale = scale;
-
-            uiItemTransform.position = GetPosition(screenHeight, screenWidth, uiItemSize,
-                uiItemTransform, balance, referencePosition, new Vector2(-0.5f, 0.5f), ignoreXPosition,
-                ignoreYPosition);
+            prop.UiItemTransform.localScale = AdjustScale(prop);
+            prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(-0.5f, 0.5f));
         }
     }
 
@@ -169,72 +156,37 @@ namespace SC.Core.ResponsiveOperations
         [SerializeField] private float _edgeOffset;
         [SerializeField] private float _maxSize = 10_000;
 
-        public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint,
-            bool ignoreXPosition, bool ignoreYPosition, bool ignoreXScale, bool ignoreYScale)
+        public override void AdjustUI(ResponsiveUIProp prop)
         {
-            var scale = GetScale(screenHeight, screenWidth, uiItemSize, balance, _edgeOffset, _maxSize,
-                new Vector2(1, 0));
-            scale = InverseTransformVector(uiItemTransform, scale);
-            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
-            scale = IgnoreScale(scale, ignoreXScale, ignoreYScale, uiItemTransform);
-            uiItemTransform.localScale = scale;
-
-            uiItemTransform.position = GetPosition(screenHeight, screenWidth, uiItemSize,
-                uiItemTransform, balance, referencePosition, new Vector2(0, 0.5f), ignoreXPosition, ignoreYPosition);
+            prop.UiItemTransform.localScale = AdjustScale(prop, _edgeOffset, _maxSize, new Vector2(1, 0));
+            prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(0, 0.5f));
         }
     }
 
     public class BottomCenter : ResponsiveOperation
     {
-        public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint,
-            bool ignoreXPosition, bool ignoreYPosition, bool ignoreXScale, bool ignoreYScale)
+        public override void AdjustUI(ResponsiveUIProp prop)
         {
-            var scale = GetScale(balance);
-            scale = InverseTransformVector(uiItemTransform, scale);
-            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
-            scale = IgnoreScale(scale, ignoreXScale, ignoreYScale, uiItemTransform);
-            uiItemTransform.localScale = scale;
-
-            uiItemTransform.position = GetPosition(screenHeight, screenWidth, uiItemSize,
-                uiItemTransform, balance, referencePosition, new Vector2(0, -0.5f), ignoreXPosition, ignoreYPosition);
+            prop.UiItemTransform.localScale = AdjustScale(prop);
+            prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(0, -0.5f));
         }
     }
 
     public class BottomRight : ResponsiveOperation
     {
-        public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint,
-            bool ignoreXPosition, bool ignoreYPosition, bool ignoreXScale, bool ignoreYScale)
+        public override void AdjustUI(ResponsiveUIProp prop)
         {
-            var scale = GetScale(balance);
-            scale = InverseTransformVector(uiItemTransform, scale);
-            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
-            scale = IgnoreScale(scale, ignoreXScale, ignoreYScale, uiItemTransform);
-            uiItemTransform.localScale = scale;
-
-            uiItemTransform.position = GetPosition(screenHeight, screenWidth, uiItemSize,
-                uiItemTransform, balance, referencePosition, new Vector2(0.5f, -0.5f), ignoreXPosition,
-                ignoreYPosition);
+            prop.UiItemTransform.localScale = AdjustScale(prop);
+            prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(0.5f, -0.5f));
         }
     }
 
     public class BottomLeft : ResponsiveOperation
     {
-        public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint,
-            bool ignoreXPosition, bool ignoreYPosition, bool ignoreXScale, bool ignoreYScale)
+        public override void AdjustUI(ResponsiveUIProp prop)
         {
-            var scale = GetScale(balance);
-            scale = InverseTransformVector(uiItemTransform, scale);
-            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
-            scale = IgnoreScale(scale, ignoreXScale, ignoreYScale, uiItemTransform);
-            uiItemTransform.localScale = scale;
-
-            uiItemTransform.position = GetPosition(screenHeight, screenWidth, uiItemSize,
-                uiItemTransform, balance, referencePosition, new Vector2(-0.5f, -0.5f), ignoreXPosition,
-                ignoreYPosition);
+            prop.UiItemTransform.localScale = AdjustScale(prop);
+            prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(-0.5f, -0.5f));
         }
     }
 
@@ -243,37 +195,19 @@ namespace SC.Core.ResponsiveOperations
         [SerializeField] private float _edgeOffset;
         [SerializeField] private float _maxSize = 10_000;
 
-        public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint,
-            bool ignoreXPosition, bool ignoreYPosition, bool ignoreXScale, bool ignoreYScale)
+        public override void AdjustUI(ResponsiveUIProp prop)
         {
-            var scale = GetScale(screenHeight, screenWidth, uiItemSize, balance, _edgeOffset, _maxSize,
-                new Vector2(1, 0));
-
-            scale = InverseTransformVector(uiItemTransform, scale);
-            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
-            scale = IgnoreScale(scale, ignoreXScale, ignoreYScale, uiItemTransform);
-            uiItemTransform.localScale = scale;
-
-            uiItemTransform.position = GetPosition(screenHeight, screenWidth, uiItemSize,
-                uiItemTransform, balance, referencePosition, new Vector2(0, -0.5f), ignoreXPosition, ignoreYPosition);
+            prop.UiItemTransform.localScale = AdjustScale(prop, _edgeOffset, _maxSize, new Vector2(1, 0));
+            prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(0, -0.5f));
         }
     }
 
     public class Center : ResponsiveOperation
     {
-        public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint,
-            bool ignoreXPosition, bool ignoreYPosition, bool ignoreXScale, bool ignoreYScale)
+        public override void AdjustUI(ResponsiveUIProp prop)
         {
-            var scale = GetScale(balance);
-            scale = InverseTransformVector(uiItemTransform, scale);
-            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
-            scale = IgnoreScale(scale, ignoreXScale, ignoreYScale, uiItemTransform);
-            uiItemTransform.localScale = scale;
-
-            uiItemTransform.position = GetPosition(screenHeight, screenWidth, uiItemSize,
-                uiItemTransform, balance, referencePosition, new Vector2(0, 0), ignoreXPosition, ignoreYPosition);
+            prop.UiItemTransform.localScale = AdjustScale(prop);
+            prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(0, 0));
         }
     }
 
@@ -282,19 +216,10 @@ namespace SC.Core.ResponsiveOperations
         [SerializeField] private float _edgeOffset;
         [SerializeField] private float _maxSize = 10_000;
 
-        public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint,
-            bool ignoreXPosition, bool ignoreYPosition, bool ignoreXScale, bool ignoreYScale)
+        public override void AdjustUI(ResponsiveUIProp prop)
         {
-            var scale = GetScale(screenHeight, screenWidth, uiItemSize, balance, _edgeOffset, _maxSize,
-                new Vector2(0, 1));
-            scale = InverseTransformVector(uiItemTransform, scale);
-            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
-            scale = IgnoreScale(scale, ignoreXScale, ignoreYScale, uiItemTransform);
-            uiItemTransform.localScale = scale;
-
-            uiItemTransform.position = GetPosition(screenHeight, screenWidth, uiItemSize,
-                uiItemTransform, balance, referencePosition, new Vector2(-0.5f, 0), ignoreXPosition, ignoreYPosition);
+            prop.UiItemTransform.localScale = AdjustScale(prop, _edgeOffset, _maxSize, new Vector2(0, 1));
+            prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(-0.5f, 0));
         }
     }
 
@@ -303,19 +228,10 @@ namespace SC.Core.ResponsiveOperations
         [SerializeField] private float _edgeOffset;
         [SerializeField] private float _maxSize = 10_000;
 
-        public override void AdjustUI(float screenHeight, float screenWidth, Vector3 uiItemSize,
-            Transform uiItemTransform, Vector3 referencePosition, float balance, Vector3 groupAxisConstraint,
-            bool ignoreXPosition, bool ignoreYPosition, bool ignoreXScale, bool ignoreYScale)
+        public override void AdjustUI(ResponsiveUIProp prop)
         {
-            var scale = GetScale(screenHeight, screenWidth, uiItemSize, balance, _edgeOffset, _maxSize,
-                new Vector2(0, 1));
-            scale = InverseTransformVector(uiItemTransform, scale);
-            scale = ScaleWithGroup(scale, groupAxisConstraint, uiItemTransform.localScale);
-            scale = IgnoreScale(scale, ignoreXScale, ignoreYScale, uiItemTransform);
-            uiItemTransform.localScale = scale;
-
-            uiItemTransform.position = GetPosition(screenHeight, screenWidth, uiItemSize,
-                uiItemTransform, balance, referencePosition, new Vector2(0.5f, 0), ignoreXPosition, ignoreYPosition);
+            prop.UiItemTransform.localScale = AdjustScale(prop, _edgeOffset, _maxSize, new Vector2(0, 1));
+            prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(0.5f, 0));
         }
     }
 }

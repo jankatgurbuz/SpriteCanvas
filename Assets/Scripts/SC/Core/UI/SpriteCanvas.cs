@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using SC.Core.Helper;
 using SC.Core.Manager;
 using SC.Core.SpriteCanvasAttribute;
 using UnityEngine;
@@ -22,9 +23,9 @@ namespace SC.Core.UI
 
         [SerializeField] private CanvasScaler _canvasScaler;
 
-        [SerializeField] private UIElementProperties _uIElementProperties;
+        [SerializeField] private UIElementSettings _uIElementProperties;
         [SerializeField, ReadOnly] private List<UIElement> _uiElements;
-        public UIElementProperties ElementProperties => _uIElementProperties;
+        public UIElementSettings ElementProperties => _uIElementProperties;
         public Camera Camera => _camera;
         public string SortingLayerName => _sortingLayerName;
         public string CanvasKey => _canvasKey;
@@ -53,7 +54,7 @@ namespace SC.Core.UI
         {
             RemoveNullElements();
             UpdateCameraViewportProperties();
-            _uiElements.ForEach(x => x.InitialCheck());
+            _uiElements.ForEach(x => x.ResetFlags());
             _uiElements.ForEach(x => x.Adjust());
         }
 
@@ -127,5 +128,5 @@ namespace SC.Core.UI
             if (_uiElements.Contains(ui)) return;
             _uiElements.Add(ui);
         } 
-    }
+    } 
 }

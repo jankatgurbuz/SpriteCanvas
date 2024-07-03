@@ -7,10 +7,10 @@ namespace SC.Core.Helper
 {
     public class HorizontalGroup : MonoBehaviour, IHorizontalGroup
     {
-        [SerializeField] private List<UIElementProperty> _childUIElementList;
+        [SerializeField] private List<GroupElementProperty> _childUIElementList;
         [SerializeField] private float _space;
         private UIElement _uiElement;
-        public List<UIElementProperty> GetUIElementList => _childUIElementList;
+        public List<GroupElementProperty> GetUIElementList => _childUIElementList;
         public UIElement GetUIElement => _uiElement;
 
         private bool Initialize()

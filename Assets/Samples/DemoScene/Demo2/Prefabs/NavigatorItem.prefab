@@ -189,13 +189,14 @@ MonoBehaviour:
   _registerType: 0
   _canvasKey: 
   _spriteCanvas: {fileID: 0}
+  _uIElementProperties:
+    _orderInLayer: 0
+    _ignoreXPosition: 0
+    _ignoreYPosition: 0
+    _ignoreXScale: 0
+    _ignoreYScale: 0
   _targetKey: 
   _itemPosition: {fileID: 3322669511833619160}
-  _orderInLayer: 5
-  _ignoreXPosition: 0
-  _ignoreYPosition: 0
-  _ignoreXScale: 0
-  _ignoreYScale: 0
   _hasReference: 1
   _referenceElement: {fileID: 7149719307074181754}
   _alpha: 1
@@ -313,13 +314,14 @@ MonoBehaviour:
   _registerType: 0
   _canvasKey: 
   _spriteCanvas: {fileID: 0}
+  _uIElementProperties:
+    _orderInLayer: 2
+    _ignoreXPosition: 0
+    _ignoreYPosition: 0
+    _ignoreXScale: 0
+    _ignoreYScale: 0
   _targetKey: 
   _itemPosition: {fileID: 5697848859103467360}
-  _orderInLayer: 3
-  _ignoreXPosition: 0
-  _ignoreYPosition: 0
-  _ignoreXScale: 0
-  _ignoreYScale: 0
   _hasReference: 1
   _referenceElement: {fileID: 2064719369102379095}
   _alpha: 1
@@ -436,13 +438,14 @@ MonoBehaviour:
   _registerType: 0
   _canvasKey: 
   _spriteCanvas: {fileID: 0}
+  _uIElementProperties:
+    _orderInLayer: 1
+    _ignoreXPosition: 0
+    _ignoreYPosition: 0
+    _ignoreXScale: 0
+    _ignoreYScale: 0
   _targetKey: 
   _itemPosition: {fileID: 5704145527635446420}
-  _orderInLayer: 2
-  _ignoreXPosition: 0
-  _ignoreYPosition: 0
-  _ignoreXScale: 0
-  _ignoreYScale: 0
   _hasReference: 1
   _referenceElement: {fileID: 7149719307074181754}
   _alpha: 1
@@ -567,13 +570,14 @@ MonoBehaviour:
   _registerType: 0
   _canvasKey: 
   _spriteCanvas: {fileID: 0}
+  _uIElementProperties:
+    _orderInLayer: 0
+    _ignoreXPosition: 0
+    _ignoreYPosition: 0
+    _ignoreXScale: 0
+    _ignoreYScale: 0
   _targetKey: 
   _itemPosition: {fileID: 4636578179340045533}
-  _orderInLayer: 1
-  _ignoreXPosition: 0
-  _ignoreYPosition: 0
-  _ignoreXScale: 0
-  _ignoreYScale: 0
   _hasReference: 1
   _referenceElement: {fileID: 0}
   _alpha: 1
@@ -739,13 +743,14 @@ MonoBehaviour:
   _registerType: 0
   _canvasKey: 
   _spriteCanvas: {fileID: 0}
+  _uIElementProperties:
+    _orderInLayer: 1
+    _ignoreXPosition: 0
+    _ignoreYPosition: 0
+    _ignoreXScale: 0
+    _ignoreYScale: 0
   _targetKey: 
   _itemPosition: {fileID: 4948955015187607712}
-  _orderInLayer: 2
-  _ignoreXPosition: 0
-  _ignoreYPosition: 0
-  _ignoreXScale: 0
-  _ignoreYScale: 0
   _hasReference: 1
   _referenceElement: {fileID: 7149719307074181754}
   _alpha: 1
@@ -862,13 +867,14 @@ MonoBehaviour:
   _registerType: 0
   _canvasKey: 
   _spriteCanvas: {fileID: 0}
+  _uIElementProperties:
+    _orderInLayer: 1
+    _ignoreXPosition: 0
+    _ignoreYPosition: 0
+    _ignoreXScale: 0
+    _ignoreYScale: 0
   _targetKey: 
   _itemPosition: {fileID: 416652763975539162}
-  _orderInLayer: 2
-  _ignoreXPosition: 0
-  _ignoreYPosition: 0
-  _ignoreXScale: 0
-  _ignoreYScale: 0
   _hasReference: 1
   _referenceElement: {fileID: 7149719307074181754}
   _alpha: 1

@@ -1,5 +1,5 @@
 using System;
-using SC.Core.UI;
+using SC.Core.Helper.UIElementHelper;
 using UnityEngine;
 
 namespace SC.Core.SpriteCanvasAttribute
@@ -35,22 +35,24 @@ namespace SC.Core.SpriteCanvasAttribute
             RunTimeSync = runTimeSync;
         }
     }
+
     public class ConditionalVisibilityAttribute : PropertyAttribute
     {
         public string EnumFieldName;
-        public UIElement.RegisterType EnumValue;
+        public RegisterType EnumValue;
 
-        public ConditionalVisibilityAttribute(string enumFieldName, UIElement.RegisterType enumValue)
+        public ConditionalVisibilityAttribute(string enumFieldName, RegisterType enumValue)
         {
             EnumFieldName = enumFieldName;
             EnumValue = enumValue;
         }
     }
+
     public class ReadOnlyAttribute : PropertyAttribute
     {
     }
-    
-    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+
+    [AttributeUsage(AttributeTargets.Field)]
     public class ButtonAttribute : PropertyAttribute
     {
         public string MethodName { get; private set; }

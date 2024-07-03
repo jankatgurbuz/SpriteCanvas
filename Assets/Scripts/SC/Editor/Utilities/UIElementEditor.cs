@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using SC.Core.Helper.UIElementHelper;
 using SC.Core.ResponsiveOperations;
 using SC.Core.UI;
 using SC.Editor.Helpers;
@@ -17,10 +18,12 @@ namespace SC.Editor.Utilities
         private const string ResponsiveOperationFieldName = "_responsiveOperation";
         private const string ItemPositionFieldName = "_itemPosition";
         private const string SpriteRendererFieldName = "_spriteRenderer";
+
         private const string TextMeshProFieldName = "_textMeshPro";
-        private const string RegisterTypeFieldName = "_registerType";
-        private const string CanvasKey = "_canvasKey";
-        private const string SpriteCanvasFieldName = "_spriteCanvas";
+
+        // private const string RegisterTypeFieldName = "_registerType";
+        // private const string CanvasKey = "_canvasKey";
+        // private const string SpriteCanvasFieldName = "_spriteCanvas";
         private const int ItemsPerPage = 5;
 
         private Transform _itemPosition;
@@ -45,6 +48,7 @@ namespace SC.Editor.Utilities
 
         public override void OnInspectorGUI()
         {
+          //  DrawScriptField();
             AssignComponent();
             FillResponsiveField();
 
@@ -55,11 +59,24 @@ namespace SC.Editor.Utilities
             while (prop.NextVisible(enterChildren))
             {
                 enterChildren = false;
-                EditorGUILayout.PropertyField(prop, true);
-                if (prop.name != SpriteCanvasFieldName) continue;
 
-                var value = (UIElement.RegisterType)GetValue<UIElement>(target, RegisterTypeFieldName);
-                if (value != UIElement.RegisterType.Key) continue;
+       
+                if (prop.name == "_referenceElement")
+                {
+                    if (!serializedObject.FindProperty("_hasReference").boolValue)
+                    {
+                        continue;
+                    }
+                }
+                
+                if (prop.name == "m_Script") continue;
+               
+                EditorGUILayout.PropertyField(prop, true);
+                
+                if (prop.name != "_register") continue;
+                var t = GetValue<UIElement>(target, "_register") as RegisterProperties;
+                if (t.RegisterType != RegisterType.Key) continue;
+
                 ListElements();
                 PageNavigation();
             }
@@ -77,10 +94,10 @@ namespace SC.Editor.Utilities
             {
                 var currentValue = GetValue<T>(target, fieldName);
                 var component = ((UIElement)target).GetComponent<T>();
-            
+
                 // if (component != null && currentValue == null)
                 // {
-                    SetValue<UIElement>(target, fieldName, component);
+                SetValue<UIElement>(target, fieldName, component);
                 // }
                 // todo: check
             }
@@ -107,13 +124,21 @@ namespace SC.Editor.Utilities
             }
         }
 
+        private void DrawScriptField()
+        {
+            serializedObject.Update();
+            SerializedProperty scriptProp = serializedObject.FindProperty("m_Script");
+            EditorGUILayout.PropertyField(scriptProp);
+            serializedObject.ApplyModifiedProperties();
+        }
+
         private List<string> CreateCanvasKeyList()
         {
             var list = new List<string>();
             var sc = Resources.FindObjectsOfTypeAll<SpriteCanvas>();
             foreach (var spriteCanvas in sc)
             {
-                var value = GetValue<SpriteCanvas>(spriteCanvas, CanvasKey);
+                var value = GetValue<SpriteCanvas>(spriteCanvas, "_canvasKey");
 
                 if (value is not string str) continue;
                 if (str == "") continue;
@@ -139,7 +164,11 @@ namespace SC.Editor.Utilities
                 GUILayout.FlexibleSpace();
                 if (GUILayout.Button(_keyList[i], GUILayout.Width(150), GUILayout.Height(25)))
                 {
-                    SetValue<UIElement>(target, CanvasKey, _keyList[i]);
+                    //SetValue<UIElement>(nameof(UIElement.RegisterProperty), "_canvasKey", _keyList[i]);
+                    var t = GetValue<UIElement>(uICanvas, "_register") as RegisterProperties;
+                    SetValue<RegisterProperties>(uICanvas.Register, "_canvasKey", _keyList[i]);
+                    SetValue<UIElement>(uICanvas, "_register", t);
+
                     EditorUtility.SetDirty(uICanvas);
                 }
 

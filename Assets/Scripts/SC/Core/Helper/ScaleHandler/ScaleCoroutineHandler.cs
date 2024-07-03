@@ -55,7 +55,7 @@ namespace SC.Core.Helper.ScaleHandler
                 }
 
                 time += Time.deltaTime;
-                uiGroup.GetUIElement.SpriteCanvas.AdjustDependentUIElements();
+                uiGroup.GetUIElement.Register.SpriteCanvas.AdjustDependentUIElements();
                 yield return null;
             }
 
@@ -65,7 +65,7 @@ namespace SC.Core.Helper.ScaleHandler
                 item.ScaleRatio = index == currentSelectedIndex ? selectedItemScale : unselectedItemScale;
             }
 
-            uiGroup.GetUIElement.SpriteCanvas.AdjustDependentUIElements();
+            uiGroup.GetUIElement.Register.SpriteCanvas.AdjustDependentUIElements();
         }
     }
 }

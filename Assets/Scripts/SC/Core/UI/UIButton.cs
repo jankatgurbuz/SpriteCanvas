@@ -1,3 +1,4 @@
+using SC.Core.Helper;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -25,7 +26,7 @@ namespace SC.Core.UI
             if (!_interactable)
                 return;
 
-            var pos = _spriteCanvas.Camera.ScreenToWorldPoint(mousePosition);
+            var pos = Register.SpriteCanvas.Camera.ScreenToWorldPoint(mousePosition);
             pos = new Vector3(pos.x, pos.y, _spriteRenderer.bounds.center.z);
 
             if (_spriteRenderer.bounds.Contains(pos))
@@ -34,7 +35,7 @@ namespace SC.Core.UI
             }
         }
 
-        public override void SetUIElementProperties(UIElementProperties elementProperties)
+        public override void SetUIElementProperties(UIElementSettings elementProperties)
         {
             base.SetUIElementProperties(elementProperties);
             _interactable = elementProperties.Interactable;
