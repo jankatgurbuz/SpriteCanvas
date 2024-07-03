@@ -1,11 +1,9 @@
-using System;
 using SC.Core.Helper;
 using SC.Core.Helper.UIElementHelper;
 using SC.Core.Manager;
 using SC.Core.ResponsiveOperations;
 using SC.Core.SpriteCanvasAttribute;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace SC.Core.UI
 {
@@ -96,9 +94,16 @@ namespace SC.Core.UI
 
         private void InitRegister()
         {
-            if (_register.SpriteCanvas == null || SpriteCanvasManager.Instance == null) return;
-            _register.SpriteCanvas.AddUI(this);
-            SpriteCanvasManager.Instance.RegisterTarget(_uIElementProperties.TargetKey, this);
+
+            if (_register.SpriteCanvas != null)
+            {
+                _register.SpriteCanvas.AddUI(this);
+            }
+
+            if (SpriteCanvasManager.Instance != null) 
+            {
+                SpriteCanvasManager.Instance.RegisterTarget(_uIElementProperties.TargetKey, this);
+            } 
         }
 
         private void AdjustGroup()
