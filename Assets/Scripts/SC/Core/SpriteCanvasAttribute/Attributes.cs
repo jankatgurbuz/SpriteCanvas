@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using SC.Core.Helper.UIElementHelper;
 using UnityEngine;
 
@@ -57,11 +58,13 @@ namespace SC.Core.SpriteCanvasAttribute
     {
         public string MethodName { get; private set; }
         public Type TargetType { get; private set; }
+        public string ButtonName { get; private set; }
 
-        public ButtonAttribute(string methodName, Type targetType)
+        public ButtonAttribute(string methodName, Type targetType, string buttonName = null)
         {
             MethodName = methodName;
             TargetType = targetType;
+            ButtonName = buttonName;
         }
     }
 }

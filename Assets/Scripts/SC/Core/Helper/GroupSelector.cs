@@ -9,7 +9,7 @@ namespace SC.Core.Helper
     {
         private IGroup _uiGroup;
 
-        [Button("DebugFunction", typeof(GroupSelector)), SerializeField]
+        [Button("DebugFunction", typeof(GroupSelector), "Debug"), SerializeField]
         private int _currentSelectedIndex = 0;
 
         [SerializeField, Space, SCHorizontalLine(EColor.White, 2)]
@@ -47,7 +47,7 @@ namespace SC.Core.Helper
         private void UpdateItemScales()
         {
             _selector.AdjustItemsScale(this, _animationDuration, _currentSelectedIndex, _selectedItemScale,
-                _unselectedItemScale, _scaleCurve, _uiGroup,OnSelectionChanged);
+                _unselectedItemScale, _scaleCurve, _uiGroup, OnSelectionChanged);
         }
 
         public void DebugFunction(float value)

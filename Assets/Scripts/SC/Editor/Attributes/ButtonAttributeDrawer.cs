@@ -2,7 +2,7 @@ using SC.Core.SpriteCanvasAttribute;
 using UnityEditor;
 using UnityEngine;
 
-namespace SC.Core.Helper
+namespace SC.Editor.Attributes
 {
     [CustomPropertyDrawer(typeof(ButtonAttribute))]
     public class ButtonAttributeDrawer : PropertyDrawer
@@ -17,10 +17,16 @@ namespace SC.Core.Helper
 
             var intField = EditorGUI.IntField(floatRect, label, property.intValue);
 
-            if (GUI.Button(buttonRect, "Debug"))
+            var name = buttonAttr.ButtonName;
+            if (buttonAttr.ButtonName == null)
             {
-                MonoBehaviour targetObject = property.serializedObject.targetObject as MonoBehaviour;
-                System.Reflection.MethodInfo methodInfo = buttonAttr.TargetType.GetMethod(buttonAttr.MethodName);
+                name = buttonAttr.MethodName;
+            }
+
+            if (GUI.Button(buttonRect, name))
+            {
+                var targetObject = property.serializedObject.targetObject as MonoBehaviour;
+                var methodInfo = buttonAttr.TargetType.GetMethod(buttonAttr.MethodName);
                 if (methodInfo != null)
                 {
                     methodInfo.Invoke(targetObject, new object[] { intField });
