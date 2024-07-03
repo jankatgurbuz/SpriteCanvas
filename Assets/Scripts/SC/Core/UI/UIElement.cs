@@ -1,4 +1,5 @@
 using SC.Core.Helper;
+using SC.Core.Helper.Groups;
 using SC.Core.Helper.UIElementHelper;
 using SC.Core.Manager;
 using SC.Core.ResponsiveOperations;

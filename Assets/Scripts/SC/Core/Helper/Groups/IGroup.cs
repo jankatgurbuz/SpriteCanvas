@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using SC.Core.UI;
 
-namespace SC.Core.Helper
+namespace SC.Core.Helper.Groups
 {
     public interface IGroup
     {

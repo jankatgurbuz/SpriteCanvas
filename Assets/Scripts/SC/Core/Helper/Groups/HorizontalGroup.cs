@@ -3,7 +3,7 @@ using System.Linq;
 using SC.Core.UI;
 using UnityEngine;
 
-namespace SC.Core.Helper
+namespace SC.Core.Helper.Groups
 {
     public class HorizontalGroup : MonoBehaviour, IHorizontalGroup
     {

@@ -1,6 +1,7 @@
 #if SPRITECANVAS_UNITASK_SUPPORT
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using SC.Core.Helper.Groups;
 using UnityEngine;
 using UnityEngine.Events;
 

@@ -1,6 +1,6 @@
 using SC.Core.UI;
 
-namespace SC.Core.Helper
+namespace SC.Core.Helper.Groups
 {
     [System.Serializable]
     public class GroupElementProperty

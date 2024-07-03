@@ -3,7 +3,7 @@ using SC.Core.SpriteCanvasAttribute;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace SC.Core.Helper
+namespace SC.Core.Helper.Groups
 {
     public class GroupSelector : MonoBehaviour
     {
