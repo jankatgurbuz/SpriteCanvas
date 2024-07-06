@@ -44,40 +44,60 @@ namespace SC.Core.Helper.Groups
         {
             if (!Initialize()) return;
 
-            var totalWidth = _uiElement.GetRenderBoundarySize().x;
+            var totalWidth = _uiElement.transform.localScale.x * _uiElement.GetBoundarySize().x;
             var totalScaleRatio = _childUIElementList.Sum(x => x.ScaleRatio);
-            //var initialPosition = -totalWidth / (2 * transform.lossyScale.x);
-            var accumulatedPosition = 0f;
+            var currentPosition = -totalWidth / 2;
 
             foreach (var childElement in _childUIElementList)
             {
-                var child = childElement.UIElement;
                 var scaleFactor = childElement.ScaleRatio * (_childUIElementList.Count / totalScaleRatio);
                 var scaledWidth = totalWidth / _childUIElementList.Count * scaleFactor;
 
-                var scaleVector = new Vector3
-                (
-                    scaledWidth / child.GetBoundarySize().x - _space - childElement.SpaceRatio,
-                    child.transform.lossyScale.y,
-                    child.transform.lossyScale.z
-                );
-
-                if (child.transform.parent != null)
-                {
-                    scaleVector = child.transform.parent.InverseTransformVector(scaleVector);
-                }
-
-                child.transform.localScale = scaleVector;
-
-                child.transform.position = new Vector3
-                (
-                    ((-totalWidth) / 2) + accumulatedPosition + scaledWidth / 2,
-                    child.transform.position.y,
-                    child.transform.position.z
-                );
-
-                accumulatedPosition += scaledWidth;
+                AdjustScale(childElement, scaledWidth);
+                currentPosition = AdjustPosition(childElement, currentPosition, scaledWidth);
             }
+        }
+        private void AdjustScale(GroupElementProperty childElement, float scaledWidth)
+        {
+            var child = childElement.UIElement;
+            var newScale = new Vector3
+            (
+                scaledWidth / child.GetBoundarySize().x - _space - childElement.SpaceRatio,
+                child.transform.lossyScale.y,
+                child.transform.lossyScale.z
+            );
+            newScale = GetLocalScaleIgnoringParent(child.transform, newScale);
+            child.transform.localScale = newScale;
+        }
+
+        private float AdjustPosition(GroupElementProperty childElement, float currentPosition,
+            float scaledWidth)
+        {
+            var child = childElement.UIElement;
+            var localPosition = new Vector3(currentPosition + scaledWidth / 2, 0, 0);
+
+            var cameraTransform = _uiElement.Register.SpriteCanvas.Camera.transform;
+            var worldPosition = _uiElement.transform.position + cameraTransform.rotation * localPosition;
+            var originalLocalPosition = child.transform.localPosition;
+
+            child.transform.position = worldPosition;
+            child.transform.localPosition = new Vector3(child.transform.localPosition.x,
+                originalLocalPosition.y, originalLocalPosition.z);
+
+            return currentPosition + scaledWidth;
+        }
+        
+        private Vector3 GetLocalScaleIgnoringParent(Transform uiItemTransform, Vector3 scale)
+        {
+            if (uiItemTransform.parent == null) return scale;
+            var parentScale = uiItemTransform.parent.lossyScale;
+            scale = new Vector3(
+                scale.x / parentScale.x,
+                scale.y / parentScale.y,
+                scale.z / parentScale.z
+            );
+
+            return scale;
         }
     }
 }

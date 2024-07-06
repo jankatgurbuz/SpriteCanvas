@@ -317,7 +317,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 0}
   _uIElementProperties:
-    _orderInLayer: 2
+    _orderInLayer: 3
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0
@@ -442,7 +442,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 0}
   _uIElementProperties:
-    _orderInLayer: 1
+    _orderInLayer: 2
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0
@@ -569,13 +569,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _responsiveOperation:
-    rid: 7568872531315130399
+    rid: 8357452874643144708
   _register:
     _registerType: 0
     _canvasKey: 
     _spriteCanvas: {fileID: 0}
   _uIElementProperties:
-    _orderInLayer: 0
+    _orderInLayer: 1
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0
@@ -608,10 +608,10 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 7568872531315130399
+    - rid: 8357452874643144708
       type: {class: BottomCenter, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 1, y: 21, z: 1}
+        LocalScale: {x: 1, y: 22, z: 1}
         _topOffset: 0
         _horizontalOffset: 0
 --- !u!114 &7184310876801860661
@@ -749,7 +749,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 0}
   _uIElementProperties:
-    _orderInLayer: 1
+    _orderInLayer: 2
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0
@@ -874,7 +874,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 0}
   _uIElementProperties:
-    _orderInLayer: 1
+    _orderInLayer: 2
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0

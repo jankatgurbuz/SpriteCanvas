@@ -15,5 +15,6 @@ namespace SC.Core.Helper.UIElementHelper
         public bool IgnoreYPosition;
         public bool IgnoreXScale;
         public bool IgnoreYScale;
+        public Camera Camera;
     }
 }

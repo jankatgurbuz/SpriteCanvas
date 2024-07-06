@@ -19,7 +19,7 @@ namespace SC.Core.ResponsiveOperations
         protected Vector3 AdjustScale(ResponsiveUIProp prop)
         {
             var scale = GetScale(prop.Balance);
-            scale = InverseTransformVector(prop.UiItemTransform, scale);
+            scale = GetLocalScaleIgnoringParent(prop.UiItemTransform, scale);
             scale = ScaleWithGroup(scale, prop.GroupAxisConstraint, prop.UiItemTransform.localScale);
             scale = IgnoreScale(scale, prop.IgnoreXScale, prop.IgnoreYScale, prop.UiItemTransform);
             return scale;
@@ -28,7 +28,7 @@ namespace SC.Core.ResponsiveOperations
         protected Vector3 AdjustScale(ResponsiveUIProp prop, float edgeOffset, float maxSize, Vector2 pivot)
         {
             var scale = GetScale(prop.Height, prop.Width, prop.UiItemSize, prop.Balance, edgeOffset, maxSize, pivot);
-            scale = InverseTransformVector(prop.UiItemTransform, scale);
+            scale = GetLocalScaleIgnoringParent(prop.UiItemTransform, scale);
             scale = ScaleWithGroup(scale, prop.GroupAxisConstraint, prop.UiItemTransform.localScale);
             scale = IgnoreScale(scale, prop.IgnoreXScale, prop.IgnoreYScale, prop.UiItemTransform);
             return scale;
@@ -38,18 +38,20 @@ namespace SC.Core.ResponsiveOperations
         {
             return GetPosition(prop.Height, prop.Width, prop.UiItemSize,
                 prop.UiItemTransform, prop.Balance, prop.ReferencePosition, pivot,
-                prop.IgnoreXPosition, prop.IgnoreYPosition);
+                prop.IgnoreXPosition, prop.IgnoreYPosition,prop.Camera);
+        }
+
+        public Quaternion AdjustRotation(ResponsiveUIProp prop)
+        {
+            return prop.Camera.transform.rotation;
         }
 
         private Vector3 GetPosition(float screenHeight, float screenWidth,
             Vector3 uiItemSize, Transform uiItemTransform, float balance, Vector3 referencePosition,
-            Vector2 positionFactors, bool ignoreXPosition, bool ignoreYPosition)
+            Vector2 positionFactors, bool ignoreXPosition, bool ignoreYPosition,Camera camera)
         {
             var scale = uiItemTransform.localScale;
-            if (uiItemTransform.parent != null)
-            {
-                scale = uiItemTransform.parent.TransformVector(scale);
-            }
+            scale = GetScaleRelativeToParent(uiItemTransform, scale);
 
             var scaledHeight = uiItemSize.y * scale.y;
             var scaledWidth = uiItemSize.x * scale.x;
@@ -60,27 +62,47 @@ namespace SC.Core.ResponsiveOperations
             var y = positionFactors.y * screenHeight - scaledHeight * positionFactors.y -
                     _topOffset * Mathf.Sign(positionFactors.y) * balance;
 
-            var z = 0; // todo set
+            var localPosition = new Vector3(x, y, 0);
+            var rotatedPosition = camera.transform.rotation * localPosition;
 
-            var position = new Vector3(x, y, z) + referencePosition;
+            var position = rotatedPosition + referencePosition;
 
-            return new Vector3(
+            var lp = new Vector3(
                 !ignoreXPosition ? position.x : uiItemTransform.position.x,
                 !ignoreYPosition ? position.y : uiItemTransform.position.y,
                 position.z);
+
+            return lp;
         }
+
 
         private Vector3 GetScale(float balance)
         {
             return LocalScale * balance;
         }
 
-        private Vector3 InverseTransformVector(Transform uiItemTransform, Vector3 scale)
+        private Vector3 GetLocalScaleIgnoringParent(Transform uiItemTransform, Vector3 scale)
         {
-            if (uiItemTransform.parent != null)
-            {
-                scale = uiItemTransform.parent.InverseTransformVector(scale);
-            }
+            if (uiItemTransform.parent == null) return scale;
+            var parentScale = uiItemTransform.parent.lossyScale;
+            scale = new Vector3(
+                scale.x / parentScale.x,
+                scale.y / parentScale.y,
+                scale.z / parentScale.z
+            );
+
+            return scale;
+        }
+
+        private Vector3 GetScaleRelativeToParent(Transform uiItemTransform, Vector3 scale)
+        {
+            if (uiItemTransform.parent == null) return scale;
+            var parentScale = uiItemTransform.parent.lossyScale;
+            scale = new Vector3(
+                scale.x * parentScale.x,
+                scale.y * parentScale.y,
+                scale.z * parentScale.z
+            );
 
             return scale;
         }
@@ -130,6 +152,7 @@ namespace SC.Core.ResponsiveOperations
         {
             prop.UiItemTransform.localScale = AdjustScale(prop);
             prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(0, 0.5f));
+            prop.UiItemTransform.rotation = AdjustRotation(prop);
         }
     }
 
@@ -139,6 +162,7 @@ namespace SC.Core.ResponsiveOperations
         {
             prop.UiItemTransform.localScale = AdjustScale(prop);
             prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(0.5f, 0.5f));
+            prop.UiItemTransform.rotation = AdjustRotation(prop);
         }
     }
 
@@ -148,6 +172,7 @@ namespace SC.Core.ResponsiveOperations
         {
             prop.UiItemTransform.localScale = AdjustScale(prop);
             prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(-0.5f, 0.5f));
+            prop.UiItemTransform.rotation = AdjustRotation(prop);
         }
     }
 
@@ -160,6 +185,7 @@ namespace SC.Core.ResponsiveOperations
         {
             prop.UiItemTransform.localScale = AdjustScale(prop, _edgeOffset, _maxSize, new Vector2(1, 0));
             prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(0, 0.5f));
+            prop.UiItemTransform.rotation = AdjustRotation(prop);
         }
     }
 
@@ -169,6 +195,7 @@ namespace SC.Core.ResponsiveOperations
         {
             prop.UiItemTransform.localScale = AdjustScale(prop);
             prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(0, -0.5f));
+            prop.UiItemTransform.rotation = AdjustRotation(prop);
         }
     }
 
@@ -178,6 +205,7 @@ namespace SC.Core.ResponsiveOperations
         {
             prop.UiItemTransform.localScale = AdjustScale(prop);
             prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(0.5f, -0.5f));
+            prop.UiItemTransform.rotation = AdjustRotation(prop);
         }
     }
 
@@ -187,6 +215,7 @@ namespace SC.Core.ResponsiveOperations
         {
             prop.UiItemTransform.localScale = AdjustScale(prop);
             prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(-0.5f, -0.5f));
+            prop.UiItemTransform.rotation = AdjustRotation(prop);
         }
     }
 
@@ -199,6 +228,7 @@ namespace SC.Core.ResponsiveOperations
         {
             prop.UiItemTransform.localScale = AdjustScale(prop, _edgeOffset, _maxSize, new Vector2(1, 0));
             prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(0, -0.5f));
+            prop.UiItemTransform.rotation = AdjustRotation(prop);
         }
     }
 
@@ -208,6 +238,7 @@ namespace SC.Core.ResponsiveOperations
         {
             prop.UiItemTransform.localScale = AdjustScale(prop);
             prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(0, 0));
+            prop.UiItemTransform.rotation = AdjustRotation(prop);
         }
     }
 
@@ -220,6 +251,7 @@ namespace SC.Core.ResponsiveOperations
         {
             prop.UiItemTransform.localScale = AdjustScale(prop, _edgeOffset, _maxSize, new Vector2(0, 1));
             prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(-0.5f, 0));
+            prop.UiItemTransform.rotation = AdjustRotation(prop);
         }
     }
 
@@ -232,6 +264,7 @@ namespace SC.Core.ResponsiveOperations
         {
             prop.UiItemTransform.localScale = AdjustScale(prop, _edgeOffset, _maxSize, new Vector2(0, 1));
             prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(0.5f, 0));
+            prop.UiItemTransform.rotation = AdjustRotation(prop);
         }
     }
 }
