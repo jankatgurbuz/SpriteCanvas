@@ -42,7 +42,7 @@ namespace SC.Core.UI
         public abstract Vector3 GetBoundarySize();
         public abstract Vector3 GetElementSize();
         public abstract Vector3 GetRenderBoundarySize();
-        protected virtual SpriteDrawMode GetDrawMode() => SpriteDrawMode.Simple;
+        public virtual SpriteDrawMode GetDrawMode() => SpriteDrawMode.Simple;
 
         private void Start()
         {

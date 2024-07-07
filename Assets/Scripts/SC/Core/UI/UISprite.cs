@@ -21,14 +21,14 @@ namespace SC.Core.UI
 
             if (_hasReference)
             {
-                var referenceSpriteSize = GetDrawMode() == SpriteDrawMode.Simple
+                var referenceSpriteSize = _referenceElement.GetDrawMode() == SpriteDrawMode.Simple
                     ? _referenceElement.GetBoundarySize()
                     : _referenceElement.GetElementSize();
 
                 referenceSize = GetGlobalSize(referenceSpriteSize, _referenceElement.transform);
                 referencePosition = _referenceElement.transform.position;
             }
-            
+
             var responsiveProp = new ResponsiveUIProp()
             {
                 UiItemTransform = _itemPosition,
@@ -69,7 +69,7 @@ namespace SC.Core.UI
             _spriteRenderer.color = color;
         }
 
-        protected override SpriteDrawMode GetDrawMode()
+        public override SpriteDrawMode GetDrawMode()
         {
             return _spriteRenderer.drawMode;
         }
