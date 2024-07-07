@@ -22,7 +22,7 @@ namespace SC.Core.UI
 
             if (_hasReference)
             {
-                var referenceSpriteSize = GetDrawMode() == SpriteDrawMode.Simple
+                var referenceSpriteSize = _referenceElement.GetDrawMode() == SpriteDrawMode.Simple
                     ? _referenceElement.GetBoundarySize()
                     : _referenceElement.GetElementSize();
 

@@ -20,16 +20,22 @@ namespace SC.Core.UI
         {
             Action(mousePosition, ClickEvent);
         }
-
+        
         private void Action(Vector3 mousePosition, UnityEvent action)
         {
-            if (!_interactable)
-                return;
+            if (!_interactable) return;
 
-            var pos = Register.SpriteCanvas.Camera.ScreenToWorldPoint(mousePosition);
-            pos = new Vector3(pos.x, pos.y, _spriteRenderer.bounds.center.z);
+            var canvasCamera = Register.SpriteCanvas.Camera;
+            var spriteCenter = _spriteRenderer.bounds.center;
+            var distance = canvasCamera.orthographic
+                ? canvasCamera.WorldToScreenPoint(spriteCenter).z
+                : Vector3.Dot(spriteCenter - canvasCamera.transform.position, canvasCamera.transform.forward);
+            mousePosition.z = distance;
 
-            if (_spriteRenderer.bounds.Contains(pos))
+            var worldPosition = canvasCamera.ScreenToWorldPoint(mousePosition);
+            if (!canvasCamera.orthographic) worldPosition.z = spriteCenter.z;
+
+            if (_spriteRenderer.bounds.Contains(worldPosition))
             {
                 action?.Invoke();
             }

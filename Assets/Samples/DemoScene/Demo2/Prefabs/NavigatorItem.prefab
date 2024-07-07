@@ -191,7 +191,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 0}
   _uIElementProperties:
-    _orderInLayer: 0
+    _orderInLayer: 2
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0
