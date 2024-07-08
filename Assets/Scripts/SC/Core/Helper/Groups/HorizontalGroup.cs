@@ -64,7 +64,7 @@ namespace SC.Core.Helper.Groups
             (
                 scaledWidth / child.GetBoundarySize().x - _space - childElement.SpaceRatio,
                 child.transform.lossyScale.y,
-                child.transform.lossyScale.z
+                childElement.UIElement.ResponsiveOperation.GetLocalScale().z
             );
             newScale = GetLocalScaleIgnoringParent(child.transform, newScale);
             child.transform.localScale = newScale;

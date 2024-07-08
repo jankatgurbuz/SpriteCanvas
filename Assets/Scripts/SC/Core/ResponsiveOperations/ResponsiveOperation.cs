@@ -7,15 +7,17 @@ namespace SC.Core.ResponsiveOperations
     public interface IResponsiveOperation
     {
         public void AdjustUI(ResponsiveUIProp prop);
+        public Vector3 GetLocalScale();
     }
 
     public abstract class ResponsiveOperation : IResponsiveOperation
     {
-        [SerializeField] protected Vector3 LocalScale = new(1, 1, 1);
+        [SerializeField] private Vector3 LocalScale = new(1, 1, 1);
         [SerializeField] protected float _topOffset;
         [SerializeField] protected float _horizontalOffset;
         public abstract void AdjustUI(ResponsiveUIProp prop);
 
+        public Vector3 GetLocalScale() => LocalScale;
         protected Vector3 AdjustScale(ResponsiveUIProp prop)
         {
             var scale = GetScale(prop.Balance);
@@ -38,17 +40,19 @@ namespace SC.Core.ResponsiveOperations
         {
             return GetPosition(prop.Height, prop.Width, prop.UiItemSize,
                 prop.UiItemTransform, prop.Balance, prop.ReferencePosition, pivot,
-                prop.IgnoreXPosition, prop.IgnoreYPosition,prop.Camera);
+                prop.IgnoreXPosition, prop.IgnoreYPosition, prop.Camera);
         }
 
         public Quaternion AdjustRotation(ResponsiveUIProp prop)
         {
             return prop.Camera.transform.rotation;
+            
+            //* Quaternion.Euler(_rotation);
         }
 
         private Vector3 GetPosition(float screenHeight, float screenWidth,
             Vector3 uiItemSize, Transform uiItemTransform, float balance, Vector3 referencePosition,
-            Vector2 positionFactors, bool ignoreXPosition, bool ignoreYPosition,Camera camera)
+            Vector2 positionFactors, bool ignoreXPosition, bool ignoreYPosition, Camera camera)
         {
             var scale = uiItemTransform.localScale;
             scale = GetScaleRelativeToParent(uiItemTransform, scale);
