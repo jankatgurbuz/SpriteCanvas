@@ -18,6 +18,7 @@ namespace SC.Core.ResponsiveOperations
         public abstract void AdjustUI(ResponsiveUIProp prop);
 
         public Vector3 GetLocalScale() => LocalScale;
+
         protected Vector3 AdjustScale(ResponsiveUIProp prop)
         {
             var scale = GetScale(prop.Balance);
@@ -46,7 +47,7 @@ namespace SC.Core.ResponsiveOperations
         public Quaternion AdjustRotation(ResponsiveUIProp prop)
         {
             return prop.Camera.transform.rotation;
-            
+
             //* Quaternion.Euler(_rotation);
         }
 
@@ -111,9 +112,16 @@ namespace SC.Core.ResponsiveOperations
             return scale;
         }
 
-        private Vector3 GetScale(float screenHeight, float screenWidth, Vector3 uiItemSize, float balance,
+        protected Vector3 GetScale(float screenHeight, float screenWidth, Vector3 uiItemSize, float balance,
             float edgeOffset, float maxSize, Vector2 positionFactors)
         {
+            if (positionFactors == Vector2.zero)
+            {
+                var scaleX = (screenWidth - edgeOffset * 2) / uiItemSize.x;
+                var scaleY = (screenHeight - edgeOffset * 2) / uiItemSize.y;
+                return new Vector3(scaleX, scaleY, LocalScale.z);
+            }
+
             var primaryDimension = screenHeight * (1 - positionFactors.x) + screenWidth * positionFactors.x;
             var itemSizeDimension = uiItemSize.y * (1 - positionFactors.x) + uiItemSize.x * positionFactors.x;
 
@@ -130,6 +138,7 @@ namespace SC.Core.ResponsiveOperations
 
             return new Vector3(finalScaleX, finalScaleY, LocalScale.z);
         }
+
 
         private Vector3 ScaleWithGroup(Vector3 scale, Vector3 groupAxisConstraint, Vector3 uiItemScale)
         {
@@ -268,6 +277,19 @@ namespace SC.Core.ResponsiveOperations
         {
             prop.UiItemTransform.localScale = AdjustScale(prop, _edgeOffset, _maxSize, new Vector2(0, 1));
             prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(0.5f, 0));
+            prop.UiItemTransform.rotation = AdjustRotation(prop);
+        }
+    }
+
+    public class FullStretch : ResponsiveOperation
+    {
+        [SerializeField] private float _edgeOffset;
+        [SerializeField] private float _maxSize = 10_000;
+
+        public override void AdjustUI(ResponsiveUIProp prop)
+        {
+            prop.UiItemTransform.localScale = AdjustScale(prop, _edgeOffset, _maxSize, new Vector2(0, 0));
+            prop.UiItemTransform.position = AdjustPosition(prop, new Vector2(0, 0));
             prop.UiItemTransform.rotation = AdjustRotation(prop);
         }
     }
