@@ -6,8 +6,9 @@ namespace SC.Core.UI
 {
     public class UISprite : UIElement
     {
-        [SerializeField, HideInInspector] protected SpriteRenderer _spriteRenderer;
+        [SerializeField] protected SpriteRenderer _spriteRenderer;
         [SerializeField] private Vector3 _spriteSize = Vector3.one;
+        private Vector3? _initPos;
 
         protected override void SetUILayout()
         {
@@ -28,6 +29,8 @@ namespace SC.Core.UI
                 referenceSize = GetGlobalSize(referenceSpriteSize, _referenceElement.transform);
                 referencePosition = _referenceElement.transform.position;
             }
+            
+            _initPos ??= referencePosition;
 
             var responsiveProp = new ResponsiveUIProp()
             {
@@ -35,7 +38,9 @@ namespace SC.Core.UI
                 Height = referenceSize.y,
                 Width = referenceSize.x,
                 Balance = sc.Balance,
-                ReferencePosition = referencePosition,
+                ReferencePosition = UIElementProperties.UseInitialCameraPosition
+                    ? (Vector3)_initPos
+                    : referencePosition,
                 UiItemSize = size,
                 GroupAxisConstraint = GroupAxisConstraint,
                 IgnoreXPosition = UIElementProperties.IgnoreXPosition,

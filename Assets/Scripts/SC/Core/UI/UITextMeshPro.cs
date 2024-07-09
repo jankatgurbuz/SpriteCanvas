@@ -7,10 +7,9 @@ namespace SC.Core.UI
 {
     public class UITextMeshPro : UIElement
     {
-        [SerializeField, HideInInspector] private TextMeshPro _textMeshPro;
+        [SerializeField] private TextMeshPro _textMeshPro;
         [SerializeField] private Vector3 _textMeshProSize = new Vector3(20, 20, 0);
-        [SerializeField] private bool _ignoreSize;
-
+        private Vector3? _initPos;
         protected override void SetUILayout()
         {
             if (_textMeshPro == null) return;
@@ -30,13 +29,17 @@ namespace SC.Core.UI
                 referencePosition = _referenceElement.transform.position;
             }
 
+            _initPos ??= referencePosition;
+            
             var responsiveProp = new ResponsiveUIProp()
             {
                 UiItemTransform = _itemPosition,
                 Height = referenceSize.y,
                 Width = referenceSize.x,
                 Balance = sc.Balance,
-                ReferencePosition = referencePosition,
+                ReferencePosition = UIElementProperties.UseInitialCameraPosition
+                    ? (Vector3)_initPos
+                    : referencePosition,
                 UiItemSize = _textMeshPro.rectTransform.sizeDelta,
                 GroupAxisConstraint = GroupAxisConstraint,
                 IgnoreXPosition = UIElementProperties.IgnoreXPosition,

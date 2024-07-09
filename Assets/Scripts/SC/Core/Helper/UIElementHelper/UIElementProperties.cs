@@ -17,8 +17,11 @@ namespace SC.Core.Helper.UIElementHelper
 
         [SerializeField] private bool _ignoreYScale;
 
+        [SerializeField] private bool _useInitialCameraPosition;
+
         [SerializeField, SCHorizontalLine(EColor.Black, 1, 1)]
         private string _targetKey;
+
         public bool IgnoreXPosition
         {
             get => _ignoreXPosition;
@@ -46,5 +49,7 @@ namespace SC.Core.Helper.UIElementHelper
         public int OrderInLayer => _orderInLayer;
 
         public string TargetKey => _targetKey;
+
+        public bool UseInitialCameraPosition => _useInitialCameraPosition;
     }
 }

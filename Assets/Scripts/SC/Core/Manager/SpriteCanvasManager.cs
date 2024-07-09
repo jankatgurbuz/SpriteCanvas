@@ -35,13 +35,7 @@ namespace SC.Core.Manager
 
         public SpriteCanvas GetSpriteCanvas(string key)
         {
-            if (_spriteCanvasMap.TryGetValue(key, out var spriteCanvas))
-            {
-                return spriteCanvas;
-            }
-
-            Debug.LogError($"No SpriteCanvas found with key {key}.");
-            return null;
+            return _spriteCanvasMap.GetValueOrDefault(key);
         }
 
         public void RegisterTarget(string targetKey, UIElement uiElement)

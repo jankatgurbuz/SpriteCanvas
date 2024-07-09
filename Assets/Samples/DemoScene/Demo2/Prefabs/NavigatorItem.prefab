@@ -196,6 +196,7 @@ MonoBehaviour:
     _ignoreYPosition: 0
     _ignoreXScale: 0
     _ignoreYScale: 0
+    _useInitialCameraPosition: 0
     _targetKey: 
   _itemPosition: {fileID: 3322669511833619160}
   _hasReference: 1
@@ -203,7 +204,6 @@ MonoBehaviour:
   _alpha: 1
   _textMeshPro: {fileID: 3373613799233040168}
   _textMeshProSize: {x: 1.8, y: 1, z: 0}
-  _ignoreSize: 0
   references:
     version: 2
     RefIds:
@@ -322,6 +322,7 @@ MonoBehaviour:
     _ignoreYPosition: 0
     _ignoreXScale: 0
     _ignoreYScale: 0
+    _useInitialCameraPosition: 0
     _targetKey: 
   _itemPosition: {fileID: 5697848859103467360}
   _hasReference: 1
@@ -447,6 +448,7 @@ MonoBehaviour:
     _ignoreYPosition: 0
     _ignoreXScale: 0
     _ignoreYScale: 0
+    _useInitialCameraPosition: 0
     _targetKey: 
   _itemPosition: {fileID: 5704145527635446420}
   _hasReference: 1
@@ -580,6 +582,7 @@ MonoBehaviour:
     _ignoreYPosition: 0
     _ignoreXScale: 0
     _ignoreYScale: 0
+    _useInitialCameraPosition: 0
     _targetKey: 
   _itemPosition: {fileID: 4636578179340045533}
   _hasReference: 1
@@ -754,6 +757,7 @@ MonoBehaviour:
     _ignoreYPosition: 0
     _ignoreXScale: 0
     _ignoreYScale: 0
+    _useInitialCameraPosition: 0
     _targetKey: 
   _itemPosition: {fileID: 4948955015187607712}
   _hasReference: 1
@@ -879,6 +883,7 @@ MonoBehaviour:
     _ignoreYPosition: 0
     _ignoreXScale: 0
     _ignoreYScale: 0
+    _useInitialCameraPosition: 0
     _targetKey: 
   _itemPosition: {fileID: 416652763975539162}
   _hasReference: 1
