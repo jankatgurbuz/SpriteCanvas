@@ -3,41 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using SC.Core.Helper.UIElementHelper;
-using SC.Core.ResponsiveOperations;
 using SC.Core.UI;
 using SC.Editor.Helpers;
-using TMPro;
 using UnityEditor;
 using UnityEngine;
 
 namespace SC.Editor.Utilities
 {
     [CustomEditor(typeof(UIElement), true)]
-    public class UIElementEditor : UnityEditor.Editor
+    public partial class UIElementEditor : UnityEditor.Editor
     {
-        private const string ResponsiveOperationFieldName = "_responsiveOperation";
-        private const string ItemPositionFieldName = "_itemPosition";
-        private const string SpriteRendererFieldName = "_spriteRenderer";
-
-        private const string TextMeshProFieldName = "_textMeshPro";
-
-        // private const string RegisterTypeFieldName = "_registerType";
-        // private const string CanvasKey = "_canvasKey";
-        // private const string SpriteCanvasFieldName = "_spriteCanvas";
         private const int ItemsPerPage = 5;
-
-        private Transform _itemPosition;
-        private List<IResponsiveOperation> _implementingTypes;
         private List<string> _keyList;
-        private string[] _typeNames;
         private int _currentPage;
-        private bool _initFlag;
 
         private void OnEnable()
         {
-            _initFlag = false;
-            _implementingTypes = GenerateTypeInstances<IResponsiveOperation>();
-            _typeNames = ConvertTypeListToArray(_implementingTypes);
+            InitializeResponsiveOperation();
             EditorApplication.update += SpriteCanvasUpdater.OnEditorUpdate;
         }
 
@@ -48,88 +30,116 @@ namespace SC.Editor.Utilities
 
         public override void OnInspectorGUI()
         {
-          //  DrawScriptField();
             AssignComponent();
             FillResponsiveField();
-
             _keyList = CreateCanvasKeyList();
+            DrawUIElements();
+            serializedObject.ApplyModifiedProperties();
+        }
 
+        private void DrawUIElements()
+        {
             var prop = serializedObject.GetIterator();
-            var enterChildren = true;
-            while (prop.NextVisible(enterChildren))
+            while (prop.NextVisible(true))
             {
-                enterChildren = false;
+                if (prop.name == "m_Script") continue;
 
-       
-                if (prop.name == "_referenceElement")
+                Draw(prop, "_responsiveOperation", line: true);
+                Draw(prop, "_register", true, RegisterAction,line: true);
+                Draw(prop, "_uIElementProperties", includeChildren: false,
+                    ignoreChild: CheckParentGroup() ? "_useInitialCameraPosition" : "", line: true);
+                Draw(prop, "_hasReference", line: true);
+                Draw(prop, "_referenceElement", serializedObject.FindProperty("_hasReference").boolValue);
+                Draw(prop, "_spriteSize");
+                Draw(prop, "_textMeshProSize");
+                Draw(prop, "DownEvent");
+                Draw(prop, "ClickEvent");
+            }
+
+            DrawLine(3, 1, 1);
+            var child = true;
+            prop = serializedObject.GetIterator();
+            while (prop.NextVisible(child))
+            {
+                child = false;
+                GUI.enabled = false;
+                Draw(prop, "_alpha");
+                Draw(prop, "_itemPosition");
+                Draw(prop, "_spriteRenderer");
+                Draw(prop, "_textMeshPro");
+                GUI.enabled = true;
+            }
+        }
+        private void RegisterAction()
+        {
+            var t = GetValue<UIElement>(target, "_register") as RegisterProperties;
+
+            if (!serializedObject.FindProperty("_register").isExpanded) return;
+            if (t.RegisterType != RegisterType.Key) return;
+
+            ListElements();
+            PageNavigation();
+        }
+
+        private void DrawLine(int height, int topSpace, int bottomSpace)
+        {
+            EditorGUILayout.Space(topSpace);
+            GUILayout.Box("test", GUILayout.ExpandWidth(true), GUILayout.Height(height));
+            EditorGUILayout.Space(bottomSpace);
+        }
+
+        private bool CheckParentGroup()
+        {
+            var element = target as UIElement;
+            var currentElement = element.ReferenceElement;
+            while (currentElement != null)
+            {
+                if (currentElement.IsGroupChecked) return true;
+                currentElement = currentElement.ReferenceElement;
+            }
+
+            return false;
+        }
+
+        private void Draw(SerializedProperty prop, string drawName, bool condition = true, Action action = null,
+            bool line = false, bool includeChildren = true, params string[] ignoreChild)
+        {
+            if (prop.name != drawName || !condition) return;
+
+            if (includeChildren)
+            {
+                if (line) DrawLine(2, 1, 1);
+                EditorGUILayout.PropertyField(prop, true);
+            }
+            else
+            {
+                if (line) DrawLine(2, 1, 1);
+                DrawPropertyWithoutChildren(prop, ignoreChild);
+            }
+
+            action?.Invoke();
+
+            void DrawPropertyWithoutChildren(SerializedProperty property, string[] ignoreChildren)
+            {
+                var path = property.propertyPath;
+                property.isExpanded = EditorGUILayout.Foldout(property.isExpanded, property.displayName);
+                if (!property.isExpanded) return;
+                while (property.NextVisible(true))
                 {
-                    if (!serializedObject.FindProperty("_hasReference").boolValue)
+                    if (!property.propertyPath.Contains(path)) break;
+
+                    if (ignoreChildren.Length == 0 || !ignoreChildren.Contains(property.name))
                     {
-                        continue;
+                        EditorGUILayout.PropertyField(property, true);
+                    }
+                    else
+                    {
+                        GUI.enabled = false;
+                        EditorGUILayout.PropertyField(property, true);
+                        GUI.enabled = true;
                     }
                 }
-                
-                if (prop.name == "m_Script") continue;
-               
-                EditorGUILayout.PropertyField(prop, true);
-                
-                if (prop.name != "_register") continue;
-                var t = GetValue<UIElement>(target, "_register") as RegisterProperties;
-                if (t.RegisterType != RegisterType.Key) continue;
-
-                ListElements();
-                PageNavigation();
             }
-
-            serializedObject.ApplyModifiedProperties();
-        }
-
-        private void AssignComponent()
-        {
-            AssignComponent<Transform>(ItemPositionFieldName);
-            AssignComponent<SpriteRenderer>(SpriteRendererFieldName);
-            AssignComponent<TextMeshPro>(TextMeshProFieldName);
-
-            void AssignComponent<T>(string fieldName) where T : Component
-            {
-                var currentValue = GetValue<T>(target, fieldName);
-                var component = ((UIElement)target).GetComponent<T>();
-
-                // if (component != null && currentValue == null)
-                // {
-                SetValue<UIElement>(target, fieldName, component);
-                // }
-                // todo: check
-            }
-        }
-
-        private void FillResponsiveField()
-        {
-            var data = GetValue<UIElement>(target, ResponsiveOperationFieldName);
-            var currentIndex = FindTypeIndexInArray(_implementingTypes, (ResponsiveOperation)data);
-
-            EditorGUI.BeginChangeCheck();
-            var selectedIndex = EditorGUILayout.Popup("Anchor Presets", currentIndex, _typeNames);
-            if (!_initFlag || EditorGUI.EndChangeCheck())
-            {
-                var spriteUIOperationHandler = _implementingTypes[selectedIndex];
-
-                if (data == null || data.GetType() != spriteUIOperationHandler.GetType())
-                {
-                    SetValue<UIElement>(target, ResponsiveOperationFieldName, spriteUIOperationHandler);
-                }
-
-                EditorUtility.SetDirty(target);
-                _initFlag = true;
-            }
-        }
-
-        private void DrawScriptField()
-        {
-            serializedObject.Update();
-            SerializedProperty scriptProp = serializedObject.FindProperty("m_Script");
-            EditorGUILayout.PropertyField(scriptProp);
-            serializedObject.ApplyModifiedProperties();
         }
 
         private List<string> CreateCanvasKeyList()
@@ -164,7 +174,6 @@ namespace SC.Editor.Utilities
                 GUILayout.FlexibleSpace();
                 if (GUILayout.Button(_keyList[i], GUILayout.Width(150), GUILayout.Height(25)))
                 {
-                    //SetValue<UIElement>(nameof(UIElement.RegisterProperty), "_canvasKey", _keyList[i]);
                     var t = GetValue<UIElement>(uICanvas, "_register") as RegisterProperties;
                     SetValue<RegisterProperties>(uICanvas.Register, "_canvasKey", _keyList[i]);
                     SetValue<UIElement>(uICanvas, "_register", t);
@@ -220,30 +229,6 @@ namespace SC.Editor.Utilities
         {
             var field = GetField<T>(fieldName, obj.GetType());
             field?.SetValue(obj, value);
-        }
-
-        private static IEnumerable<Type> GetAssemblies()
-        {
-            return AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(assembly => assembly.GetTypes()).ToList();
-        }
-
-        private static List<T> GenerateTypeInstances<T>()
-        {
-            var typeList = GetAssemblies();
-            return typeList.Where(type => typeof(T).IsAssignableFrom(type) && type.IsClass && !type.IsAbstract)
-                .Select(type => (T)Activator.CreateInstance(type))
-                .ToList();
-        }
-
-        private static string[] ConvertTypeListToArray<T>(List<T> list)
-        {
-            return list.Select(type => type.GetType().ToString().Split('.').Last()).ToArray();
-        }
-
-        private static int FindTypeIndexInArray<T>(List<T> array, T field)
-        {
-            return field == null ? 0 : array.FindIndex(type => type.GetType() == field.GetType());
         }
     }
 }
