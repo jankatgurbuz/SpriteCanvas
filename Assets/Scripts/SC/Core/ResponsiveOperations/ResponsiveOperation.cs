@@ -1,5 +1,4 @@
 using SC.Core.Helper.UIElementHelper;
-using SC.Core.UI;
 using UnityEngine;
 
 namespace SC.Core.ResponsiveOperations
@@ -14,7 +13,9 @@ namespace SC.Core.ResponsiveOperations
     {
         [SerializeField] private Vector3 LocalScale = new(1, 1, 1);
         [SerializeField] protected float _topOffset;
+        [SerializeField] private bool _isOffsetProportionalToScreenWidth;
         [SerializeField] protected float _horizontalOffset;
+
         public abstract void AdjustUI(ResponsiveUIProp prop);
 
         public Vector3 GetLocalScale() => LocalScale;
@@ -61,8 +62,12 @@ namespace SC.Core.ResponsiveOperations
             var scaledHeight = uiItemSize.y * scale.y;
             var scaledWidth = uiItemSize.x * scale.x;
 
-            var x = positionFactors.x * screenWidth - scaledWidth * positionFactors.x -
-                    _horizontalOffset * Mathf.Sign(positionFactors.x) * balance;
+            var offset = !_isOffsetProportionalToScreenWidth
+                ? _horizontalOffset
+                : _horizontalOffset * screenWidth / balance;
+            
+            var x = positionFactors.x * screenWidth - scaledWidth * positionFactors.x - offset *
+                Mathf.Sign(positionFactors.x) * balance;
 
             var y = positionFactors.y * screenHeight - scaledHeight * positionFactors.y -
                     _topOffset * Mathf.Sign(positionFactors.y) * balance;
