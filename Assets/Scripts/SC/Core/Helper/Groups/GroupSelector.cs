@@ -1,3 +1,4 @@
+using System;
 using SC.Core.Helper.ScaleHandler;
 using SC.Core.SpriteCanvasAttribute;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace SC.Core.Helper.Groups
         [SerializeField] private float _unselectedItemScale = 1;
         [SerializeField] private float _animationDuration;
         [SerializeField] private AnimationCurve _scaleCurve;
+        [SerializeField] private bool _isStartValid = true;
         private IGroupSelectorHandler _selector; // todo set
 
         [Space, SCHorizontalLine(EColor.White, 2)]
@@ -27,6 +29,14 @@ namespace SC.Core.Helper.Groups
         {
             _uiGroup = GetComponent<IGroup>();
             CreateSelectorHandler();
+        }
+
+        private void Start()
+        {
+            if (_isStartValid)
+            {
+                UpdateItemScales(_currentSelectedIndex);
+            }
         }
 
         private void CreateSelectorHandler()
