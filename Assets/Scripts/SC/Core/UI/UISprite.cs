@@ -8,13 +8,13 @@ namespace SC.Core.UI
     {
         [SerializeField] protected SpriteRenderer _spriteRenderer;
         [SerializeField] private Vector3 _spriteSize = Vector3.one;
-        private Vector3? _initPos;
+        private Vector3? _initPosition;
 
         protected override void SetUILayout()
         {
             if (_spriteRenderer == null) return;
-            _spriteRenderer.size = _spriteSize;
 
+            _spriteRenderer.size = _spriteSize;
             var size = _spriteRenderer.drawMode == SpriteDrawMode.Simple ? GetBoundarySize() : GetElementSize();
             var sc = Register.SpriteCanvas;
             var referencePosition = sc.ViewportPosition;
@@ -32,13 +32,13 @@ namespace SC.Core.UI
 
             if (Application.isPlaying)
             {
-                _initPos ??= referencePosition;
+                _initPosition ??= referencePosition;
             }
             else
             {
-                _initPos = referencePosition;
+                _initPosition = referencePosition;
             }
-            
+
             var responsiveProp = new ResponsiveUIProp()
             {
                 UiItemTransform = _itemPosition,
@@ -46,7 +46,7 @@ namespace SC.Core.UI
                 Width = referenceSize.x,
                 Balance = sc.Balance,
                 ReferencePosition = UIElementProperties.UseInitialCameraPosition
-                    ? (Vector3)_initPos
+                    ? (Vector3)_initPosition
                     : referencePosition,
                 UiItemSize = size,
                 GroupAxisConstraint = GroupAxisConstraint,
@@ -69,6 +69,7 @@ namespace SC.Core.UI
         protected override void ArrangeLayers(string sortingLayer, int sortingOrder)
         {
             if (_spriteRenderer == null) return;
+
             _spriteRenderer.sortingLayerName = sortingLayer;
             _spriteRenderer.sortingOrder = Mathf.Max(sortingOrder, sortingOrder + UIElementProperties.OrderInLayer);
         }
@@ -76,6 +77,7 @@ namespace SC.Core.UI
         public override void SetUIElementProperties(UIElementSettings elementProperties)
         {
             if (_spriteRenderer == null) return;
+
             var color = _spriteRenderer.color;
             color.a = Mathf.Min(elementProperties.Alpha, _alpha);
             _spriteRenderer.color = color;

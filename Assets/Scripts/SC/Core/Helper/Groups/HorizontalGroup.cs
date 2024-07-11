@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using SC.Core.ResponsiveOperations;
 using SC.Core.UI;
 using UnityEngine;
 
@@ -30,8 +31,8 @@ namespace SC.Core.Helper.Groups
                 return false;
             }
 
-            if (_uiElement.ResponsiveOperation is not (ResponsiveOperations.BottomStretch
-                or ResponsiveOperations.TopStretch)) // todo why ! center
+            if (_uiElement.ResponsiveOperation is not (BottomStretch
+                or TopStretch))
             {
                 Debug.LogWarning("ResponsiveOperation is neither BottomStretch nor TopStretch.");
                 return false;
@@ -57,6 +58,7 @@ namespace SC.Core.Helper.Groups
                 currentPosition = AdjustPosition(childElement, currentPosition, scaledWidth);
             }
         }
+
         private void AdjustScale(GroupElementProperty childElement, float scaledWidth)
         {
             var child = childElement.UIElement;
@@ -86,10 +88,11 @@ namespace SC.Core.Helper.Groups
 
             return currentPosition + scaledWidth;
         }
-        
+
         private Vector3 GetLocalScaleIgnoringParent(Transform uiItemTransform, Vector3 scale)
         {
             if (uiItemTransform.parent == null) return scale;
+
             var parentScale = uiItemTransform.parent.lossyScale;
             scale = new Vector3(
                 scale.x / parentScale.x,

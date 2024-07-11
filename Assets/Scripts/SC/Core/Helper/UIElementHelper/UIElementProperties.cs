@@ -1,4 +1,5 @@
 using SC.Core.SpriteCanvasAttribute;
+using SC.Core.Utility;
 using UnityEngine;
 
 namespace SC.Core.Helper.UIElementHelper
@@ -8,7 +9,7 @@ namespace SC.Core.Helper.UIElementHelper
     {
         [SerializeField] private int _orderInLayer;
 
-        [SerializeField, SCHorizontalLine(EColor.Black, 1, 1)]
+        [SerializeField, HorizontalLine(EColor.Black, 1, 1)]
         private bool _ignoreXPosition;
 
         [SerializeField] private bool _ignoreYPosition;
@@ -19,7 +20,7 @@ namespace SC.Core.Helper.UIElementHelper
 
         [SerializeField] private bool _useInitialCameraPosition;
 
-        [SerializeField, SCHorizontalLine(EColor.Black, 1, 1)]
+        [SerializeField, HorizontalLine(EColor.Black, 1, 1)]
         private string _targetKey;
 
         public bool IgnoreXPosition

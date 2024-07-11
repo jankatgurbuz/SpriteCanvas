@@ -11,28 +11,24 @@ namespace SC.Core.UI
     public abstract class UIElement : MonoBehaviour
     {
         [SerializeReference] protected IResponsiveOperation _responsiveOperation;
-
         [SerializeField] private RegisterProperties _register;
-
         [SerializeField] private UIElementProperties _uIElementProperties;
-
         [SerializeField] protected Transform _itemPosition;
-
         [SerializeField] protected bool _hasReference;
-
         [SerializeField] protected UIElement _referenceElement;
-
         [SerializeField, SyncAlpha] protected float _alpha = 1;
 
         private bool _isChecked = true;
         private bool _isGroupChecked = true;
         private Vector3 _groupAxisConstraint = Vector3.one;
+        
         public IResponsiveOperation ResponsiveOperation => _responsiveOperation;
         public UIElementProperties UIElementProperties => _uIElementProperties;
         public bool IsGroupChecked => _isGroupChecked;
         public RegisterProperties Register => _register;
         public UIElement ReferenceElement => _referenceElement;
         public Vector3 GroupAxisConstraint => _groupAxisConstraint;
+        
         protected abstract void SetUILayout();
         protected abstract void ArrangeLayers(string sortingLayer, int sortingOrder);
         public abstract void SetUIElementProperties(UIElementSettings elementProperties);
@@ -78,6 +74,7 @@ namespace SC.Core.UI
                     foreach (var item in spriteCanvasArray)
                     {
                         if (item.CanvasKey != _register.CanvasKey) continue;
+                        
                         _register.SpriteCanvas = item;
                     }
 #endif
@@ -86,7 +83,8 @@ namespace SC.Core.UI
                         var register = SpriteCanvasManager.Instance.GetSpriteCanvas(_register.CanvasKey);
                         if (register == null)
                         {
-                            Debug.LogError($"No SpriteCanvas found with key \" {_register.CanvasKey} \". Object = {name}");
+                            Debug.LogError(
+                                $"No SpriteCanvas found with key \" {_register.CanvasKey} \". Object = {name}");
                         }
 
                         _register.SpriteCanvas = register;

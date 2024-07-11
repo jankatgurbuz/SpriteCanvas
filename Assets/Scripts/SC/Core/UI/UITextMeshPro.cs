@@ -9,12 +9,12 @@ namespace SC.Core.UI
     {
         [SerializeField] private TextMeshPro _textMeshPro;
         [SerializeField] private Vector3 _textMeshProSize = new Vector3(20, 20, 0);
-        private Vector3? _initPos;
+        private Vector3? _initPosition;
         protected override void SetUILayout()
         {
             if (_textMeshPro == null) return;
+            
             _textMeshPro.rectTransform.sizeDelta = _textMeshProSize;
-
             var sc = Register.SpriteCanvas;
             var referencePosition = sc.ViewportPosition;
             var referenceSize = new Vector2(sc.ViewportWidth, sc.ViewportHeight);
@@ -31,11 +31,11 @@ namespace SC.Core.UI
 
             if (Application.isPlaying)
             {
-                _initPos ??= referencePosition;
+                _initPosition ??= referencePosition;
             }
             else
             {
-                _initPos = referencePosition;
+                _initPosition = referencePosition;
             }
             
             var responsiveProp = new ResponsiveUIProp()
@@ -45,7 +45,7 @@ namespace SC.Core.UI
                 Width = referenceSize.x,
                 Balance = sc.Balance,
                 ReferencePosition = UIElementProperties.UseInitialCameraPosition
-                    ? (Vector3)_initPos
+                    ? (Vector3)_initPosition
                     : referencePosition,
                 UiItemSize = _textMeshPro.rectTransform.sizeDelta,
                 GroupAxisConstraint = GroupAxisConstraint,
@@ -67,6 +67,7 @@ namespace SC.Core.UI
         protected override void ArrangeLayers(string sortingLayer, int sortingOrder)
         {
             if (_textMeshPro == null) return;
+            
             _textMeshPro.sortingLayerID = SortingLayer.NameToID(sortingLayer);
             _textMeshPro.sortingOrder = Mathf.Max(sortingOrder, sortingOrder + UIElementProperties.OrderInLayer);
         }
@@ -74,22 +75,12 @@ namespace SC.Core.UI
         public override void SetUIElementProperties(UIElementSettings elementProperties)
         {
             if (_textMeshPro == null) return;
+            
             var color = _textMeshPro.color;
             color.a = Mathf.Min(elementProperties.Alpha, _alpha);
             _textMeshPro.color = color;
         }
-
-        // protected override void SetUILayout(float spriteCanvasViewportHeight, float spriteCanvasViewportWidth,
-        //     Vector3 spriteCanvasViewportPosition, float spriteCanvasBalance, Vector3 groupAxisConstraint,
-        //     bool ignoreXPosition, bool ignoreYPosition, bool ignoreXScale, bool ignoreYScale)
-        // {
-        //     if (_textMeshPro == null) return;
-        //     _textMeshPro.rectTransform.sizeDelta = _textMeshProSize;
-        //     Handle(_textMeshPro.rectTransform.sizeDelta, spriteCanvasViewportHeight, spriteCanvasViewportWidth,
-        //         spriteCanvasViewportPosition, spriteCanvasBalance, groupAxisConstraint, ignoreXPosition,
-        //         ignoreYPosition, ignoreXScale, ignoreYScale);
-        // }
-
+        
         public override Vector3 GetBoundarySize()
         {
             return _textMeshPro.rectTransform.sizeDelta;

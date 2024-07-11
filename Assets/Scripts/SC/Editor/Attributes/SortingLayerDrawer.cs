@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SC.Editor.Attributes
 {
-    [CustomPropertyDrawer(typeof(SCSortingLayerAttribute))]
+    [CustomPropertyDrawer(typeof(SortingLayerAttribute))]
     public class SortingLayerAttributeDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)

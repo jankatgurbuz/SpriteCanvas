@@ -1,4 +1,5 @@
 #if SPRITECANVAS_UNITASK_SUPPORT
+
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using SC.Core.Helper.Groups;
@@ -7,7 +8,7 @@ using UnityEngine.Events;
 
 namespace SC.Core.Helper.ScaleHandler
 {
-    public class ScaleTaskHandler : IGroupSelectorHandler
+    public sealed class ScaleTaskHandler : IGroupSelectorHandler
     {
         private CancellationTokenSource _cancellationTokenSource;
 
@@ -18,9 +19,9 @@ namespace SC.Core.Helper.ScaleHandler
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource = new CancellationTokenSource();
 
-            AdjustItemsScaleTask(animationDuration, currentSelectedIndex,
+            _ = AdjustItemsScaleTask(animationDuration, currentSelectedIndex,
                 selectedItemScale, unselectedItemScale, scaleCurve, uiGroup, onSelectionChanged,
-                _cancellationTokenSource.Token).Forget();
+                _cancellationTokenSource.Token);
         }
 
         private async UniTask AdjustItemsScaleTask(float animationDuration, int currentSelectedIndex,
@@ -43,6 +44,7 @@ namespace SC.Core.Helper.ScaleHandler
             while (time < animationDuration)
             {
                 if (cancellationToken.IsCancellationRequested) return;
+
                 for (var index = 0; index < uiGroup.GetUIElementList.Count; index++)
                 {
                     var item = uiGroup.GetUIElementList[index];

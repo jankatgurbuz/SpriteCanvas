@@ -36,12 +36,13 @@ namespace SC.Editor.Helpers
             var tmpObj = new GameObject("TextMeshPro");
             var tmp = tmpObj.AddComponent<TextMeshPro>();
             tmp.text = "Sample Text";
-            
+
             tmpObj.AddComponent<UITextMeshPro>();
             GameObjectUtility.SetParentAndAlign(tmpObj, menuCommand.context as GameObject);
             Undo.RegisterCreatedObjectUndo(tmpObj, "Create " + tmpObj.name);
             Selection.activeObject = tmpObj;
         }
+
         [MenuItem("GameObject/Sprite Canvas/Button", false, 7)]
         static void CreateButton(MenuCommand menuCommand)
         {

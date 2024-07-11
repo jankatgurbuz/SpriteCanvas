@@ -5,7 +5,20 @@ namespace SC.Core.Helper
     [System.Serializable]
     public class UIElementSettings
     {
-        [Range(0f, 1f)] public float Alpha = 1;
-        public bool Interactable = true;
+        [SerializeField, Range(0f, 1f)] private float _alpha = 1;
+
+        [SerializeField] private bool _interactable = true;
+
+        public float Alpha
+        {
+            get => _alpha;
+            set => _alpha = value;
+        }
+
+        public bool Interactable
+        {
+            get => _interactable;
+            set => _interactable = value;
+        }
     }
 }

@@ -173,7 +173,23 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7149719307074181754, guid: b90ea975c9abc416da2adfb015639d3c, type: 3}
+      propertyPath: managedReferences[8357452874643144710]._localScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7149719307074181754, guid: b90ea975c9abc416da2adfb015639d3c, type: 3}
+      propertyPath: managedReferences[8357452874643144710]._localScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7149719307074181754, guid: b90ea975c9abc416da2adfb015639d3c, type: 3}
+      propertyPath: managedReferences[8357452874643144710]._localScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7149719307074181754, guid: b90ea975c9abc416da2adfb015639d3c, type: 3}
       propertyPath: managedReferences[8357452874643144710]._horizontalOffset
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7149719307074181754, guid: b90ea975c9abc416da2adfb015639d3c, type: 3}
+      propertyPath: managedReferences[8357452874643144710]._isOffsetProportionalToScreenWidth
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7721672296066109956, guid: b90ea975c9abc416da2adfb015639d3c, type: 3}

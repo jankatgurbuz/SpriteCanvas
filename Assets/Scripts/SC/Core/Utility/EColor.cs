@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SC.Core.SpriteCanvasAttribute
+namespace SC.Core.Utility
 {
     public enum EColor
     {

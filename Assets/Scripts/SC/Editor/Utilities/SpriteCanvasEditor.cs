@@ -26,12 +26,12 @@ namespace SC.Editor.Utilities
         private void OnEnable()
         {
             _stringList = Resources.Load<SOKeyContainer>(KeyContainer);
-            EditorApplication.update += SpriteCanvasUpdater.OnEditorUpdate;
+            //EditorApplication.update += SpriteCanvasUpdater.OnEditorUpdate;
         }
 
         private void OnDisable()
         {
-            EditorApplication.update -= SpriteCanvasUpdater.OnEditorUpdate;
+            //EditorApplication.update -= SpriteCanvasUpdater.OnEditorUpdate;
         }
 
         public override void OnInspectorGUI()

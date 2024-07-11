@@ -194,8 +194,9 @@ MonoBehaviour:
     - rid: 7568872166055739427
       type: {class: BottomLeft, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+        _localScale: {x: 0.5, y: 0.5, z: 0.5}
         _topOffset: 0.05
+        _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0.25
 --- !u!212 &16508837
 SpriteRenderer:
@@ -320,8 +321,9 @@ MonoBehaviour:
     - rid: 7568872166055739431
       type: {class: BottomRight, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+        _localScale: {x: 0.5, y: 0.5, z: 0.5}
         _topOffset: 0.05
+        _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0.25
 --- !u!212 &94823678
 SpriteRenderer:
@@ -530,8 +532,9 @@ MonoBehaviour:
     - rid: 7568872166055739426
       type: {class: TopRight, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+        _localScale: {x: 0.5, y: 0.5, z: 0.5}
         _topOffset: 0.05
+        _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0.25
 --- !u!212 &349766887
 SpriteRenderer:
@@ -640,8 +643,8 @@ MonoBehaviour:
   _sortingLayerOrder: 100
   _canvasScaler: 0
   _uIElementProperties:
-    Alpha: 1
-    Interactable: 1
+    _alpha: 1
+    _interactable: 1
   _uiElements:
   - {fileID: 16508835}
   - {fileID: 94823676}
@@ -739,8 +742,9 @@ MonoBehaviour:
     - rid: 7568872166055739439
       type: {class: BottomStretch, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 1, y: 2, z: 1}
+        _localScale: {x: 1, y: 2, z: 1}
         _topOffset: 0
+        _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0
         _edgeOffset: 0
         _maxSize: 10000
@@ -1145,8 +1149,9 @@ MonoBehaviour:
     - rid: 7568872166055739415
       type: {class: TopStretch, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 1, y: 45, z: 1}
+        _localScale: {x: 1, y: 45, z: 1}
         _topOffset: 0
+        _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0
         _edgeOffset: 0
         _maxSize: 10000
@@ -1278,8 +1283,9 @@ MonoBehaviour:
     - rid: 7568872275334660146
       type: {class: Center, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 1, y: 1, z: 1}
+        _localScale: {x: 1, y: 1, z: 1}
         _topOffset: 0
+        _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0
 --- !u!114 &1064447761
 MonoBehaviour:
@@ -1492,8 +1498,9 @@ MonoBehaviour:
     - rid: 7568872275334660150
       type: {class: Center, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 1, y: 1, z: 1}
+        _localScale: {x: 1, y: 1, z: 1}
         _topOffset: 0
+        _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0
 --- !u!114 &1090733705
 MonoBehaviour:
@@ -1713,8 +1720,9 @@ MonoBehaviour:
     - rid: 7568872166055739429
       type: {class: BottomCenter, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+        _localScale: {x: 0.5, y: 0.5, z: 0.5}
         _topOffset: 0.05
+        _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0
 --- !u!212 &1129966643
 SpriteRenderer:
@@ -1845,8 +1853,9 @@ MonoBehaviour:
     - rid: 7568872166055739421
       type: {class: TopRight, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 1, y: 1, z: 1}
+        _localScale: {x: 1, y: 1, z: 1}
         _topOffset: 0.2
+        _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0.2
 --- !u!212 &1211146598
 SpriteRenderer:
@@ -2024,8 +2033,9 @@ MonoBehaviour:
     - rid: 8357452922258980865
       type: {class: TopLeft, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 1, y: 1, z: 1}
+        _localScale: {x: 1, y: 1, z: 1}
         _topOffset: 0.2
+        _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0.2
 --- !u!1 &1356520692
 GameObject:
@@ -2182,8 +2192,9 @@ MonoBehaviour:
     - rid: 7568872166055739405
       type: {class: Center, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 0.5, y: 0.5, z: 1}
+        _localScale: {x: 0.5, y: 0.5, z: 1}
         _topOffset: 0
+        _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0
 --- !u!114 &1356520696
 MonoBehaviour:
@@ -2233,8 +2244,8 @@ MonoBehaviour:
   _sortingLayerOrder: 0
   _canvasScaler: 0
   _uIElementProperties:
-    Alpha: 1
-    Interactable: 1
+    _alpha: 1
+    _interactable: 1
   _uiElements:
   - {fileID: 1064447760}
   - {fileID: 1356520695}
@@ -2328,8 +2339,9 @@ MonoBehaviour:
     - rid: 7568872166055739423
       type: {class: TopLeft, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+        _localScale: {x: 0.5, y: 0.5, z: 0.5}
         _topOffset: 0.05
+        _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0.25
 --- !u!212 &1569241411
 SpriteRenderer:
@@ -2508,8 +2520,9 @@ MonoBehaviour:
     - rid: 7568872166055739417
       type: {class: TopStretch, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 1, y: 45, z: 1}
+        _localScale: {x: 1, y: 45, z: 1}
         _topOffset: 0
+        _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0
         _edgeOffset: 0
         _maxSize: 125
@@ -2584,8 +2597,9 @@ MonoBehaviour:
     - rid: 7568872331812012032
       type: {class: TopStretch, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 1, y: 2, z: 1}
+        _localScale: {x: 1, y: 2, z: 1}
         _topOffset: -0.05
+        _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0
         _edgeOffset: 0
         _maxSize: 10000
@@ -2765,8 +2779,9 @@ MonoBehaviour:
     - rid: 7568872166055739401
       type: {class: BottomStretch, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 1, y: 30, z: 1}
+        _localScale: {x: 1, y: 30, z: 1}
         _topOffset: 0
+        _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0
         _edgeOffset: 0
         _maxSize: 10000
@@ -2841,8 +2856,9 @@ MonoBehaviour:
     - rid: 7568872166055739424
       type: {class: TopCenter, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+        _localScale: {x: 0.5, y: 0.5, z: 0.5}
         _topOffset: 0.05
+        _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0
 --- !u!212 &2016244205
 SpriteRenderer:

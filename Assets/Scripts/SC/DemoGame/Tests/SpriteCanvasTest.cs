@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace SC.DemoGame.Tests
 {
-   
     public class SpriteCanvasTest : MonoBehaviour
     {
         public bool IsActive = false;

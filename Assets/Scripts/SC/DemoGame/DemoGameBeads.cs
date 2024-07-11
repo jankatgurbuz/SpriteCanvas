@@ -8,7 +8,6 @@ namespace SC.DemoGame
     {
         [SerializeField] private DemoGameBeadsProp[] _demoGameBeadsProp;
         private Dictionary<DemoGameBeadsColor, GameObject> _objects;
-        private Dictionary<DemoGameBeadsColor, GameObject> Objects => _objects;
 
         private void Awake()
         {

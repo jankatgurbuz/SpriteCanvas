@@ -20,14 +20,7 @@ namespace SC.Editor.Utilities
         private void OnEnable()
         {
             InitializeResponsiveOperation();
-            EditorApplication.update += SpriteCanvasUpdater.OnEditorUpdate;
         }
-
-        private void OnDisable()
-        {
-            EditorApplication.update -= SpriteCanvasUpdater.OnEditorUpdate;
-        }
-
         public override void OnInspectorGUI()
         {
             AssignComponent();

@@ -210,7 +210,7 @@ MonoBehaviour:
     - rid: 7568872531315130404
       type: {class: BottomCenter, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 1, y: 1, z: 1}
+        _localScale: {x: 1, y: 1, z: 1}
         _topOffset: 0
         _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0
@@ -337,7 +337,7 @@ MonoBehaviour:
     - rid: 7568872531315130396
       type: {class: Center, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 0.15, y: 0.15, z: 1}
+        _localScale: {x: 0.15, y: 0.15, z: 1}
         _topOffset: 0
         _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0
@@ -464,7 +464,7 @@ MonoBehaviour:
     - rid: 7568872531315130394
       type: {class: LeftStretch, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: -0.05, y: 1, z: 1}
+        _localScale: {x: -0.05, y: 1, z: 1}
         _topOffset: 0
         _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0
@@ -617,7 +617,7 @@ MonoBehaviour:
     - rid: 8357452874643144708
       type: {class: BottomCenter, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 1, y: 22, z: 1}
+        _localScale: {x: 1, y: 22, z: 1}
         _topOffset: 0
         _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0
@@ -775,7 +775,7 @@ MonoBehaviour:
     - rid: 7568872413706584067
       type: {class: Center, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 0.5, y: 0.5, z: 1}
+        _localScale: {x: 0.5, y: 0.5, z: 1}
         _topOffset: 0
         _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0
@@ -902,7 +902,7 @@ MonoBehaviour:
     - rid: 7568872531315130393
       type: {class: RightStretch, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: -0.075, y: 1, z: 1}
+        _localScale: {x: -0.075, y: 1, z: 1}
         _topOffset: 0
         _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0

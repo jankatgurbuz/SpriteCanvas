@@ -10,6 +10,7 @@ namespace SC.Core.Manager
         private Dictionary<string, SpriteCanvas> _spriteCanvasMap;
         private Dictionary<string, UIElement> _targetUI;
         private List<UIButton> _uiButtons;
+
         private void Awake()
         {
             Instance = this;
@@ -23,14 +24,10 @@ namespace SC.Core.Manager
 
         public void SpriteCanvasRegister(string str, SpriteCanvas spriteCanvas)
         {
-            if (str == string.Empty)
-            {
-                return;
-            }
-            if (!_spriteCanvasMap.TryAdd(str, spriteCanvas))
-            {
-                Debug.LogError($"Failed to register SpriteCanvas with key {str}. It might already exist in the map.");
-            }
+            if (str == string.Empty) return;
+            if (_spriteCanvasMap.TryAdd(str, spriteCanvas)) return;
+
+            Debug.LogError($"Failed to register SpriteCanvas with key {str}. It might already exist in the map.");
         }
 
         public SpriteCanvas GetSpriteCanvas(string key)
@@ -50,7 +47,7 @@ namespace SC.Core.Manager
 
             if (uiElement is UIButton button)
             {
-                _uiButtons.Add(button); 
+                _uiButtons.Add(button);
             }
         }
 
@@ -64,24 +61,25 @@ namespace SC.Core.Manager
             Debug.LogWarning("The targetKey does not exist in the dictionary.");
             return null;
         }
+
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))
             {
-                var pos = Input.mousePosition;
+                var mousePosition = Input.mousePosition;
                 foreach (var item in _uiButtons)
                 {
-                    item.Down(pos);
+                    item.Down(mousePosition);
                 }
             }
             else if (Input.GetMouseButtonUp(0))
             {
-                var pos = Input.mousePosition;
+                var mousePosition = Input.mousePosition;
                 foreach (var item in _uiButtons)
                 {
-                    item.Up(pos);
+                    item.Up(mousePosition);
                 }
-            } 
+            }
         }
     }
 }

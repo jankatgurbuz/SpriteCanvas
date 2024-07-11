@@ -1,5 +1,4 @@
 using SC.Core.Helper.Groups;
-using SC.Core.UI;
 using UnityEngine;
 using UnityEngine.Events;
 

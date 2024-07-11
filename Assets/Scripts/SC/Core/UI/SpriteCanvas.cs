@@ -4,7 +4,7 @@ using SC.Core.Helper;
 using SC.Core.Manager;
 using SC.Core.SpriteCanvasAttribute;
 using UnityEngine;
-using EColor = SC.Core.SpriteCanvasAttribute.EColor;
+using EColor = SC.Core.Utility.EColor;
 
 namespace SC.Core.UI
 {
@@ -16,7 +16,7 @@ namespace SC.Core.UI
 
         [SerializeField] private float _planeDistance = 10;
 
-        [SCHorizontalLine(EColor.Orange), SerializeField, SCSortingLayer]
+        [HorizontalLine(EColor.Orange), SerializeField, SortingLayer]
         private string _sortingLayerName;
 
         [SerializeField] private int _sortingLayerOrder;
@@ -85,6 +85,7 @@ namespace SC.Core.UI
         private void UpdateCameraViewportProperties()
         {
             if (_camera == null) return;
+
             ViewportHeight = _camera.orthographic
                 ? 2f * _camera.orthographicSize
                 : 2.0f * _planeDistance * Mathf.Tan(_camera.fieldOfView * 0.5f * Mathf.Deg2Rad);
@@ -126,6 +127,7 @@ namespace SC.Core.UI
         public void AddUI(UIElement ui)
         {
             if (_uiElements.Contains(ui)) return;
+            
             _uiElements.Add(ui);
         } 
     } 

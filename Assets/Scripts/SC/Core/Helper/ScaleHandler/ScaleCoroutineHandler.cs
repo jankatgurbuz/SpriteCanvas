@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using SC.Core.Helper.Groups;
-using SC.Core.UI;
 using UnityEngine;
 using UnityEngine.Events;
 

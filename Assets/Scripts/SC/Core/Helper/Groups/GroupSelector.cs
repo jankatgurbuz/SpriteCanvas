@@ -1,6 +1,7 @@
 using System;
 using SC.Core.Helper.ScaleHandler;
 using SC.Core.SpriteCanvasAttribute;
+using SC.Core.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,16 +14,16 @@ namespace SC.Core.Helper.Groups
         [Button("DebugFunction", typeof(GroupSelector), "Debug"), SerializeField]
         private int _currentSelectedIndex = 0;
 
-        [SerializeField, Space, SCHorizontalLine(EColor.White, 2)]
+        [SerializeField, Space, HorizontalLine(EColor.White, 2)]
         private float _selectedItemScale = 2;
 
         [SerializeField] private float _unselectedItemScale = 1;
         [SerializeField] private float _animationDuration;
         [SerializeField] private AnimationCurve _scaleCurve;
         [SerializeField] private bool _isStartValid = true;
-        private IGroupSelectorHandler _selector; // todo set
+        private IGroupSelectorHandler _selector;
 
-        [Space, SCHorizontalLine(EColor.White, 2)]
+        [Space, HorizontalLine(EColor.White, 2)]
         public UnityEvent<int> OnSelectionChanged;
 
         private void Awake()
