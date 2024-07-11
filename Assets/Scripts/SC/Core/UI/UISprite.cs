@@ -29,9 +29,16 @@ namespace SC.Core.UI
                 referenceSize = GetGlobalSize(referenceSpriteSize, _referenceElement.transform);
                 referencePosition = _referenceElement.transform.position;
             }
-            
-            _initPos ??= referencePosition;
 
+            if (Application.isPlaying)
+            {
+                _initPos ??= referencePosition;
+            }
+            else
+            {
+                _initPos = referencePosition;
+            }
+            
             var responsiveProp = new ResponsiveUIProp()
             {
                 UiItemTransform = _itemPosition,

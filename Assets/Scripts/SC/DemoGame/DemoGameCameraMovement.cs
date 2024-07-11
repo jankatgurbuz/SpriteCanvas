@@ -8,13 +8,15 @@ namespace SC.DemoGame
     {
         [SerializeField] private SpriteCanvas _spriteCanvas;
         [SerializeField] private float _moveSpeed = 10f;
-        
+
         private Vector3 _targetPosition;
-        private bool _isMoving = false;
+        private bool _isMoving;
+        private Vector3 _cameraInitPos;
 
         private void Start()
         {
             _targetPosition = transform.position;
+            _cameraInitPos = _targetPosition;
         }
 
         private void Update()
@@ -34,12 +36,22 @@ namespace SC.DemoGame
 
         public void OnItemSelectionChanged(int index)
         {
-            var newPositionX = index switch
+            float newPositionX;
+            switch (index)
             {
-                0 => -2 * _spriteCanvas.ViewportWidth,
-                4 => 2 * _spriteCanvas.ViewportWidth,
-                _ => (index - 2) * _spriteCanvas.ViewportWidth
-            };
+                case 0:
+                    newPositionX = _cameraInitPos.x + -2 * _spriteCanvas.ViewportWidth;
+                    break;
+                case 4:
+                    newPositionX = _cameraInitPos.x + 2 * _spriteCanvas.ViewportWidth;
+                    break;
+                case 2:
+                    newPositionX = _cameraInitPos.x;
+                    break;
+                default:
+                    newPositionX = _cameraInitPos.x + (index - 2) * _spriteCanvas.ViewportWidth;
+                    break;
+            }
 
             _targetPosition = new Vector3(newPositionX, transform.position.y, transform.position.z);
             _isMoving = true;

@@ -29,7 +29,14 @@ namespace SC.Core.UI
                 referencePosition = _referenceElement.transform.position;
             }
 
-            _initPos ??= referencePosition;
+            if (Application.isPlaying)
+            {
+                _initPos ??= referencePosition;
+            }
+            else
+            {
+                _initPos = referencePosition;
+            }
             
             var responsiveProp = new ResponsiveUIProp()
             {
