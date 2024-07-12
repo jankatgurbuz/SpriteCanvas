@@ -20,12 +20,7 @@
     {
       "displayName": "Demo 1",
       "description": "A demo showing the basic usage of the sprite canvas.",
-      "path": "Samples/Demo1"
-    },
-    {
-      "displayName": "Demo 2",
-      "description": "An example demonstrating a horizontal group.",
-      "path": "Samples/Demo2"
+      "path": "Samples~/Demo"
     }
   ]
 }
