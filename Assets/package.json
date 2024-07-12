@@ -1,7 +1,7 @@
 {
   "name": "com.jgurbuz.spritecanvas",
   "displayName": "Sprite Canvas",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "unity": "2022.3",
   "description": "A package for creating a canvas using sprites without Unity's Canvas system.",
   "keywords": [
@@ -15,5 +15,17 @@
   "author": {
     "name": "Jankat Gurbuz",
     "url": "https://github.com/jankatgurbuz"
-  }
+  },
+  "samples": [
+    {
+      "displayName": "Demo 1",
+      "description": "A demo showing the basic usage of the sprite canvas.",
+      "path": "Samples/Demo1"
+    },
+    {
+      "displayName": "Demo 2",
+      "description": "An example demonstrating a horizontal group.",
+      "path": "Samples/Demo2"
+    }
+  ]
 }
