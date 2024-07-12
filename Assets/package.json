@@ -20,7 +20,7 @@
     {
       "displayName": "Demo 1",
       "description": "A demo showing the basic usage of the sprite canvas.",
-      "path": "Samples~/Demo"
+      "path": "Samples/Demo"
     }
   ]
 }
