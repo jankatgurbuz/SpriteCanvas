@@ -1,8 +1,7 @@
-using SC.Core.Helper;
 using SC.Core.Helper.Groups;
 using UnityEngine;
 
-namespace SC.DemoGame
+namespace Samples.Demo.Scripts.DemoGame
 {
     public class DemoGameButtonClickForGroup : MonoBehaviour
     {

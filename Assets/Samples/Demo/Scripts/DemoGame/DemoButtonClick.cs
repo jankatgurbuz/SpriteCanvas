@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace SC.DemoGame
+namespace Samples.Demo.Scripts.DemoGame
 {
     public class DemoButtonClick : MonoBehaviour
     {

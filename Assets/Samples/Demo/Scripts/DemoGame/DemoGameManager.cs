@@ -6,7 +6,7 @@ using Unity.Plastic.Antlr3.Runtime.Misc;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace SC.DemoGame
+namespace Samples.Demo.Scripts.DemoGame
 {
     public class DemoGameManager : MonoBehaviour
     {

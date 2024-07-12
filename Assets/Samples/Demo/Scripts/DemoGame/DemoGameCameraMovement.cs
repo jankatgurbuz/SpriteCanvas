@@ -1,8 +1,7 @@
 using SC.Core.UI;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace SC.DemoGame
+namespace Samples.Demo.Scripts.DemoGame
 {
     public class DemoGameCameraMovement : MonoBehaviour
     {

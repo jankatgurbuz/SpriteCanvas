@@ -1,11 +1,8 @@
-using System;
-using System.Collections;
-using SC.Core.Helper;
 using SC.Core.UI;
 using TMPro;
 using UnityEngine;
 
-namespace SC.DemoGame
+namespace Samples.Demo.Scripts.DemoGame
 {
     public class DemoGameNavigatorItem : MonoBehaviour
     {

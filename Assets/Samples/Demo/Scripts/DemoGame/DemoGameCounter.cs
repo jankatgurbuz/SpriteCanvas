@@ -1,7 +1,8 @@
+using SC.DemoGame;
 using TMPro;
 using UnityEngine;
 
-namespace SC.DemoGame
+namespace Samples.Demo.Scripts.DemoGame
 {
     public class DemoGameCounter : MonoBehaviour
     {
