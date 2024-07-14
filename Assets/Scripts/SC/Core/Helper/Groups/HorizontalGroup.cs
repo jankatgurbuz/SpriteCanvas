@@ -10,6 +10,7 @@ namespace SC.Core.Helper.Groups
     {
         [SerializeField] private List<GroupElementProperty> _childUIElementList;
         [SerializeField] private float _space;
+        
         private UIElement _uiElement;
         public List<GroupElementProperty> GetUIElementList => _childUIElementList;
         public UIElement GetUIElement => _uiElement;
@@ -78,7 +79,7 @@ namespace SC.Core.Helper.Groups
             var child = childElement.UIElement;
             var localPosition = new Vector3(currentPosition + scaledWidth / 2, 0, 0);
 
-            var cameraTransform = _uiElement.Register.SpriteCanvas.Camera.transform;
+            var cameraTransform = _uiElement.Register.SpriteCanvas.CameraMode.Transform;
             var worldPosition = _uiElement.transform.position + cameraTransform.rotation * localPosition;
             var originalLocalPosition = child.transform.localPosition;
 

@@ -1,4 +1,3 @@
-using System;
 using SC.Core.Helper.ScaleHandler;
 using SC.Core.SpriteCanvasAttribute;
 using SC.Core.Utility;
@@ -34,10 +33,16 @@ namespace SC.Core.Helper.Groups
 
         private void Start()
         {
-            if (_isStartValid)
+            if (!_isStartValid) return;
+
+            if (_uiGroup.GetUIElement == null)
             {
-                UpdateItemScales(_currentSelectedIndex);
+                Debug.LogWarning("Assignment to UIElement failed. Most likely because " +
+                          "SpriteCanvas RunOnAwake is set to false.");
+                return;
             }
+
+            UpdateItemScales(_currentSelectedIndex);
         }
 
         private void CreateSelectorHandler()

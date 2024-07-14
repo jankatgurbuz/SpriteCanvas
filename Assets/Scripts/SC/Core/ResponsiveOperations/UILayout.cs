@@ -1,4 +1,3 @@
-using System;
 using SC.Core.Helper.UIElementHelper;
 using UnityEngine;
 

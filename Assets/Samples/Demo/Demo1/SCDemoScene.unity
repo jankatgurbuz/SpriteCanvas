@@ -150,7 +150,7 @@ Transform:
   m_GameObject: {fileID: 16508833}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.72999984, y: -0.3450004, z: 0}
+  m_LocalPosition: {x: -0.73, y: -0.3450004, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.49999997}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -277,7 +277,7 @@ Transform:
   m_GameObject: {fileID: 94823674}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.7299998, y: -0.3450004, z: 0}
+  m_LocalPosition: {x: 0.72999966, y: -0.3450004, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.49999997}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -488,7 +488,7 @@ Transform:
   m_GameObject: {fileID: 349766883}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.7299998, y: 0.3450004, z: 0}
+  m_LocalPosition: {x: 0.72999966, y: 0.3450004, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.49999997}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -637,11 +637,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasKey: TopCanvas
+  _runOnAwake: 1
+  _isVirtualCamera: 0
+  _virtualCamera:
+    _transform: {fileID: 0}
+    _orthographicSize: 5
+    _screenWidth: 1920
+    _screenHeight: 1080
   _camera: {fileID: 519420031}
   _planeDistance: 10
+  _canvasScaler: 0
   _sortingLayerName: Default
   _sortingLayerOrder: 100
-  _canvasScaler: 0
   _uIElementProperties:
     _alpha: 1
     _interactable: 1
@@ -698,8 +705,8 @@ Transform:
   m_GameObject: {fileID: 426712005}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.5, y: 14.776, z: 0}
-  m_LocalScale: {x: 310.9027, y: 4.8, z: 1}
+  m_LocalPosition: {x: 4.5000005, y: 14.776, z: 0}
+  m_LocalScale: {x: 417.81946, y: 4.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 404344877}
@@ -903,7 +910,6 @@ GameObject:
   - component: {fileID: 566408708}
   - component: {fileID: 566408706}
   - component: {fileID: 566408707}
-  - component: {fileID: 566408709}
   - component: {fileID: 566408705}
   m_Layer: 0
   m_Name: DemoGameManager
@@ -982,18 +988,6 @@ Transform:
   - {fileID: 685365848}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &566408709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 566408704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d7a051aa730740089d82f178c153fd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &685365847
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,8 +1099,8 @@ Transform:
   m_GameObject: {fileID: 788897654}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.5, y: 16.84, z: 0}
-  m_LocalScale: {x: 310.9027, y: 108.00001, z: 1}
+  m_LocalPosition: {x: 4.5000005, y: 16.84, z: 0}
+  m_LocalScale: {x: 417.81946, y: 108.00001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 404344877}
@@ -1676,7 +1670,7 @@ Transform:
   m_GameObject: {fileID: 1129966639}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.3450004, z: 0}
+  m_LocalPosition: {x: -0.00000023283062, y: -0.3450004, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.49999997}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2066,7 +2060,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0038597286, y: 0.016666668, z: 2.4}
+  m_LocalScale: {x: 0.002872054, y: 0.016666668, z: 2.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1064447759}
@@ -2238,11 +2232,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasKey: BottomCanvas
+  _runOnAwake: 1
+  _isVirtualCamera: 0
+  _virtualCamera:
+    _transform: {fileID: 0}
+    _orthographicSize: 5
+    _screenWidth: 1920
+    _screenHeight: 1080
   _camera: {fileID: 519420031}
   _planeDistance: 10
+  _canvasScaler: 0
   _sortingLayerName: Default
   _sortingLayerOrder: 0
-  _canvasScaler: 0
   _uIElementProperties:
     _alpha: 1
     _interactable: 1
@@ -2295,7 +2296,7 @@ Transform:
   m_GameObject: {fileID: 1569241407}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.72999984, y: 0.3450004, z: 0}
+  m_LocalPosition: {x: -0.73, y: 0.3450004, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.49999997}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2474,7 +2475,7 @@ Transform:
   m_GameObject: {fileID: 1645110077}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.5, y: 16.84, z: 0}
+  m_LocalPosition: {x: 4.5000005, y: 16.84, z: 0}
   m_LocalScale: {x: 300, y: 108.00001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2553,8 +2554,8 @@ Transform:
   m_GameObject: {fileID: 1922011239}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.5, y: -2.096, z: 0}
-  m_LocalScale: {x: 310.9027, y: 4.8, z: 1}
+  m_LocalPosition: {x: 4.5000005, y: -2.096, z: 0}
+  m_LocalScale: {x: 417.81946, y: 4.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1455885519}
@@ -2682,8 +2683,8 @@ Transform:
   m_GameObject: {fileID: 1929393232}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.5, y: -3.56, z: 0}
-  m_LocalScale: {x: 310.9027, y: 72, z: 1}
+  m_LocalPosition: {x: 4.5000005, y: -3.56, z: 0}
+  m_LocalScale: {x: 417.81946, y: 72, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1356520693}
@@ -2812,7 +2813,7 @@ Transform:
   m_GameObject: {fileID: 2016244201}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.3450004, z: 0}
+  m_LocalPosition: {x: -0.00000023283062, y: 0.3450004, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.49999997}
   m_ConstrainProportionsScale: 0
   m_Children: []

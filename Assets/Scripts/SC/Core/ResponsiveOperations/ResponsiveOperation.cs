@@ -1,6 +1,7 @@
 using SC.Core.Helper.UIElementHelper;
+using SC.Core.UI;
 using UnityEngine;
-using UnityEngine.Serialization;
+using CameraMode = SC.Core.Helper.SpriteCanvasHelper.CameraMode;
 
 namespace SC.Core.ResponsiveOperations
 {
@@ -40,14 +41,14 @@ namespace SC.Core.ResponsiveOperations
 
         protected Quaternion AdjustRotation(ResponsiveUIProp prop)
         {
-            return prop.Camera.transform.rotation;
+            return prop.Camera.Transform.rotation;
 
             //* Quaternion.Euler(_rotation);
         }
 
         private Vector3 GetPosition(float screenHeight, float screenWidth,
             Vector3 uiItemSize, Transform uiItemTransform, float balance, Vector3 referencePosition,
-            Vector2 positionFactors, bool ignoreXPosition, bool ignoreYPosition, Camera camera)
+            Vector2 positionFactors, bool ignoreXPosition, bool ignoreYPosition, CameraMode camera)
         {
             var scale = uiItemTransform.localScale;
             scale = GetScaleRelativeToParent(uiItemTransform, scale);
@@ -66,7 +67,8 @@ namespace SC.Core.ResponsiveOperations
                     _topOffset * Mathf.Sign(positionFactors.y) * balance;
 
             var localPosition = new Vector3(x, y, 0);
-            var rotatedPosition = camera.transform.rotation * localPosition;
+            
+            var rotatedPosition = camera.Transform.rotation * localPosition;
 
             var position = rotatedPosition + referencePosition;
 

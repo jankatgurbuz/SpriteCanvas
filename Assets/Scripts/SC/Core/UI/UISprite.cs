@@ -54,7 +54,7 @@ namespace SC.Core.UI
                 IgnoreYPosition = UIElementProperties.IgnoreYPosition,
                 IgnoreXScale = UIElementProperties.IgnoreXScale,
                 IgnoreYScale = UIElementProperties.IgnoreYScale,
-                Camera = Register.SpriteCanvas.Camera
+                Camera = Register.SpriteCanvas.CameraMode
             };
             _responsiveOperation.AdjustUI(responsiveProp);
         }

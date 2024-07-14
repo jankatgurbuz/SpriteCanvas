@@ -77,7 +77,7 @@ namespace SC.Editor.Utilities
         private void DrawLine(int height, int topSpace, int bottomSpace)
         {
             EditorGUILayout.Space(topSpace);
-            GUILayout.Box("test", GUILayout.ExpandWidth(true), GUILayout.Height(height));
+            GUILayout.Box("", GUILayout.ExpandWidth(true), GUILayout.Height(height));
             EditorGUILayout.Space(bottomSpace);
         }
 

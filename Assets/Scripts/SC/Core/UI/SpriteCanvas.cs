@@ -1,32 +1,30 @@
 using System.Collections.Generic;
-using System.Linq;
 using SC.Core.Helper;
+using SC.Core.Helper.SpriteCanvasHelper;
 using SC.Core.Manager;
 using SC.Core.SpriteCanvasAttribute;
 using UnityEngine;
-using EColor = SC.Core.Utility.EColor;
 
 namespace SC.Core.UI
 {
     public class SpriteCanvas : MonoBehaviour
     {
         [SerializeField] private string _canvasKey;
-
+        [SerializeField] private bool _runOnAwake = true;
+        [SerializeField] private bool _isVirtualCamera;
+        [SerializeField] private VirtualCamera _virtualCamera;
         [SerializeField] private Camera _camera;
-
         [SerializeField] private float _planeDistance = 10;
-
-        [HorizontalLine(EColor.Orange), SerializeField, SortingLayer]
-        private string _sortingLayerName;
-
-        [SerializeField] private int _sortingLayerOrder;
-
         [SerializeField] private CanvasScaler _canvasScaler;
-
+        [SerializeField, SortingLayer] private string _sortingLayerName;
+        [SerializeField] private int _sortingLayerOrder;
         [SerializeField] private UIElementSettings _uIElementProperties;
         [SerializeField, ReadOnly] private List<UIElement> _uiElements;
+
+        private static SpriteCanvasManager _spriteCanvasManager;
+
         public UIElementSettings ElementProperties => _uIElementProperties;
-        public Camera Camera => _camera;
+        public CameraMode CameraMode { get; private set; }
         public string SortingLayerName => _sortingLayerName;
         public string CanvasKey => _canvasKey;
         public int SortingLayerOrder => _sortingLayerOrder;
@@ -35,29 +33,16 @@ namespace SC.Core.UI
         public Vector3 ViewportPosition { get; private set; }
         public float Balance { get; private set; }
 
-        private static SpriteCanvasManager _spriteCanvasManager;
-
-        private enum CanvasScaler
-        {
-            Height,
-            Width
-        }
-
         private void Awake()
         {
             CreateSpriteCanvasManager();
             _spriteCanvasManager.SpriteCanvasRegister(_canvasKey, this);
+            AdjustCameraMode();
+
+            if (!_runOnAwake) return;
+
             AdjustDependentUIElements();
         }
-
-        public void AdjustDependentUIElements()
-        {
-            RemoveNullElements();
-            UpdateCameraViewportProperties();
-            _uiElements.ForEach(x => x.ResetFlags());
-            _uiElements.ForEach(x => x.Adjust());
-        }
-
         private void RemoveNullElements()
         {
             var initialCount = _uiElements.Count;
@@ -84,22 +69,102 @@ namespace SC.Core.UI
 
         private void UpdateCameraViewportProperties()
         {
-            if (_camera == null) return;
+            if (_isVirtualCamera)
+            {
+                ViewportHeight = 2f * CameraMode.VirtualCamera.OrthographicSize;
+                ViewportWidth = ViewportHeight * CameraMode.VirtualCamera.AspectRatio;
+                Balance = _canvasScaler == CanvasScaler.Height ? ViewportHeight * 0.1f : ViewportWidth * 0.1f;
 
-            ViewportHeight = _camera.orthographic
-                ? 2f * _camera.orthographicSize
-                : 2.0f * _planeDistance * Mathf.Tan(_camera.fieldOfView * 0.5f * Mathf.Deg2Rad);
+                var viewportCenter = new Vector3(0.5f, 0.5f, _planeDistance);
+                ViewportPosition = CameraMode.VirtualCamera.ViewportToWorldPoint(viewportCenter);
+            }
+            else
+            {
+                if (_camera == null) return;
 
-            ViewportWidth = ViewportHeight * _camera.aspect;
-            Balance = _canvasScaler == CanvasScaler.Height ? ViewportHeight * 0.1f : ViewportWidth * 0.1f;
-            ViewportPosition = GetViewportCenterPosition();
+                ViewportHeight = _camera.orthographic
+                    ? 2f * _camera.orthographicSize
+                    : 2.0f * _planeDistance * Mathf.Tan(_camera.fieldOfView * 0.5f * Mathf.Deg2Rad);
+
+                ViewportWidth = ViewportHeight * _camera.aspect;
+                Balance = _canvasScaler == CanvasScaler.Height ? ViewportHeight * 0.1f : ViewportWidth * 0.1f;
+
+                var viewportCenter = new Vector3(0.5f, 0.5f, _planeDistance);
+                ViewportPosition = _camera.ViewportToWorldPoint(viewportCenter);
+            }
         }
 
-
-        private Vector3 GetViewportCenterPosition()
+        private bool CheckCamera()
         {
-            var viewportCenter = new Vector3(0.5f, 0.5f, _planeDistance);
-            return _camera.ViewportToWorldPoint(viewportCenter);
+            if (_isVirtualCamera)
+            {
+                if (_virtualCamera.Transform == null)
+                {
+                    Debug.LogWarning("VirtualCamera.Transform is null");
+                    return false;
+                }
+            }
+            else
+            {
+                if (_camera == null)
+                {
+                    Debug.LogWarning("Camera is null");
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public void AdjustDependentUIElements()
+        {
+            if (!CheckCamera()) return;
+
+            RemoveNullElements();
+            UpdateCameraViewportProperties();
+            _uiElements.ForEach(x => x.ResetFlags());
+            _uiElements.ForEach(x => x.Adjust());
+        }
+        
+        public void AdjustCameraMode()
+        {
+            if (!CheckCamera()) return;
+
+            CameraMode = new CameraMode();
+            if (_isVirtualCamera)
+            {
+                CameraMode.SetMode(true, virtualCamera: _virtualCamera, planeDistance: _planeDistance);
+            }
+            else
+            {
+                CameraMode.SetMode(false, camera: _camera);
+            }
+        }
+
+        public void SetCamera(Camera camera, bool runAdjustMethods = true)
+        {
+            _camera = camera;
+            _isVirtualCamera = false;
+
+            if (!runAdjustMethods) return;
+
+            AdjustCameraMode();
+            AdjustDependentUIElements();
+        }
+
+        public void SetVirtualCamera(VirtualCamera virtualCamera = null, bool runAdjustMethods = true)
+        {
+            if (virtualCamera != null)
+            {
+                _virtualCamera = virtualCamera;
+            }
+
+            _isVirtualCamera = true;
+
+            if (!runAdjustMethods) return;
+
+            AdjustCameraMode();
+            AdjustDependentUIElements();
         }
 
         public void ShowAllUIs()
@@ -127,8 +192,8 @@ namespace SC.Core.UI
         public void AddUI(UIElement ui)
         {
             if (_uiElements.Contains(ui)) return;
-            
+
             _uiElements.Add(ui);
-        } 
-    } 
+        }
+    }
 }

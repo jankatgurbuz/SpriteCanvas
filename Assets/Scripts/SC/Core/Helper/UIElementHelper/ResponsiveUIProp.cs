@@ -1,4 +1,6 @@
+using SC.Core.UI;
 using UnityEngine;
+using CameraMode = SC.Core.Helper.SpriteCanvasHelper.CameraMode;
 
 namespace SC.Core.Helper.UIElementHelper
 {
@@ -15,6 +17,6 @@ namespace SC.Core.Helper.UIElementHelper
         public bool IgnoreYPosition { get; set; }
         public bool IgnoreXScale { get; set; }
         public bool IgnoreYScale { get; set; }
-        public Camera Camera { get; set; }
+        public CameraMode Camera { get; set; }
     }
 }

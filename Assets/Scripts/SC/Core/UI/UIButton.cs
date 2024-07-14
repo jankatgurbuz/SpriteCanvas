@@ -25,19 +25,23 @@ namespace SC.Core.UI
         {
             if (!_interactable) return;
 
-            var canvasCamera = Register.SpriteCanvas.Camera;
+            var canvasCamera = Register.SpriteCanvas.CameraMode;
             var spriteCenter = _spriteRenderer.bounds.center;
-            var distance = canvasCamera.orthographic
-                ? canvasCamera.WorldToScreenPoint(spriteCenter).z
-                : Vector3.Dot(spriteCenter - canvasCamera.transform.position, canvasCamera.transform.forward);
-            mousePosition.z = distance;
 
-            var worldPosition = canvasCamera.ScreenToWorldPoint(mousePosition);
-            if (!canvasCamera.orthographic) worldPosition.z = spriteCenter.z;
-
-            if (_spriteRenderer.bounds.Contains(worldPosition))
+            if (!canvasCamera.IsFakeCamera)
             {
-                action?.Invoke();
+                var distance = canvasCamera.Camera.orthographic
+                    ? canvasCamera.Camera.WorldToScreenPoint(spriteCenter).z
+                    : Vector3.Dot(spriteCenter - canvasCamera.Transform.position, canvasCamera.Transform.forward);
+                mousePosition.z = distance;
+
+                var worldPosition = canvasCamera.Camera.ScreenToWorldPoint(mousePosition);
+                if (!canvasCamera.Camera.orthographic) worldPosition.z = spriteCenter.z;
+                
+                if (_spriteRenderer.bounds.Contains(worldPosition))
+                {
+                    action?.Invoke();
+                }
             }
         }
 

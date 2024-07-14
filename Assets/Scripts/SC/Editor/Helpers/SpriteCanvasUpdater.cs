@@ -1,12 +1,9 @@
 using System;
-using System.Diagnostics;
 using System.Reflection;
-using SC.Core.Helper;
 using SC.Core.Helper.Groups;
 using SC.Core.UI;
 using UnityEditor;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 using Object = UnityEngine.Object;
 
 namespace SC.Editor.Helpers
@@ -24,10 +21,14 @@ namespace SC.Editor.Helpers
         private static void OnEditorUpdate()
         {
             if (Application.isPlaying) return;
-            
+
+
             var objects = Object.FindObjectsOfType<SpriteCanvas>();
             foreach (var item in objects)
             {
+                var checkCamera = (bool)InvokeMethod<SpriteCanvas>(item, "CheckCamera");
+                if (!checkCamera) return;
+
                 Handle(item);
             }
 
@@ -40,14 +41,22 @@ namespace SC.Editor.Helpers
 
         private static void Handle(SpriteCanvas currentSpriteCanvas)
         {
-            InvokeMethod<SpriteCanvas>(currentSpriteCanvas, CameraViewportPropertiesName);
+            var canvases = Object.FindObjectsOfType<SpriteCanvas>();
             var objects = Object.FindObjectsOfType<UIElement>();
+
+            foreach (var item in canvases)
+            {
+                item.AdjustCameraMode();
+            }
+
+            InvokeMethod<SpriteCanvas>(currentSpriteCanvas, CameraViewportPropertiesName);
+
             foreach (var item in objects)
             {
                 item.Initialize();
             }
 
-            var canvases = Object.FindObjectsOfType<SpriteCanvas>();
+
             foreach (var item in canvases)
             {
                 item.AdjustDependentUIElements();
@@ -61,10 +70,10 @@ namespace SC.Editor.Helpers
             return field;
         }
 
-        private static void InvokeMethod<T>(object obj, string fieldName, params object[] parameters)
+        private static object InvokeMethod<T>(object obj, string fieldName, params object[] parameters)
         {
             var info = GetMethodInfo<T>(fieldName, obj.GetType());
-            info.Invoke(obj, parameters);
+            return info.Invoke(obj, parameters);
         }
     }
 }
