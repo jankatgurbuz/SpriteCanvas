@@ -24,8 +24,8 @@ namespace SC.Core.Helper.Groups
 
         [Space, HorizontalLine(EColor.White, 2)]
         public UnityEvent<int> OnSelectionChanged;
-
         public UnityEvent<int> OnScaleUpdated;
+        public UnityEvent<int> OnScaleAdjustmentComplete; 
 
         private void Awake()
         {
@@ -65,7 +65,7 @@ namespace SC.Core.Helper.Groups
         private void UpdateItemScales()
         {
             _selector.AdjustItemsScale(this, _animationDuration, _currentSelectedIndex, _selectedItemScale,
-                _unselectedItemScale, _scaleCurve, _uiGroup, OnSelectionChanged, OnScaleUpdated);
+                _unselectedItemScale, _scaleCurve, _uiGroup, OnSelectionChanged, OnScaleUpdated,OnScaleAdjustmentComplete);
         }
 
         public void DebugFunction(float value)

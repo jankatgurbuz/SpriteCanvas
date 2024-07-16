@@ -14,18 +14,20 @@ namespace SC.Core.Helper.ScaleHandler
 
         public void AdjustItemsScale(GroupSelector groupSelector, float animationDuration,
             int currentSelectedIndex, float selectedItemScale, float unselectedItemScale, AnimationCurve scaleCurve,
-            IGroup uiGroup, UnityEvent<int> onSelectionChanged, UnityEvent<int> onScaleUpdated)
+            IGroup uiGroup, UnityEvent<int> onSelectionChanged, UnityEvent<int> onScaleUpdated,
+            UnityEvent<int> onScaleAdjustmentComplete)
         {
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource = new CancellationTokenSource();
 
             _ = AdjustItemsScaleTask(animationDuration, currentSelectedIndex, selectedItemScale, unselectedItemScale,
-                scaleCurve, uiGroup, onSelectionChanged, onScaleUpdated, _cancellationTokenSource.Token);
+                scaleCurve, uiGroup, onSelectionChanged, onScaleUpdated,onScaleAdjustmentComplete, _cancellationTokenSource.Token);
         }
 
         private async UniTask AdjustItemsScaleTask(float animationDuration, int currentSelectedIndex,
             float selectedItemScale, float unselectedItemScale, AnimationCurve scaleCurve, IGroup uiGroup,
-            UnityEvent<int> onSelectionChanged, UnityEvent<int> onScaleUpdated, CancellationToken cancellationToken)
+            UnityEvent<int> onSelectionChanged, UnityEvent<int> onScaleUpdated,
+            UnityEvent<int> onScaleAdjustmentComplete, CancellationToken cancellationToken)
         {
             var time = 0f;
             var useScaleCurve = scaleCurve != null && scaleCurve.keys.Length > 0;
@@ -57,6 +59,7 @@ namespace SC.Core.Helper.ScaleHandler
                 }
 
                 time += Time.deltaTime;
+                onScaleUpdated?.Invoke(currentSelectedIndex);
                 uiGroup.GetUIElement.Register.SpriteCanvas.AdjustDependentUIElements();
                 await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken);
             }
@@ -66,7 +69,8 @@ namespace SC.Core.Helper.ScaleHandler
                 var item = uiGroup.GetUIElementList[index];
                 item.ScaleRatio = index == currentSelectedIndex ? selectedItemScale : unselectedItemScale;
             }
-
+            
+            onScaleAdjustmentComplete?.Invoke(currentSelectedIndex);
             uiGroup.GetUIElement.Register.SpriteCanvas.AdjustDependentUIElements();
         }
     }

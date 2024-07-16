@@ -11,7 +11,8 @@ namespace SC.Core.Helper.ScaleHandler
 
         public void AdjustItemsScale(GroupSelector groupSelector, float animationDuration,
             int currentSelectedIndex, float selectedItemScale, float unselectedItemScale, AnimationCurve scaleCurve,
-            IGroup uiGroup, UnityEvent<int> onSelectionChanged, UnityEvent<int> onScaleUpdated)
+            IGroup uiGroup, UnityEvent<int> onSelectionChanged, UnityEvent<int> onScaleUpdated,
+            UnityEvent<int> onScaleAdjustmentComplete)
         {
             if (_coroutine != null)
             {
@@ -19,12 +20,14 @@ namespace SC.Core.Helper.ScaleHandler
             }
 
             _coroutine = groupSelector.StartCoroutine(AdjustItemsScaleCoroutine(animationDuration, currentSelectedIndex,
-                selectedItemScale, unselectedItemScale, scaleCurve, uiGroup, onSelectionChanged,onScaleUpdated));
+                selectedItemScale, unselectedItemScale, scaleCurve, uiGroup,
+                onSelectionChanged, onScaleUpdated, onScaleAdjustmentComplete));
         }
 
         private IEnumerator AdjustItemsScaleCoroutine(float animationDuration, int currentSelectedIndex,
             float selectedItemScale, float unselectedItemScale, AnimationCurve scaleCurve,
-            IGroup uiGroup, UnityEvent<int> onSelectionChanged, UnityEvent<int> onScaleUpdated)
+            IGroup uiGroup, UnityEvent<int> onSelectionChanged, UnityEvent<int> onScaleUpdated,
+            UnityEvent<int> onScaleAdjustmentComplete)
         {
             var time = 0f;
             var useScaleCurve = scaleCurve != null && scaleCurve.keys.Length > 0;
@@ -64,7 +67,8 @@ namespace SC.Core.Helper.ScaleHandler
                 var item = uiGroup.GetUIElementList[index];
                 item.ScaleRatio = index == currentSelectedIndex ? selectedItemScale : unselectedItemScale;
             }
-
+            
+            onScaleAdjustmentComplete?.Invoke(currentSelectedIndex);
             uiGroup.GetUIElement.Register.SpriteCanvas.AdjustDependentUIElements();
         }
     }
