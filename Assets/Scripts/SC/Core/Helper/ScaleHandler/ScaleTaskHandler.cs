@@ -13,20 +13,19 @@ namespace SC.Core.Helper.ScaleHandler
         private CancellationTokenSource _cancellationTokenSource;
 
         public void AdjustItemsScale(GroupSelector groupSelector, float animationDuration,
-            int currentSelectedIndex, float selectedItemScale, float unselectedItemScale,
-            AnimationCurve scaleCurve, IGroup uiGroup, UnityEvent<int> onSelectionChanged)
+            int currentSelectedIndex, float selectedItemScale, float unselectedItemScale, AnimationCurve scaleCurve,
+            IGroup uiGroup, UnityEvent<int> onSelectionChanged, UnityEvent<int> onScaleUpdated)
         {
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource = new CancellationTokenSource();
 
-            _ = AdjustItemsScaleTask(animationDuration, currentSelectedIndex,
-                selectedItemScale, unselectedItemScale, scaleCurve, uiGroup, onSelectionChanged,
-                _cancellationTokenSource.Token);
+            _ = AdjustItemsScaleTask(animationDuration, currentSelectedIndex, selectedItemScale, unselectedItemScale,
+                scaleCurve, uiGroup, onSelectionChanged, onScaleUpdated, _cancellationTokenSource.Token);
         }
 
         private async UniTask AdjustItemsScaleTask(float animationDuration, int currentSelectedIndex,
-            float selectedItemScale, float unselectedItemScale, AnimationCurve scaleCurve,
-            IGroup uiGroup, UnityEvent<int> onSelectionChanged, CancellationToken cancellationToken)
+            float selectedItemScale, float unselectedItemScale, AnimationCurve scaleCurve, IGroup uiGroup,
+            UnityEvent<int> onSelectionChanged, UnityEvent<int> onScaleUpdated, CancellationToken cancellationToken)
         {
             var time = 0f;
             var useScaleCurve = scaleCurve != null && scaleCurve.keys.Length > 0;

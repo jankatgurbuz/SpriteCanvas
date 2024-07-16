@@ -10,8 +10,8 @@ namespace SC.Core.Helper.ScaleHandler
         private Coroutine _coroutine;
 
         public void AdjustItemsScale(GroupSelector groupSelector, float animationDuration,
-            int currentSelectedIndex, float selectedItemScale, float unselectedItemScale,
-            AnimationCurve scaleCurve, IGroup uiGroup, UnityEvent<int> onSelectionChanged)
+            int currentSelectedIndex, float selectedItemScale, float unselectedItemScale, AnimationCurve scaleCurve,
+            IGroup uiGroup, UnityEvent<int> onSelectionChanged, UnityEvent<int> onScaleUpdated)
         {
             if (_coroutine != null)
             {
@@ -19,12 +19,12 @@ namespace SC.Core.Helper.ScaleHandler
             }
 
             _coroutine = groupSelector.StartCoroutine(AdjustItemsScaleCoroutine(animationDuration, currentSelectedIndex,
-                selectedItemScale, unselectedItemScale, scaleCurve, uiGroup, onSelectionChanged));
+                selectedItemScale, unselectedItemScale, scaleCurve, uiGroup, onSelectionChanged,onScaleUpdated));
         }
 
         private IEnumerator AdjustItemsScaleCoroutine(float animationDuration, int currentSelectedIndex,
-            float selectedItemScale,
-            float unselectedItemScale, AnimationCurve scaleCurve, IGroup uiGroup, UnityEvent<int> onSelectionChanged)
+            float selectedItemScale, float unselectedItemScale, AnimationCurve scaleCurve,
+            IGroup uiGroup, UnityEvent<int> onSelectionChanged, UnityEvent<int> onScaleUpdated)
         {
             var time = 0f;
             var useScaleCurve = scaleCurve != null && scaleCurve.keys.Length > 0;
@@ -54,6 +54,7 @@ namespace SC.Core.Helper.ScaleHandler
                 }
 
                 time += Time.deltaTime;
+                onScaleUpdated?.Invoke(currentSelectedIndex);
                 uiGroup.GetUIElement.Register.SpriteCanvas.AdjustDependentUIElements();
                 yield return null;
             }

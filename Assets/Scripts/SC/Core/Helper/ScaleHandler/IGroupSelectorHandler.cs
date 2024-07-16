@@ -8,6 +8,6 @@ namespace SC.Core.Helper.ScaleHandler
     {
         void AdjustItemsScale(GroupSelector groupSelector, float animationDuration, int currentSelectedIndex,
             float selectedItemScale, float unselectedItemScale, AnimationCurve scaleCurve, IGroup uiGroup,
-            UnityEvent<int> onSelectionChanged);
+            UnityEvent<int> onSelectionChanged, UnityEvent<int> onScaleUpdated);
     }
 }

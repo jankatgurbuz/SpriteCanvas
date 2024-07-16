@@ -25,6 +25,8 @@ namespace SC.Core.Helper.Groups
         [Space, HorizontalLine(EColor.White, 2)]
         public UnityEvent<int> OnSelectionChanged;
 
+        public UnityEvent<int> OnScaleUpdated;
+
         private void Awake()
         {
             _uiGroup = GetComponent<IGroup>();
@@ -38,7 +40,7 @@ namespace SC.Core.Helper.Groups
             if (_uiGroup.GetUIElement == null)
             {
                 Debug.LogWarning("Assignment to UIElement failed. Most likely because " +
-                          "SpriteCanvas RunOnAwake is set to false.");
+                                 "SpriteCanvas RunOnAwake is set to false.");
                 return;
             }
 
@@ -63,7 +65,7 @@ namespace SC.Core.Helper.Groups
         private void UpdateItemScales()
         {
             _selector.AdjustItemsScale(this, _animationDuration, _currentSelectedIndex, _selectedItemScale,
-                _unselectedItemScale, _scaleCurve, _uiGroup, OnSelectionChanged);
+                _unselectedItemScale, _scaleCurve, _uiGroup, OnSelectionChanged, OnScaleUpdated);
         }
 
         public void DebugFunction(float value)
