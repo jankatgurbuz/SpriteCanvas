@@ -81,6 +81,7 @@ namespace SC.Core.UI
             var color = _spriteRenderer.color;
             color.a = Mathf.Min(elementProperties.Alpha, _alpha);
             _spriteRenderer.color = color;
+            _spriteRenderer.enabled = _spriteRenderer.color.a != 0;
         }
 
         public override SpriteDrawMode GetDrawMode()
