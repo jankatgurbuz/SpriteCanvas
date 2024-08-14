@@ -31,10 +31,10 @@ Please follow this path: Hierarchy -> Sprite Canvas -> Canvas
 
 **Don't forget to drag and drop the camera**
 
-<img src="Assets/Documentation~/Images/one.png?raw=true" alt="Sprite Canvas" style="margin: 10 0 10px 10px;" />
+<img src="Assets/Documentation~/Images/one.png?raw=true " alt="Sprite Canvas" style="margin: 10 0 0px 50px;" width="400px"/>
 
 
-<img src="Assets/Documentation~/Images/four.png?raw=true" alt="Sprite Canvas" style="margin: 10 0 10px 10px;" />
+<img src="Assets/Documentation~/Images/four.png?raw=true" alt="Sprite Canvas" style="margin: 10 0 0px 50px;" width="400px"/>
 
 Each component you create (Image, TextMeshPro, Button) does not have to be a child of the Canvas. There are 3 registration methods:
 
@@ -42,12 +42,12 @@ Each component you create (Image, TextMeshPro, Button) does not have to be a chi
 - Reference
 - Key
 
-<img src="Assets/Documentation~/Images/two.png?raw=true" alt="Sprite Canvas" style="margin: 10 0 10px 10px;" />
+<img src="Assets/Documentation~/Images/two.png?raw=true" alt="Sprite Canvas" style="margin: 10 0 0px 50px;" width="400px"/>
 
 To select anchor presets, look at the following image
 
 
-<img src="Assets/Documentation~/Images/three.png?raw=true" alt="Sprite Canvas" style="margin: 10 0 10px 10px;" />
+<img src="Assets/Documentation~/Images/three.png?raw=true" alt="Sprite Canvas" style="margin: 10 0 0px 50px;" width="400px"/>
 
 I am leaving a video below
 
