@@ -42,7 +42,7 @@ Each component you create (Image, TextMeshPro, Button) does not have to be a chi
 - Reference
 - Key
 
-<img src="Assets/Documentatio~/Images/two.png?raw=true" alt="Sprite Canvas" style="margin: 10 0 10px 10px;" />
+<img src="Assets/Documentation~/Images/two.png?raw=true" alt="Sprite Canvas" style="margin: 10 0 10px 10px;" />
 
 To select anchor presets, look at the following image
 
